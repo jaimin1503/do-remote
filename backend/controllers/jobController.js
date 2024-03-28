@@ -1,4 +1,4 @@
-import Job from "../models/job.js";
+import { Job } from "../models/job.js";
 
 export const getAllJobs = async () => {
   try {
@@ -105,4 +105,3 @@ export const deleteJob = async () => {
     res.status(500).send({ message: error.message });
   }
 };
-

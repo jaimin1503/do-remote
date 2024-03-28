@@ -4,6 +4,8 @@ import connect from "./utils/db.js";
 import dotenv from "dotenv";
 dotenv.config();
 import userRoutes from "./routes/userRoutes.js";
+import jobRoutes from "./routes/jobRoutes.js";
+import proposalRoutes from "./routes/proposalRoutes.js";
 import cors from "cors";
 
 connect();
@@ -20,6 +22,8 @@ app.use(
 );
 
 app.use("/user", userRoutes);
+app.use("/user/job", jobRoutes);
+app.use("/user/proposal", proposalRoutes);
 
 const port = process.env.PORT || 5555;
 app.listen(port, () => {
