@@ -9,18 +9,9 @@ dotenv.config();
 
 export const signup = async (req, res) => {
   try {
-    console.log(req);
-    const {
-      firstName,
-      lastName,
-      email,
-      password,
-      username,
-      location,
-      otp,
-      role,
-    } = req.body;
-    if (!firstName || !lastName || !email || !password || !username || !otp) {
+    const { firstName, lastName, email, password, username, location, otp } =
+      req.body;
+    if (!firstName || !lastName || !email || !password || !username) {
       res.status(400).json({
         success: false,
         message: `please fill all the details`,
@@ -52,7 +43,7 @@ export const signup = async (req, res) => {
     const otpverify = await OTP.find({ email })
       .sort({ createdAt: -1 })
       .limit(1);
-    console.log("otp of db", otpverify);
+    // console.log("otp of db", otpverify);
     if (otpverify[0].otp !== otp) {
       return res.status(401).json({
         success: false,
@@ -68,7 +59,7 @@ export const signup = async (req, res) => {
         message: `error occurred while hashing password and error is ${error}`,
       });
     }
-    // TODO : Create a profile according to chosen role
+
     let profile;
 
     try {
@@ -125,9 +116,10 @@ export const signup = async (req, res) => {
     }
   }
 };
+
 export const sendotp = async (req, res) => {
   try {
-    console.log("inside send otp controller");
+    // console.log("inside send otp controller");
     const { email } = req.body;
     const user = await User.findOne({ email });
     if (user) {
@@ -142,7 +134,7 @@ export const sendotp = async (req, res) => {
       lowerCaseAlphabets: false,
       specialChars: false,
     });
-    console.log("otp generated ", otp);
+    // console.log("otp generated ", otp);
     const otpBOdy = await OTP.create({
       email,
       otp,
@@ -192,7 +184,7 @@ export const login = async (req, res) => {
     }
 
     const payload = {
-      userid: user._id,
+      _id: user._id,
       email: user.email,
       username: user.username,
     };
@@ -225,6 +217,171 @@ export const login = async (req, res) => {
     return res.status(500).json({
       success: false,
       message: `Something went wrong while logging in: ${error.message}`,
+    });
+  }
+};
+
+export const logout = async (req, res) => {
+  try {
+    res.clearCookie("token");
+    return res.status(200).json({
+      success: true,
+      message: "User logged out successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: `Something went wrong while logging out: ${error.message}`,
+    });
+  }
+};
+
+export const getUser = async (req, res) => {
+  try {
+    console.log(req.user._id);
+    const user = await User.findById(req.user._id).populate("profile");
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+    return res.status(200).json({
+      success: true,
+      data: user,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: `Something went wrong while fetching user profile: ${error.message}`,
+    });
+  }
+};
+
+export const updateUserInfo = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+    const { firstName, lastName, email, username, location } = req.body;
+    if (firstName) user.firstName = firstName;
+    if (lastName) user.lastName = lastName;
+    if (email) user.email = email;
+    if (username) user.username = username;
+    if (location) user.location = location;
+    await user.save();
+    return res.status(200).json({
+      success: true,
+      message: "User profile updated successfully",
+      data: user,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: `Something went wrong while updating user profile: ${error.message}`,
+    });
+  }
+};
+
+export const forgotPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+    if (!email) {
+      return res.status(400).json({
+        success: false,
+        message: "Please provide email",
+      });
+    }
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+    const otp = otpGenerator.generate(6, {
+      upperCaseAlphabets: false,
+      lowerCaseAlphabets: false,
+      specialChars: false,
+    });
+    const otpBody = await OTP.create({
+      email,
+      otp,
+    });
+    return res.status(200).json({
+      success: true,
+      message: "otp sent successfully",
+      OTP: otp,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: `Something went wrong while sending otp: ${error.message}`,
+    });
+  }
+};
+
+export const resetPassword = async (req, res) => {
+  try {
+    const { email, otp, password } = req.body;
+    if (!email || !otp || !password) {
+      return res.status(400).json({
+        success: false,
+        message: "Please provide email, otp and new password",
+      });
+    }
+    const otpverify = await OTP.find({ email })
+      .sort({ createdAt: -1 })
+      .limit(1);
+    if (otpverify[0].otp !== otp) {
+      return res.status(401).json({
+        success: false,
+        message: "otp is invalide please try again",
+      });
+    }
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+    const hashedpassword = await bcrypt.hash(password, 10);
+    user.password = hashedpassword;
+    await user.save();
+    return res.status(200).json({
+      success: true,
+      message: "Password reset successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: `Something went wrong while resetting password: ${error.message}`,
+    });
+  }
+};
+
+export const deleteUser = async (req, res) => {
+  try {
+    const user = await User.findByIdAndDelete(req.user._id);
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+    return res.status(200).json({
+      success: true,
+      message: "User deleted successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: `Something went wrong while deleting user: ${error.message}`,
     });
   }
 };

@@ -35,6 +35,31 @@ export const getJob = async () => {
   }
 };
 
+export const createJob = async (req, res) => {
+  try {
+    if (
+      !req.body.title ||
+      !req.body.description ||
+      !req.body.category ||
+      !req.body.budget ||
+      !req.body.skillsRequired ||
+      !req.body.deadline
+    ) {
+      return res.status(400).send({
+        message: "Please fill all the required details",
+      });
+    }
+    const newJob = new Job(req.body);
+    const savedJob = await newJob.save();
+    res.status(201).json({
+      data: savedJob,
+    });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+};
+
 export const editJob = async () => {
   try {
     if (
@@ -80,3 +105,4 @@ export const deleteJob = async () => {
     res.status(500).send({ message: error.message });
   }
 };
+
