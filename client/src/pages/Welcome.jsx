@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Welcome() {
   const [role, setRole] = useState("");
@@ -31,7 +32,10 @@ export default function Welcome() {
               checked={role === "client"}
               onChange={handleRole}
             />
-            <label className=" py-10 px-5 cursor-pointer" htmlFor="client">
+            <label
+              className="text-lg font-medium py-10 px-5 cursor-pointer"
+              htmlFor="client"
+            >
               I am a client looking for Talent
             </label>
           </div>
@@ -45,17 +49,22 @@ export default function Welcome() {
               checked={role === "freelancer"}
               onChange={handleRole}
             />
-            <label className="py-10 px-5 cursor-pointer" htmlFor="freelancer">
+            <label
+              className="py-10 font-medium text-lg px-5 cursor-pointer"
+              htmlFor="freelancer"
+            >
               I am a Freelancer looking for work
             </label>
           </div>
         </div>
         <div className="button">
-          <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 my-5 rounded">
-            {role === "client"
-              ? "Continue as Client"
-              : "Continue as Freelancer"}
-          </button>
+          <Link to={`/signup/${role}`}>
+            <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 my-5 rounded-lg">
+              {role === "client"
+                ? "Continue as Client"
+                : "Continue as Freelancer"}
+            </button>
+          </Link>
         </div>
         <p>
           Already have an account?{" "}

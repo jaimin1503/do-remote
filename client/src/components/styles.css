@@ -1,0 +1,20 @@
+.input-field {
+	@apply w-full px-3 py-2 mb-4 leading-tight rounded-md focus:outline-none focus:ring focus:border-blue-500;
+	border: 1px solid #e2e8f0;
+	transition: border-color 0.3s ease;
+  }
+  
+  .input-field:focus {
+	border-color: #4a90e2;
+  }
+  
+  .submit-button {
+	@apply w-full px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-500;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+  }
+  
+  .submit-button:hover {
+	background-color: #357ad1;
+  }
+  

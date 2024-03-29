@@ -1,6 +1,14 @@
 import mongoose, { Schema } from "mongoose";
 
 const userSchema = mongoose.Schema({
+  firstName: {
+    type: "string",
+    required: true,
+  },
+  lastName: {
+    type: "string",
+    required: true,
+  },
   username: {
     type: "string",
     unique: true,
@@ -15,17 +23,13 @@ const userSchema = mongoose.Schema({
     type: "string",
     required: true,
   },
-  firstName: {
-    type: "string",
-    required: true,
-  },
-  lastName: {
-    type: "string",
-    required: true,
-  },
   location: {
     type: "string",
     default: "India",
+  },
+  role: {
+    type: "string",
+    required: true,
   },
   profile: {
     type: Schema.Types.ObjectId,

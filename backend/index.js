@@ -21,9 +21,9 @@ app.use(
   })
 );
 
-app.use("/user", userRoutes);
-app.use("/user/job", jobRoutes);
-app.use("/user/proposal", proposalRoutes);
+app.use("api/user", userRoutes);
+app.use("api/job", jobRoutes);
+app.use("api/proposal", proposalRoutes);
 
 const port = process.env.PORT || 5555;
 app.listen(port, () => {
