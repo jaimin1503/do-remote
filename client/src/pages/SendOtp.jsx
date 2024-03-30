@@ -51,7 +51,7 @@ export function signUp(data,navigate) {
       } catch (error) {
         console.log("SIGNUP API ERROR............", error)
         toast.error("Signup Failed")
-        navigate("/signup")
+        navigate("/welcome")
       }
       toast.dismiss(toastId)
     }

@@ -5,6 +5,7 @@ import DevIT from "./pages/DevIT";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Welcome from "./pages/Welcome";
+import VerifyEmail from "./pages/VerifyEmail";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup/:role" element={<Signup />} />
         <Route path="/welcome" element={<Welcome />} />
+        <Route path="/verify-email" element={<VerifyEmail />} />
       </Routes>
     </>
   );

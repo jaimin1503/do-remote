@@ -2,6 +2,10 @@ import { useState } from "react";
 import axios from "axios";
 import "./styles.css";
 import SelectCountry from "./SelectCountry";
+import { sendOtp } from "../pages/SendOtp";
+import { useDispatch } from "react-redux";
+import { setsignupdata } from "../reducers/authReducer";
+import { useNavigate } from "react-router-dom";
 
 const ClientSignup = ({ role }) => {
   const url = import.meta.env.VITE_BASE_URL;
@@ -23,17 +27,20 @@ const ClientSignup = ({ role }) => {
     setFormData({ ...formData, location: country.label });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      axios
-        .post(`${url}/user/signup`, formData, { withCredentials: true })
-        .then((res) => {
-          console.log(res.data);
-        });
-    } catch (error) {
-      console.error(error);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = {};
+    for (const key in formData) {
+      if (formData[key] !== "") {
+        data[key] = formData[key];
+      }
     }
+    dispatch(setsignupdata(data));
+    sendOtp(data.email, navigate);
+    console.log("inside handle submit", data);
   };
 
   return (
@@ -44,7 +51,7 @@ const ClientSignup = ({ role }) => {
             Join as a client and hire talented freelancers
           </h1>
         </div>
-        <form className="max-w-md mx-auto">
+        <form onSubmit={handleSubmit} className="max-w-md mx-auto">
           <input
             type="text"
             name="firstName"
@@ -95,12 +102,7 @@ const ClientSignup = ({ role }) => {
             onCountrySelect={handleCountrySelect}
             value={formData.location}
           />
-          <button
-            onSubmit={handleSubmit}
-            type="submit"
-            name="location"
-            className="submit-button mt-10"
-          >
+          <button type="submit" name="location" className="submit-button mt-10">
             Submit
           </button>
         </form>
