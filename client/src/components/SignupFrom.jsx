@@ -1,14 +1,12 @@
 import { useState } from "react";
-import axios from "axios";
 import "./styles.css";
 import SelectCountry from "./SelectCountry";
 import { sendOtp } from "../pages/SendOtp";
 import { useDispatch } from "react-redux";
-import { setsignupdata } from "../reducers/authReducer";
+import { setLoading, setsignupdata } from "../reducers/authReducer";
 import { useNavigate } from "react-router-dom";
 
-const ClientSignup = ({ role }) => {
-  const url = import.meta.env.VITE_BASE_URL;
+const SignupForm = ({ role }) => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -30,17 +28,13 @@ const ClientSignup = ({ role }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = {};
-    for (const key in formData) {
-      if (formData[key] !== "") {
-        data[key] = formData[key];
-      }
-    }
-    dispatch(setsignupdata(data));
-    sendOtp(data.email, navigate);
-    console.log("inside handle submit", data);
+    dispatch(setLoading(true));
+    dispatch(setsignupdata(formData));
+    dispatch(sendOtp(formData.email, navigate));
+    console.log("inside handle submit", formData);
+    dispatch(setLoading(false));
   };
 
   return (
@@ -48,7 +42,9 @@ const ClientSignup = ({ role }) => {
       <div className=" w-fit mx-auto md:border-2 border-blue-300 rounded-2xl p-20 mt-10">
         <div className=" flex justify-center items-center">
           <h1 className=" text-3xl pb-10 font-medium">
-            Join as a client and hire talented freelancers
+            {role === "client"
+              ? "Join as a client and hire talented freelancers"
+              : "Join as a freelancer and get hired"}
           </h1>
         </div>
         <form onSubmit={handleSubmit} className="max-w-md mx-auto">
@@ -110,4 +106,4 @@ const ClientSignup = ({ role }) => {
     </>
   );
 };
-export default ClientSignup;
+export default SignupForm;
