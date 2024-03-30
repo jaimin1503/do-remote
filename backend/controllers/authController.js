@@ -9,8 +9,16 @@ dotenv.config();
 
 export const signup = async (req, res) => {
   try {
-    const { firstName, lastName, email, password, username, location,role, otp } =
-      req.body;
+    const {
+      firstName,
+      lastName,
+      email,
+      password,
+      username,
+      location,
+      role,
+      otp,
+    } = req.body;
     if (!firstName || !lastName || !email || !password || !username || !role) {
       res.status(400).json({
         success: false,
@@ -156,7 +164,7 @@ export const sendotp = async (req, res) => {
 export const login = async (req, res) => {
   try {
     const { identifier, password } = req.body;
-
+    console.log(req.body);
     if (!identifier || !password) {
       return res.status(400).json({
         success: false,
