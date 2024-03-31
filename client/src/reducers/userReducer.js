@@ -8,12 +8,11 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    getuser: (state, action) => {
+    setuser: (state, action) => {
       state.user = action.payload;
     },
   },
 });
 
-export const { getuser } = userSlice.actions;
+export const { setuser } = userSlice.actions;
 export default userSlice.reducer;
-

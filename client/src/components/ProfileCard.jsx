@@ -1,10 +1,12 @@
 import settingsLogo from "./assets/settings.svg";
 import logoutLogo from "./assets/logout.svg";
+import { useSelector } from "react-redux";
 
 const ProfileCard = () => {
+  const { user } = useSelector((state) => state.user);
   const handleLogout = () => {
-	localStorage.removeItem("token");
-	window.location.href = "/";
+    localStorage.removeItem("token");
+    window.location.href = "/";
   };
   return (
     <>
@@ -12,11 +14,11 @@ const ProfileCard = () => {
         <div className="image text-center">
           <img
             className=" h-28 w-28 rounded-full mx-auto"
-            src="https://www.w3schools.com/howto/img_avatar.png"
-            alt="Avatar"
+            src={user.profile?.prfilePicture}
+            alt={user.profile?.prfilePicture}
           />
 
-          <p className="Name">Jaimin Viramgama</p>
+          <p className="Name">{user?.username}</p>
           <p className="role text-sm text-gray-600">Freelancer</p>
         </div>
         <div className="options">

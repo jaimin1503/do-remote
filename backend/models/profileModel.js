@@ -7,7 +7,7 @@ const profileSchema = mongoose.Schema({
   profilePicture: {
     type: "string",
     default:
-      "https://res.cloudinary.com/dtuuyvimi/image/upload/v1698836702/OpenToWork/tqlskn97ccqwvglon5ah.jpg",
+      "https://unsplash.com/photos/a-man-wearing-glasses-and-a-black-shirt-iEEBWgY_6lA",
   },
   about: {
     type: "string",
