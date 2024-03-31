@@ -24,6 +24,7 @@ export default function Login() {
         { withCredentials: true }
       );
       if (response.status === 200) {
+        localStorage.setItem("token", response.data.token);
         navigate("/");
       } else {
         setError("An error occurred. Please try again later.");

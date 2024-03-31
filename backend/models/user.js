@@ -35,6 +35,12 @@ const userSchema = mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: "Profile",
   },
+  resetPasswordToken: {
+    type: "string",
+  },
+  tokenExpireTime: {
+    type: "Date",
+  },
 });
 
 export const User = mongoose.model("User", userSchema);

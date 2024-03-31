@@ -3,7 +3,6 @@ import { auth } from "../middlewares/auth.js";
 import {
   getUser,
   login,
-  logout,
   sendotp,
   signup,
   updateUserInfo,
@@ -16,7 +15,6 @@ const router = express.Router();
 router.post("/signup", signup);
 router.post("/login", login);
 router.post("/sendotp", sendotp);
-router.post("/logout", logout);
 router.get("/getUser", auth, getUser);
 router.put("/updateUserInfo", auth, updateUserInfo);
 router.post("/forgotPassword", auth, forgotPassword);
