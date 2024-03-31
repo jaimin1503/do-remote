@@ -21,10 +21,10 @@ export default function Welcome() {
             Join as client or Freelancer
           </h1>
         </div>
-        <div className="choice flex flex-col">
-          <div className=" bg-blue-200 border-2 rounded-xl m-5 py-5 hover:border-blue-300">
+        <div className="choice flex flex-col ">
+          <div className=" bg-blue-200 my-2 flex flex-row-reverse border-2 rounded-xl hover:border-blue-300">
             <input
-              className="m-5"
+              className="float-right m-3"
               type="radio"
               name="role"
               id="client"
@@ -33,15 +33,15 @@ export default function Welcome() {
               onChange={handleRole}
             />
             <label
-              className="text-lg font-medium py-10 px-5 cursor-pointer"
+              className=" py-10 px-5 text-lg font-medium cursor-pointer"
               htmlFor="client"
             >
               I am a client looking for Talent
             </label>
           </div>
-          <div className=" bg-blue-200 rounded-xl m-5 py-5 border-2 hover:border-blue-300">
+          <div className=" bg-blue-200 my-2 flex flex-row-reverse rounded-xl border-2 hover:border-blue-300">
             <input
-              className="m-5"
+              className=" float-right m-3"
               type="radio"
               name="role"
               id="freelancer"
@@ -50,7 +50,7 @@ export default function Welcome() {
               onChange={handleRole}
             />
             <label
-              className="py-10 font-medium text-lg px-5 cursor-pointer"
+              className=" py-10 px-5 font-medium text-lg cursor-pointer"
               htmlFor="freelancer"
             >
               I am a Freelancer looking for work
