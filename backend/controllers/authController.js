@@ -231,7 +231,6 @@ export const login = async (req, res) => {
 
 export const getUser = async (req, res) => {
   try {
-    console.log(req.user._id);
     const user = await User.findById(req.user._id).populate("profile");
     if (!user) {
       return res.status(404).json({
@@ -375,6 +374,27 @@ export const deleteUser = async (req, res) => {
     return res.status(500).json({
       success: false,
       message: `Something went wrong while deleting user: ${error.message}`,
+    });
+  }
+};
+
+export const getUserProfile = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id).populate("profile");
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+    return res.status(200).json({
+      success: true,
+      profile: user.profile,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: `Something went wrong while fetching user profile: ${error.message}`,
     });
   }
 };

@@ -13,9 +13,9 @@ const ProfileCard = () => {
       <div className="card w-60 flex py-4 shadow-md">
         <div className="image text-center">
           <img
-            className=" h-28 w-28 rounded-full mx-auto"
-            src={user.profile?.prfilePicture}
-            alt={user.profile?.prfilePicture}
+            className="h-28 w-28 rounded-full mx-auto object-cover"
+            src={user?.profile?.profilePicture}
+            alt="img"
           />
 
           <p className="Name">{user?.username}</p>

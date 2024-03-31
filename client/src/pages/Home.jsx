@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Navebar from "../components/Navebar";
-import ProfileCard from "../components/ProfileCard";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setuser } from "../reducers/userReducer";
@@ -23,7 +22,6 @@ export default function Home() {
   return (
     <div>
       <Navebar />
-      <ProfileCard />
     </div>
   );
 }
