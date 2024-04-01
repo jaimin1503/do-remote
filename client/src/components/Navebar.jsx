@@ -2,7 +2,6 @@ import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import { Link } from "react-router-dom";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const Navebar = () => {
@@ -16,14 +15,14 @@ const Navebar = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className=" items-center">
-              <Nav.Link as={Link} to="/design">
-                Design & Creative
-              </Nav.Link>
               <Nav.Link as={Link} to="/dev">
                 Development & IT
               </Nav.Link>
-              <Nav.Link as={Link} to="/dev">
-                AI & Data Science
+              <Nav.Link as={Link} to="/design">
+                Design & Creative
+              </Nav.Link>
+              <Nav.Link as={Link} to="/design">
+                AI and Data Science
               </Nav.Link>
             </Nav>
             <Nav className="ml-auto items-center">
