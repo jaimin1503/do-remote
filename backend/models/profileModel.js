@@ -17,6 +17,24 @@ const profileSchema = mongoose.Schema({
     type: "string",
     default: "",
   },
+  languages: [
+    {
+      type: String,
+      required: true,
+    },
+  ],
+  education: [
+    {
+      type: String,
+      required: true,
+    },
+  ],
+  experience: [
+    {
+      type: String,
+      required: true,
+    },
+  ],
   skills: [
     {
       type: String,
