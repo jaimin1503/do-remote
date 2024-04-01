@@ -1,4 +1,5 @@
 import NavLogged from "../components/NavLogged";
+import { useSelector } from "react-redux";
 
 const FLH = () => {
   return (

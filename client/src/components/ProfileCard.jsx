@@ -1,9 +1,9 @@
 import settingsLogo from "./assets/settings.svg";
 import logoutLogo from "./assets/logout.svg";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
-const ProfileCard = ({ photo, username, role }) => {
-  console.log(photo, username, role);
+const ProfileCard = ({ id, photo, username, role }) => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     window.location.href = "/";
@@ -18,7 +18,14 @@ const ProfileCard = ({ photo, username, role }) => {
             alt="img"
           />
 
-          <p className="Name">{username}</p>
+          <Link to={`/profile/${id}`}>
+            <p
+              className="Name hover:underline hover:text-blue-600 cursor-pointer"
+              style={{ transition: "0.3s" }}
+            >
+              {username}
+            </p>
+          </Link>
           <p className="role text-sm text-gray-600">{role}</p>
         </div>
         <div className="options">

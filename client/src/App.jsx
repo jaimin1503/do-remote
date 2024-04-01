@@ -7,6 +7,7 @@ import Signup from "./pages/Signup";
 import Welcome from "./pages/Welcome";
 import VerifyEmail from "./pages/VerifyEmail";
 import FLH from "./pages/FLH";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/flh" element={<FLH />} />
+        <Route path="/profile/:id" element={<Profile />} />
       </Routes>
     </>
   );

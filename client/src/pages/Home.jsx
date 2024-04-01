@@ -21,6 +21,13 @@ export default function Home() {
       });
   }, [dispatch]);
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      window.location.href = "/flh";
+    }
+  });
+
   return (
     <div>
       <Navebar role={user?.role} />

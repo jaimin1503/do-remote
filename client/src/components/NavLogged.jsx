@@ -36,6 +36,7 @@ const NavLogged = () => {
       })
       .then((res) => {
         dispatch(setuser(res.data.user));
+        console.log("fetched user data");
       })
       .catch((err) => {
         console.log(err);
@@ -93,6 +94,7 @@ const NavLogged = () => {
               photo={user?.profile?.profilePicture}
               username={user.username}
               role={user.role}
+              id={user._id}
             />
           )}
         </div>
@@ -150,6 +152,7 @@ const NavLogged = () => {
               photo={user?.profile?.profilePicture}
               username={user.username}
               role={user.role}
+              id={user._id}
             />
           )}
         </div>
