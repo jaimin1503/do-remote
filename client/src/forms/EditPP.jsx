@@ -4,23 +4,21 @@ import { useSelector } from "react-redux";
 import { updateDisplayPicture } from "../services/profile.js";
 import "./formStyles.css";
 
-const EditPP = ({ pId }) => {
+const EditPP = ({ pId, setIsOpenEditPP }) => {
   const [File, setFile] = useState(null);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   const inputRef = useRef(null);
-  const showRef = useRef(null);
+  const editPPRef = useRef(null);
   const [loading, setLoading] = useState(false);
   const [previewSource, setPreviewSource] = useState(null);
 
   const handleImageChange = (e) => {
-    console.log(e.target.files[0]);
     setFile(e.target.files[0]);
     const reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
     reader.onloadend = () => {
       setPreviewSource(reader.result);
-      console.log("previewsource", reader.result);
     };
   };
 
@@ -32,6 +30,7 @@ const EditPP = ({ pId }) => {
       console.log("formdata", formData);
       dispatch(updateDisplayPicture(formData, pId)).then(() => {
         setLoading(false);
+        setIsOpenEditPP(false);
       });
     } catch (error) {
       setLoading(false);
@@ -47,7 +46,7 @@ const EditPP = ({ pId }) => {
     <div id="edit-profile" className="overlay">
       <div className="upload-img absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-10">
         <div
-          ref={showRef}
+          ref={editPPRef}
           className=" items-center flex flex-col bg-white rounded-2xl w-[300px] sm:w-[350px] "
         >
           <h1 className="text-2xl font-semibold my-4 text-center">

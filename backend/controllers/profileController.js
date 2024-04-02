@@ -27,7 +27,7 @@ export const editProfilePicture = async (req, res) => {
   }
 };
 
-export const editInfo = async () => {
+export const editInfo = async (req, res) => {
   try {
     const pId = req.params.id;
     const { current_position, about, skills } = req.body;
@@ -47,7 +47,7 @@ export const editInfo = async () => {
   }
 };
 
-export const editSpecs = async () => {
+export const editSpecs = async (req, res) => {
   try {
     const pId = req.params.id;
     const { hourlyRate, languages, education, linkedAccounts } = req.body;

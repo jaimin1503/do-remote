@@ -3,38 +3,61 @@ import { useSelector } from "react-redux";
 import editLogo from "./assets/editLogo.svg";
 import EditPP from "../forms/EditPP";
 import { useEffect, useState, useRef } from "react";
+import EditInfo from "../forms/EditInfo";
 
 const Profile = () => {
   const { user } = useSelector((state) => state.user);
-  const [isOpen, setIsOpen] = useState(false);
-  const showRef = useRef(null);
-
-  const time = new Date().toLocaleTimeString("IN", {
+  const [isOpenEditPP, setIsOpenEditPP] = useState(false);
+  const [isOpenEditProfile, setIsOpenEditProfile] = useState(false);
+  const [isOpenEditInfo, setIsOpenEditInfo] = useState(false);
+  const editPPRef = useRef(null);
+  const editProfileRef = useRef(null);
+  const editInfoRef = useRef(null);
+  const time = new Date().toLocaleTimeString("In", {
     hour: "2-digit",
     minute: "2-digit",
-    hour12: true,
   });
+
   useEffect(() => {
-    const handleClickedOutside = (e) => {
-      if (showRef.current && !showRef.current.contains(e.target)) {
-        setIsOpen(false);
+    const handleClickOutside = (event) => {
+      if (
+        editPPRef.current &&
+        !editPPRef.current.contains(event.target) &&
+        editProfileRef.current &&
+        !editProfileRef.current.contains(event.target) &&
+        editInfoRef.current &&
+        !editInfoRef.current.contains(event.target)
+      ) {
+        setIsOpenEditPP(false);
+        setIsOpenEditProfile(false);
+        setIsOpenEditInfo(false);
       }
     };
-    document.addEventListener("click", handleClickedOutside);
+
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener("click", handleClickedOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [isOpen]);
+  }, []);
   return (
     <>
       <NavLogged />
-      <div>{isOpen && <EditPP pId={user?.profile?._id} />}</div>
+      <div>
+        {isOpenEditPP && (
+          <EditPP pId={user?.profile?._id} setIsOpenEditPP={setIsOpenEditPP} />
+        )}
+      </div>
+      <div>
+        {isOpenEditInfo && (
+          <EditInfo
+            pId={user?.profile?._id}
+            setIsOpenEditPP={setIsOpenEditInfo}
+          />
+        )}
+      </div>
       <div className=" md:border md:rounded-2xl md:m-5">
         <div className="row1 p-5 pb-5 flex flex-col md:flex-row items-center">
-          <div
-            ref={showRef}
-            className="user-info flex flex-col items-center md:flex-row h-fit"
-          >
+          <div className="user-info flex flex-col items-center md:flex-row h-fit">
             <img
               className=" h-24 w-24 rounded-full object-cover"
               src={user?.profile?.profilePicture}
@@ -44,7 +67,7 @@ const Profile = () => {
               id="edit-profile"
               onClick={(e) => {
                 e.stopPropagation;
-                setIsOpen(!isOpen);
+                setIsOpenEditPP(!isOpenEditPP);
               }}
               className="absolute p-1 ml-[4.5rem] bg-gray-200 mt-16 border-gray-600 rounded-full border-2"
             >
@@ -104,7 +127,13 @@ const Profile = () => {
           </div>
 
           <div className=" w-full ">
-            <button className=" float-right m-4 p-1 bg-gray-200 border-gray-600 rounded-full border-2">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsOpenEditInfo(!isOpenEditInfo);
+              }}
+              className=" float-right m-4 p-1 bg-gray-200 border-gray-600 rounded-full border-2"
+            >
               <img src={editLogo} alt="edit" />
             </button>
             {/* // edit personal info */}

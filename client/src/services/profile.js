@@ -33,3 +33,35 @@ export function updateDisplayPicture(formData, pId) {
     }
   };
 }
+
+export function updateInfo(formData, pId) {
+  return async (dispatch) => {
+    const toastId = toast.loading("Loading...");
+    try {
+      await axios
+        .put(
+          `${import.meta.env.VITE_BASE_URL}/profile/editInfo/${pId}`,
+          formData,
+          {
+            withCredentials: true,
+          }
+        )
+        .then((res) => {
+          console.log(res);
+          toast.success("Profile Updated Successfully");
+          dispatch(setuser(res?.data?.data));
+        })
+        .catch((error) => {
+          console.log("error accure in update display", error);
+          toast.error("Could Not Update Profile");
+        });
+
+      console.log("UPDATE_INFO_API API RESPONSE............");
+    } catch (error) {
+      console.error("UPDATE_INFO_API API ERROR............", error);
+      toast.error("Could Not Update Profile");
+    } finally {
+      toast.dismiss(toastId);
+    }
+  };
+}
