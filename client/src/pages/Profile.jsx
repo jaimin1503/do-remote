@@ -4,15 +4,18 @@ import editLogo from "./assets/editLogo.svg";
 import EditPP from "../forms/EditPP";
 import { useEffect, useState, useRef } from "react";
 import EditInfo from "../forms/EditInfo";
+import MultipleSelectChip from "../components/MultipleSelectChip";
 
 const Profile = () => {
   const { user } = useSelector((state) => state.user);
   const [isOpenEditPP, setIsOpenEditPP] = useState(false);
   const [isOpenEditProfile, setIsOpenEditProfile] = useState(false);
   const [isOpenEditInfo, setIsOpenEditInfo] = useState(false);
+  const [isOpenSkills, setIsOpenSkills] = useState(false);
   const editPPRef = useRef(null);
   const editProfileRef = useRef(null);
   const editInfoRef = useRef(null);
+  const editSkillsRef = useRef(null);
   const time = new Date().toLocaleTimeString("In", {
     hour: "2-digit",
     minute: "2-digit",
@@ -26,11 +29,14 @@ const Profile = () => {
         editProfileRef.current &&
         !editProfileRef.current.contains(event.target) &&
         editInfoRef.current &&
-        !editInfoRef.current.contains(event.target)
+        !editInfoRef.current.contains(event.target) &&
+        editSkillsRef.current &&
+        !editSkillsRef.current.contains(event.target)
       ) {
         setIsOpenEditPP(false);
         setIsOpenEditProfile(false);
         setIsOpenEditInfo(false);
+        setIsOpenSkills(false);
       }
     };
 
@@ -51,7 +57,15 @@ const Profile = () => {
         {isOpenEditInfo && (
           <EditInfo
             pId={user?.profile?._id}
-            setIsOpenEditPP={setIsOpenEditInfo}
+            setIsOpenEditInfo={setIsOpenEditInfo}
+          />
+        )}
+      </div>
+      <div>
+        {isOpenSkills && (
+          <MultipleSelectChip
+            pId={user?.profile?._id}
+            setIsOpenSkills={setIsOpenSkills}
           />
         )}
       </div>
@@ -75,9 +89,9 @@ const Profile = () => {
             </button>
             {/* //edit profile picture */}
             <div className="info mx-4">
-              <h1 className="text-4xl my-2 font-semibold">{user.username}</h1>
+              <h1 className="text-4xl my-2 font-semibold">{user?.username}</h1>
               <span className="text-lg my-2 text-gray-600 font-semibold">
-                {user.location},{" "}
+                {user?.location},{" "}
               </span>
               <span> {time}</span>
             </div>
@@ -99,7 +113,7 @@ const Profile = () => {
               <li className="py-2">
                 <h1 className=" text-xl pb-2 font-semibold">Rate</h1>
                 <p className="text-gray-600 text-lg">
-                  {user.profile?.hourlyRate}{" "}
+                  {user?.profile?.hourlyRate}{" "}
                   <span className="text-gray-600">Rs./hr</span>
                 </p>
               </li>
@@ -144,7 +158,7 @@ const Profile = () => {
                 </h1>
               </div>
               <div className="content-body p-4 pt-0 max-w-xl">
-                <p className="text-gray-600">{user.profile?.about}</p>
+                <p className="text-gray-600">{user?.profile?.about}</p>
               </div>
             </div>
             <div className="projects p-0 md:p-4 border-b">
@@ -154,16 +168,25 @@ const Profile = () => {
                   <h1 className="text-xl pb-2 font-semibold">Project 1</h1>
                   <img
                     className=" w-44 h-32 object-cover cursor-pointer rounded-lg "
-                    src={user.profile?.profilePicture}
+                    src={user?.profile?.profilePicture}
                     alt="img"
                   />
                 </div>
               </div>
             </div>
             <div className="skills p-0 md:p-4 border-b lg:border-none">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsOpenSkills(!isOpenSkills);
+                }}
+                className=" float-right m-4 p-1 bg-gray-200 border-gray-600 rounded-full border-2"
+              >
+                <img src={editLogo} alt="edit" />
+              </button>
               <h1 className="text-2xl p-4 font-semibold">Skills</h1>
               <div className=" flex p-5 pt-0 flex-wrap">
-                {user.profile?.skills?.map((skill, index) => (
+                {user?.profile?.skills?.map((skill, index) => (
                   <div
                     key={index}
                     className="skills-list py-2 px-4 m-2 bg-blue-200 w-fit rounded-full"

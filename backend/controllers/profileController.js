@@ -30,10 +30,27 @@ export const editProfilePicture = async (req, res) => {
 export const editInfo = async (req, res) => {
   try {
     const pId = req.params.id;
-    const { current_position, about, skills } = req.body;
+    const { current_position, about } = req.body;
     const newProfile = await Profile.findByIdAndUpdate(pId, {
       current_position,
       about,
+    });
+    res.status(201).json({
+      message: "Profile updated",
+      success: true,
+      data: newProfile,
+    });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send({ message: error.message });
+  }
+};
+
+export const editSkills = async (req, res) => {
+  try {
+    const pId = req.params.id;
+    const { skills } = req.body;
+    const newProfile = await Profile.findByIdAndUpdate(pId, {
       skills,
     });
     res.status(201).json({

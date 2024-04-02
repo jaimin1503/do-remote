@@ -7,6 +7,8 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Chip from "@mui/material/Chip";
+import { useRef } from "react";
+import { editInfo } from "../../../backend/controllers/profileController";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -44,6 +46,7 @@ function getStyles(name, personName, theme) {
 export default function MultipleSelectChip() {
   const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
+  const editSkillsRef = useRef(null);
 
   const handleChange = (event) => {
     const {
@@ -56,7 +59,7 @@ export default function MultipleSelectChip() {
   };
 
   return (
-    <div>
+    <div ref={editSkillsRef}>
       <FormControl sx={{ m: 1, width: 300 }}>
         <InputLabel id="demo-multiple-chip-label">Chip</InputLabel>
         <Select
