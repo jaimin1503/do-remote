@@ -1,19 +1,31 @@
 import { Profile } from "../models/profileModel.js";
+import uploadImageToCloudinary from "../utils/imageUploader.js";
 
 export const editPofilePicture = async () => {
   try {
-    const pId = req.params.id;
-    const url = req.body;
-    const newProfile = await Profile.findByIdAndUpdate(pId, {
-      profilePicture: url,
-    });
-    res.status(201).json({
-      newProfile,
-      message: "Profile picture updated",
+    const displayPicture = req.files.displayPicture;
+    const userId = req.user.id;
+    const image = await uploadImageToCloudinary(
+      displayPicture,
+      process.env.FOLDER_NAME,
+    );
+    console.log(image);
+    const updatedProfile = await User.findByIdAndUpdate(
+      userId,
+      { image: image.secure_url },
+      { new: true }
+    ).populate("additionalDetails");
+    console.log("updatedProfile", updatedProfile);
+    return res.status(200).json({
+      success: true,
+      message: `Image Updated successfully`,
+      data: updatedProfile,
     });
   } catch (error) {
-    console.error(error.message);
-    res.status(500).send({ message: error.message });
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 

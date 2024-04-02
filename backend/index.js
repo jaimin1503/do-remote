@@ -8,10 +8,11 @@ import jobRoutes from "./routes/jobRoutes.js";
 import proposalRoutes from "./routes/proposalRoutes.js";
 import profileRoutes from "./routes/profileRoutes.js";
 import cors from "cors";
+import fileUpload from "express-fileupload";
+import cloudinaryConnect from "./utils/cloudinary.js";
 
 connect();
 const app = express();
-
 app.use(express.json());
 app.use(cookieParser());
 app.use(
@@ -21,6 +22,13 @@ app.use(
     credentials: true,
   })
 );
+app.use(
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: "/tmp",
+  })
+);
+cloudinaryConnect();
 
 app.use("/user", userRoutes);
 app.use("/job", jobRoutes);
