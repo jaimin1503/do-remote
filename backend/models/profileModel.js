@@ -29,8 +29,7 @@ const profileSchema = mongoose.Schema({
   },
   profilePicture: {
     type: "string",
-    default:
-      "https://unsplash.com/photos/a-man-wearing-glasses-and-a-black-shirt-iEEBWgY_6lA",
+    default: "https://cdn-icons-png.flaticon.com/512/9131/9131529.png",
   },
   about: {
     type: "string",

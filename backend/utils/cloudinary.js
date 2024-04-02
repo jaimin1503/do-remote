@@ -2,8 +2,7 @@ import { v2 as cloudinaryV2 } from "cloudinary";
 
 export default function cloudinaryConnect() {
   try {
-    v2.config({
-      //!    ########   Configuring the Cloudinary to Upload MEDIA ########
+    cloudinaryV2.config({
       cloud_name: process.env.CLOUD_NAME,
       api_key: process.env.API_KEY,
       api_secret: process.env.API_SECRET,

@@ -3,13 +3,13 @@ const router = express.Router();
 import { auth } from "../middlewares/auth.js";
 
 import {
-  editPofilePicture,
+  editProfilePicture,
   editInfo,
   editSpecs,
 } from "../controllers/profileController.js";
 
-router.post("/editProfilePicture/:id", auth, editPofilePicture);
-router.post("/editInfo/:id", auth, editInfo);
-router.post("/editSpecs/:id", auth, editSpecs);
+router.put("/editProfilePicture/:id", auth, editProfilePicture);
+router.put("/editInfo/:id", auth, editInfo);
+router.put("/editSpecs/:id", auth, editSpecs);
 
 export default router;
