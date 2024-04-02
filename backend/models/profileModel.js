@@ -1,5 +1,28 @@
 import mongoose, { Schema } from "mongoose";
 
+const educationSchema = mongoose.Schema({
+  school: {
+    type: "string",
+    required: true,
+  },
+  degree: {
+    type: "string",
+    required: true,
+  },
+});
+
+const socialSchema = mongoose.Schema({
+  linkedin: {
+    type: "string",
+  },
+  github: {
+    type: "string",
+  },
+  stackoverflow: {
+    type: "string",
+  },
+});
+
 const profileSchema = mongoose.Schema({
   CompanyName: {
     type: "string",
@@ -23,18 +46,8 @@ const profileSchema = mongoose.Schema({
       required: true,
     },
   ],
-  education: [
-    {
-      type: String,
-      required: true,
-    },
-  ],
-  experience: [
-    {
-      type: String,
-      required: true,
-    },
-  ],
+  education: [educationSchema],
+  linkedAccounts: socialSchema,
   skills: [
     {
       type: String,
