@@ -1,5 +1,4 @@
-import { Profile } from "../models/profileModel";
-import { User } from "../models/userModel";
+import { Profile } from "../models/profileModel.js";
 
 export const editPofilePicture = async () => {
   try {
@@ -9,7 +8,8 @@ export const editPofilePicture = async () => {
       profilePicture: url,
     });
     res.status(201).json({
-      data: newProfile,
+      newProfile,
+      message: "Profile picture updated",
     });
   } catch (error) {
     console.error(error.message);

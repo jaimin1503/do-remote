@@ -1,6 +1,7 @@
 import NavLogged from "../components/NavLogged";
 import { useSelector } from "react-redux";
 import editLogo from "./assets/editLogo.svg";
+import EditPP from "../forms/EditPP";
 
 const Profile = () => {
   const { user } = useSelector((state) => state.user);
@@ -120,6 +121,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
+      <EditPP pId={user.profile?._id} />
     </>
   );
 };
