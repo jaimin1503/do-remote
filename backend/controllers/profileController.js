@@ -16,7 +16,6 @@ export const editProfilePicture = async (req, res) => {
       { profilePicture: image.secure_url },
       { new: true }
     );
-    console.log("updatedProfile", updatedProfile);
     const updatedUser = await User.findOne({ profile: pId }).populate(
       "profile"
     );
@@ -59,6 +58,48 @@ export const editSkills = async (req, res) => {
     const { skills } = req.body;
     const newProfile = await Profile.findByIdAndUpdate(pId, {
       skills,
+    });
+    const updatedUser = await User.findOne({ profile: pId }).populate(
+      "profile"
+    );
+    res.status(201).json({
+      message: "Profile updated",
+      success: true,
+      data: updatedUser,
+    });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send({ message: error.message });
+  }
+};
+
+export const editRate = async (req, res) => {
+  try {
+    const pId = req.params.id;
+    const { rate } = req.body;
+    const newProfile = await Profile.findByIdAndUpdate(pId, {
+      hourlyRate: rate,
+    });
+    const updatedUser = await User.findOne({ profile: pId }).populate(
+      "profile"
+    );
+    res.status(201).json({
+      message: "Profile updated",
+      success: true,
+      data: updatedUser,
+    });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send({ message: error.message });
+  }
+};
+
+export const editLanguages = async (req, res) => {
+  try {
+    const pId = req.params.id;
+    const { languages } = req.body;
+    const newProfile = await Profile.findByIdAndUpdate(pId, {
+      languages,
     });
     const updatedUser = await User.findOne({ profile: pId }).populate(
       "profile"

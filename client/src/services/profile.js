@@ -130,3 +130,67 @@ export function updateSpecs(formData, pId) {
     }
   };
 }
+
+export function updateRate(formData, pId) {
+  return async (dispatch) => {
+    const toastId = toast.loading("Loading...");
+    try {
+      await axios
+        .put(
+          `${import.meta.env.VITE_BASE_URL}/profile/editRate/${pId}`,
+          formData,
+          {
+            withCredentials: true,
+          }
+        )
+        .then((res) => {
+          console.log(res);
+          toast.success("Rate Updated Successfully");
+          dispatch(setuser(res.data.data));
+        })
+        .catch((error) => {
+          console.log("error accure in update display", error);
+          toast.error("Could Not Update Rate");
+        });
+
+      console.log("UPDATE_RATE_API API RESPONSE............");
+    } catch (error) {
+      console.error("UPDATE_RATE_API API ERROR............", error);
+      toast.error("Could Not Update Rate");
+    } finally {
+      toast.dismiss(toastId);
+    }
+  };
+}
+
+export function updateLanguages(languages, pId) {
+  return async (dispatch) => {
+    const toastId = toast.loading("Loading...");
+    try {
+      await axios
+        .put(
+          `${import.meta.env.VITE_BASE_URL}/profile/editLanguages/${pId}`,
+          languages,
+          {
+            withCredentials: true,
+          }
+        )
+        .then((res) => {
+          console.log(res);
+          toast.success("Languages Updated Successfully");
+          dispatch(setuser(res.data.data));
+        })
+        .catch((error) => {
+          console.log("error accure in update display", error);
+          toast.error("Could Not Update Languages");
+        });
+
+      console.log("UPDATE_LANGUAGES_API API RESPONSE............");
+    } catch (error) {
+      console.error("UPDATE_LANGUAGES_API API ERROR............", error);
+      toast.error("Could Not Update Languages");
+    } finally {
+      toast.dismiss(toastId);
+    }
+  };
+}

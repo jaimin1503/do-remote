@@ -39,13 +39,10 @@ const EditInfo = ({ pId, setIsOpenEditInfo }) => {
         <div className=" absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-10">
           <div className=" bg-white p-4 rounded-2xl flex flex-col w-[340px] sm:w-[50vw] items-center">
             <div className="edit-details-header my-4">
-              <h1 className="text-2xl font-semibold">Edit Personal Info</h1>
+              <h1 className="text-3xl font-semibold">Edit Personal Info</h1>
             </div>
 
-            <form
-              onSubmit={handleSubmit}
-              className="flex flex-col items-center w-full"
-            >
+            <form onSubmit={handleSubmit} className="items-center w-full">
               <input
                 onChange={handelInputChange}
                 name="current_position"
@@ -64,9 +61,15 @@ const EditInfo = ({ pId, setIsOpenEditInfo }) => {
               />
               <button
                 type="submit"
-                className="btn bg-blue-500 hover:bg-blue-600 py-2 px-5 rounded-lg text-white my-4"
+                className="btn bg-blue-500 hover:bg-blue-600 py-2 px-5 rounded-lg float-right text-white mt-4"
               >
                 Save
+              </button>
+              <button
+                onClick={() => setIsOpenEditInfo(false)}
+                className="py-2 px-4 float-right text-blue-500 mt-4"
+              >
+                Cancle
               </button>
             </form>
           </div>

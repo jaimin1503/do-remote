@@ -61,10 +61,16 @@ function EditSkills({ setIsOpenSkills, pId }) {
             </div>
             <div className="mt-4">
               <button
-                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg"
+                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 float-right rounded-lg"
                 type="submit"
               >
                 Save
+              </button>
+              <button
+                onClick={() => setIsOpenSkills(false)}
+                className="py-2 px-4 float-right text-blue-500 "
+              >
+                Cancle
               </button>
             </div>
           </form>

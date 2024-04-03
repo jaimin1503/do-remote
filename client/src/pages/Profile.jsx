@@ -5,15 +5,22 @@ import EditPP from "../forms/EditPP";
 import { useEffect, useState, useRef } from "react";
 import EditInfo from "../forms/EditInfo";
 import EditSkills from "../forms/EditSkills";
+import Rate from "../forms/Rate";
+import EditLangs from "../forms/EditLangs";
 
 const Profile = () => {
   const { user } = useSelector((state) => state.user);
   const [isOpenEditPP, setIsOpenEditPP] = useState(false);
   const [isOpenEditInfo, setIsOpenEditInfo] = useState(false);
   const [isOpenSkills, setIsOpenSkills] = useState(false);
+  const [isOpenRate, setIsOpenRate] = useState(false);
+  const [isOpenLangs, setIsOpenLangs] = useState(false);
+  const editLangsRef = useRef(null);
   const editPPRef = useRef(null);
   const editInfoRef = useRef(null);
   const editSkillsRef = useRef(null);
+  const editRateRef = useRef(null);
+
   const time = new Date().toLocaleTimeString("In", {
     hour: "2-digit",
     minute: "2-digit",
@@ -27,11 +34,17 @@ const Profile = () => {
         editInfoRef.current &&
         !editInfoRef.current.contains(event.target) &&
         editSkillsRef.current &&
-        !editSkillsRef.current.contains(event.target)
+        !editSkillsRef.current.contains(event.target) &&
+        editRateRef.current &&
+        !editRateRef.current.contains(event.target) &&
+        editLangsRef.current &&
+        !editLangsRef.current.contains(event.target)
       ) {
         setIsOpenEditPP(false);
         setIsOpenEditInfo(false);
         setIsOpenSkills(false);
+        setIsOpenRate(false);
+        setIsOpenLangs(false);
       }
     };
 
@@ -64,9 +77,19 @@ const Profile = () => {
           />
         )}
       </div>
+      <div>
+        {isOpenRate && (
+          <Rate pId={user?.profile?._id} setIsOpenRate={setIsOpenRate} />
+        )}
+      </div>
+      <div>
+        {isOpenLangs && (
+          <EditLangs setIsOpenLangs={setIsOpenLangs} pId={user?.profile?._id} />
+        )}
+      </div>
       <div className=" md:border md:rounded-2xl md:m-5">
-        <div className="row1 p-5 pb-5 flex flex-col md:flex-row items-center">
-          <div className="user-info flex flex-col items-center md:flex-row h-fit">
+        <div className="row1 p-5 pb-5 flex flex-col sm:flex-row items-center">
+          <div className="user-info flex flex-col items-center sm:flex-row h-fit">
             <img
               className=" h-24 w-24 rounded-full object-cover"
               src={user?.profile?.profilePicture}
@@ -91,7 +114,7 @@ const Profile = () => {
               <span> {time}</span>
             </div>
           </div>
-          <div className="editbutton mt-4 md:mt-0 md:ml-auto bg-gray-200 h-fit">
+          <div className="editbutton mt-4 md:mt-0 md:ml-auto h-fit">
             <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">
               Edit Profile
             </button>
@@ -99,12 +122,18 @@ const Profile = () => {
         </div>
 
         <div className="row2 border-t flex flex-col-reverse lg:flex-row">
-          <div className="side-bar px-0 lg:border-r w-full md:w-fit">
-            <button className=" float-right m-4 p-1 bg-gray-200 border-gray-600 rounded-full border-2">
+          <div className="side-bar px-0 lg:border-r w-full lg:w-[400px]">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsOpenRate(!isOpenRate);
+              }}
+              className=" float-right m-4 p-1 bg-gray-200 border-gray-600 rounded-full border-2"
+            >
               <img src={editLogo} alt="edit" />
             </button>
             {/* edit specifications */}
-            <ul className="list-none p-4 mr-10">
+            <ul className="list-none p-4 ">
               <li className="py-2">
                 <h1 className=" text-xl pb-2 font-semibold">Rate</h1>
                 <p className="text-gray-600 text-lg">
@@ -113,12 +142,23 @@ const Profile = () => {
                 </p>
               </li>
               <li className="py-2">
-                <h1 className=" text-xl pb-2 font-semibold">
-                  Languages Spoken
-                </h1>
-                <p className="text-gray-600">Hindi</p>
-                <p className="text-gray-600">English</p>
-                <p className="text-gray-600">Gujarati</p>
+                <div className=" flex items-center justify-between w-full">
+                  <h1 className=" text-xl pb-2 font-semibold">Languages</h1>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setIsOpenLangs(!isOpenLangs);
+                    }}
+                    className=" m-4 p-1 bg-gray-200 border-gray-600 rounded-full border-2"
+                  >
+                    <img src={editLogo} alt="edit" />
+                  </button>
+                </div>
+                {user?.profile?.languages?.map((language, index) => (
+                  <p key={index} className="text-gray-600">
+                    {language}
+                  </p>
+                ))}
               </li>
               <li className="py-2">
                 <h1 className=" text-xl pb-2 font-semibold">Education</h1>
