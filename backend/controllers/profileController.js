@@ -1,5 +1,6 @@
 import { Profile } from "../models/profileModel.js";
 import uploadImageToCloudinary from "../utils/imageUploader.js";
+import { User } from "../models/user.js";
 
 export const editProfilePicture = async (req, res) => {
   try {
@@ -16,10 +17,13 @@ export const editProfilePicture = async (req, res) => {
       { new: true }
     );
     console.log("updatedProfile", updatedProfile);
+    const updatedUser = await User.findOne({ profile: pId }).populate(
+      "profile"
+    );
     return res.status(200).json({
       success: true,
       message: `Image Updated successfully`,
-      data: updatedProfile,
+      data: updatedUser,
     });
   } catch (error) {
     console.error(error.message);
@@ -35,10 +39,13 @@ export const editInfo = async (req, res) => {
       current_position,
       about,
     });
+    const updatedUser = await User.findOne({ profile: pId }).populate(
+      "profile"
+    );
     res.status(201).json({
       message: "Profile updated",
       success: true,
-      data: newProfile,
+      data: updatedUser,
     });
   } catch (error) {
     console.error(error.message);
@@ -53,10 +60,13 @@ export const editSkills = async (req, res) => {
     const newProfile = await Profile.findByIdAndUpdate(pId, {
       skills,
     });
+    const updatedUser = await User.findOne({ profile: pId }).populate(
+      "profile"
+    );
     res.status(201).json({
       message: "Profile updated",
       success: true,
-      newProfile,
+      data: updatedUser,
     });
   } catch (error) {
     console.error(error.message);
@@ -74,10 +84,13 @@ export const editSpecs = async (req, res) => {
       education,
       linkedAccounts,
     });
+    const updatedUser = await User.findOne({ profile: pId }).populate(
+      "profile"
+    );
     res.status(201).json({
       message: "Profile updated",
       success: true,
-      newProfile,
+      data: updatedUser,
     });
   } catch (error) {
     console.error(error.message);

@@ -3,7 +3,6 @@ import { setuser } from "../reducers/userReducer";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 
-
 export function updateDisplayPicture(formData, pId) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading...");
@@ -51,7 +50,7 @@ export function updateInfo(formData, pId) {
         .then((res) => {
           console.log(res);
           toast.success("Profile Updated Successfully");
-          dispatch(setuser(res?.data?.data));
+          dispatch(setuser(res.data.data));
         })
         .catch((error) => {
           console.log("error accure in update display", error);
@@ -83,7 +82,7 @@ export function updateSkills(formData, pId) {
         .then((res) => {
           console.log(res);
           toast.success("Skills Updated Successfully");
-          dispatch(setuser(res?.data?.data));
+          dispatch(setuser(res.data.data));
         })
         .catch((error) => {
           console.log("error accure in update display", error);
