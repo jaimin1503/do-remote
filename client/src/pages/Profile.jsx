@@ -61,7 +61,14 @@ const Profile = () => {
           />
         )}
       </div>
-      <div>{isOpenSkills && <EditSkills />}</div>
+      <div>
+        {isOpenSkills && (
+          <EditSkills
+            pId={user?.profile?._id}
+            setIsOpenSkills={setIsOpenSkills}
+          />
+        )}
+      </div>
       <div className=" md:border md:rounded-2xl md:m-5">
         <div className="row1 p-5 pb-5 flex flex-col md:flex-row items-center">
           <div className="user-info flex flex-col items-center md:flex-row h-fit">

@@ -19,7 +19,7 @@ const EditInfo = ({ pId, setIsOpenEditInfo }) => {
       current_position: user?.profile?.current_position,
       about: user?.profile?.about,
     });
-  }, [user.profile]);
+  }, [user?.profile]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

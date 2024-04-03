@@ -42,7 +42,7 @@ const NavLogged = () => {
         console.log(err);
       });
   }, [dispatch]);
-  if (user.role === "freelancer") {
+  if (user?.role === "freelancer") {
     return (
       <>
         <Navbar className=" border-b" expand="lg">
@@ -92,9 +92,9 @@ const NavLogged = () => {
           {isOpened && (
             <ProfileCard
               photo={user?.profile?.profilePicture}
-              username={user.username}
-              role={user.role}
-              id={user._id}
+              username={user?.username}
+              role={user?.role}
+              id={user?._id}
             />
           )}
         </div>
@@ -150,9 +150,9 @@ const NavLogged = () => {
           {isOpened && (
             <ProfileCard
               photo={user?.profile?.profilePicture}
-              username={user.username}
-              role={user.role}
-              id={user._id}
+              username={user?.username}
+              role={user?.role}
+              id={user?._id}
             />
           )}
         </div>

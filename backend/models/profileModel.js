@@ -11,15 +11,6 @@ const educationSchema = mongoose.Schema({
   },
 });
 
-const skillSchema = mongoose.Schema({
-  name: {
-    type: "string",
-  },
-  value: {
-    type: "string",
-  },
-});
-
 const socialSchema = mongoose.Schema({
   linkedin: {
     type: "string",
@@ -56,7 +47,11 @@ const profileSchema = mongoose.Schema({
   ],
   education: [educationSchema],
   linkedAccounts: socialSchema,
-  skills: [skillSchema],
+  skills: [
+    {
+      type: String,
+    },
+  ],
   hourlyRate: {
     type: "number",
     default: 0,
