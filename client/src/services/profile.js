@@ -98,3 +98,35 @@ export function updateSkills(formData, pId) {
     }
   };
 }
+
+export function updateSpecs(formData, pId) {
+  return async (dispatch) => {
+    const toastId = toast.loading("Loading...");
+    try {
+      await axios
+        .put(
+          `${import.meta.env.VITE_BASE_URL}/profile/editSpecs/${pId}`,
+          formData,
+          {
+            withCredentials: true,
+          }
+        )
+        .then((res) => {
+          console.log(res);
+          toast.success("Specializations Updated Successfully");
+          dispatch(setuser(res.data.data));
+        })
+        .catch((error) => {
+          console.log("error accure in update display", error);
+          toast.error("Could Not Update Specializations");
+        });
+
+      console.log("UPDATE_SPECS_API API RESPONSE............");
+    } catch (error) {
+      console.error("UPDATE_SPECS_API API ERROR............", error);
+      toast.error("Could Not Update Specializations");
+    } finally {
+      toast.dismiss(toastId);
+    }
+  };
+}

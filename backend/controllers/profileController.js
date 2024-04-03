@@ -73,27 +73,3 @@ export const editSkills = async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 };
-
-export const editSpecs = async (req, res) => {
-  try {
-    const pId = req.params.id;
-    const { hourlyRate, languages, education, linkedAccounts } = req.body;
-    const newProfile = await Profile.findByIdAndUpdate(pId, {
-      hourlyRate,
-      languages,
-      education,
-      linkedAccounts,
-    });
-    const updatedUser = await User.findOne({ profile: pId }).populate(
-      "profile"
-    );
-    res.status(201).json({
-      message: "Profile updated",
-      success: true,
-      data: updatedUser,
-    });
-  } catch (error) {
-    console.error(error.message);
-    res.status(500).send({ message: error.message });
-  }
-};

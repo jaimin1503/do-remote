@@ -4,21 +4,32 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import { updateSkills } from "../services/profile.js";
+import skillsArray from "./assets/skills.js";
 
 function EditSkills({ setIsOpenSkills, pId }) {
   const [skills, setSkills] = useState([]);
+  const [optiopns, setOptions] = useState([]);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   const editSkillsRef = useRef(null);
 
   // Assuming user.profile.skills is the array of skills from your database
+
+  useEffect(() => {
+    const skills = skillsArray.map((skill) => ({
+      name: skill,
+      value: skill,
+    }));
+    setOptions(skills);
+  }, []);
+
   useEffect(() => {
     if (user?.profile?.skills) {
-      const skillsOptions = user?.profile.skills.map((skill) => ({
+      const skills = user?.profile?.skills.map((skill) => ({
         name: skill,
         value: skill,
       }));
-      setSkills(skillsOptions);
+      setSkills(skills);
     }
   }, [user?.profile]);
 
@@ -41,7 +52,7 @@ function EditSkills({ setIsOpenSkills, pId }) {
           <form onSubmit={handleSubmit} className=" w-full">
             <div className="w-full h-fit">
               <Multiselect
-                options={skills}
+                options={optiopns}
                 displayValue="name"
                 onSelect={(selectedList) => setSkills(selectedList)}
                 onRemove={(selectedList) => setSkills(selectedList)}

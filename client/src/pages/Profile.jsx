@@ -9,11 +9,9 @@ import EditSkills from "../forms/EditSkills";
 const Profile = () => {
   const { user } = useSelector((state) => state.user);
   const [isOpenEditPP, setIsOpenEditPP] = useState(false);
-  const [isOpenEditProfile, setIsOpenEditProfile] = useState(false);
   const [isOpenEditInfo, setIsOpenEditInfo] = useState(false);
   const [isOpenSkills, setIsOpenSkills] = useState(false);
   const editPPRef = useRef(null);
-  const editProfileRef = useRef(null);
   const editInfoRef = useRef(null);
   const editSkillsRef = useRef(null);
   const time = new Date().toLocaleTimeString("In", {
@@ -26,15 +24,12 @@ const Profile = () => {
       if (
         editPPRef.current &&
         !editPPRef.current.contains(event.target) &&
-        editProfileRef.current &&
-        !editProfileRef.current.contains(event.target) &&
         editInfoRef.current &&
         !editInfoRef.current.contains(event.target) &&
         editSkillsRef.current &&
         !editSkillsRef.current.contains(event.target)
       ) {
         setIsOpenEditPP(false);
-        setIsOpenEditProfile(false);
         setIsOpenEditInfo(false);
         setIsOpenSkills(false);
       }
