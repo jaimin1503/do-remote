@@ -4,7 +4,7 @@ import editLogo from "./assets/editLogo.svg";
 import EditPP from "../forms/EditPP";
 import { useEffect, useState, useRef } from "react";
 import EditInfo from "../forms/EditInfo";
-import MultipleSelectChip from "../components/MultipleSelectChip";
+import EditSkills from "../forms/EditSkills";
 
 const Profile = () => {
   const { user } = useSelector((state) => state.user);
@@ -61,14 +61,7 @@ const Profile = () => {
           />
         )}
       </div>
-      <div>
-        {isOpenSkills && (
-          <MultipleSelectChip
-            pId={user?.profile?._id}
-            setIsOpenSkills={setIsOpenSkills}
-          />
-        )}
-      </div>
+      <div>{isOpenSkills && <EditSkills />}</div>
       <div className=" md:border md:rounded-2xl md:m-5">
         <div className="row1 p-5 pb-5 flex flex-col md:flex-row items-center">
           <div className="user-info flex flex-col items-center md:flex-row h-fit">

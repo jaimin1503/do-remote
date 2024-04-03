@@ -67,3 +67,35 @@ export function updateInfo(formData, pId) {
     }
   };
 }
+
+export function updateSkills(formData, pId) {
+  return async (dispatch) => {
+    const toastId = toast.loading("Loading...");
+    try {
+      await axios
+        .put(
+          `${import.meta.env.VITE_BASE_URL}/profile/editSkills/${pId}`,
+          formData,
+          {
+            withCredentials: true,
+          }
+        )
+        .then((res) => {
+          console.log(res);
+          toast.success("Skills Updated Successfully");
+          dispatch(setuser(res?.data?.data));
+        })
+        .catch((error) => {
+          console.log("error accure in update display", error);
+          toast.error("Could Not Update Skills");
+        });
+
+      console.log("UPDATE_SKILLS_API API RESPONSE............");
+    } catch (error) {
+      console.error("UPDATE_SKILLS_API API ERROR............", error);
+      toast.error("Could Not Update Skills");
+    } finally {
+      toast.dismiss(toastId);
+    }
+  };
+}
