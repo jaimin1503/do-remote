@@ -3,13 +3,13 @@ const FlCard = ({ user }) => {
     <>
       <div
         key={user?._id}
-        className="fl-card h-fit m-4 whitespace-nowrap max-w-[300px] min-w-[300px] border-2 border-blue-500 rounded-2xl cursor-pointer hover:bg-gray-50"
+        className="fl-card h-fit mx-3 whitespace-nowrap max-w-[300px] min-w-[300px] border-2 border-blue-500 rounded-2xl cursor-pointer hover:bg-gray-50"
       >
         <div className="fl-card-img flex items-center">
           <img
             src={user?.profile?.profilePicture}
             alt="img"
-            className=" w-24 h-24 object-cover rounded-full m-4"
+            className=" min-w-24 max-w-24 h-24 object-cover rounded-full m-4"
           />
           <div>
             <h1 className="text-xl font-medium text-blue-500">

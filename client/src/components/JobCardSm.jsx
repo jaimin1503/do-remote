@@ -1,7 +1,7 @@
 const JobCardSm = ({ job }) => {
   return (
     <>
-      <div className="job-card h-[300px] mx-4 whitespace-nowrap max-w-[300px] min-w-[300px] border-2 border-blue-500 rounded-2xl flex-col flex justify-evenly cursor-pointer hover:bg-gray-50">
+      <div className="job-card h-[300px] mx-3 whitespace-nowrap max-w-[250px] min-w-[280px] border-2 border-blue-500 rounded-2xl flex-col flex justify-evenly cursor-pointer hover:bg-gray-50">
         <h1 className="text-xl font-medium text-wrap mx-4">
           {job?.title.substring(0, 30)}
           {job?.title.length > 30 ? "..." : ""}

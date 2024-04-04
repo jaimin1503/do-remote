@@ -9,6 +9,7 @@ import VerifyEmail from "./pages/VerifyEmail";
 import DB from "./pages/DB";
 import Profile from "./pages/Profile";
 import ClientDB from "./pages/ClientDB";
+import ViewProfile from "./pages/ViewProfile";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/db" element={<DB />} />
         <Route path="/client" element={<ClientDB />} />
         <Route path="/profile/:id" element={<Profile />} />
+        <Route path="/viewprofile/:id" element={<ViewProfile />} />
       </Routes>
     </>
   );

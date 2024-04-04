@@ -18,7 +18,7 @@ const ProfileCard = ({ id, photo, username, role }) => {
             alt="img"
           />
 
-          <Link to={`/profile/${id}`}>
+          <Link to={role === "freelancer" ? `/profile/${id}` : ""}>
             <p
               className="Name hover:underline hover:text-blue-600 cursor-pointer"
               style={{ transition: "0.3s" }}

@@ -9,7 +9,7 @@ import {
   forgotPassword,
   resetPassword,
   deleteUser,
-  getUserProfile,
+  getUserByID,
 } from "../controllers/authController.js";
 const router = express.Router();
 
@@ -21,6 +21,6 @@ router.put("/updateUserInfo", auth, updateUserInfo);
 router.post("/forgotPassword", auth, forgotPassword);
 router.put("/resetPassword", auth, resetPassword);
 router.delete("/deleteUser", auth, deleteUser);
-router.get("/getUserProfile", auth, getUserProfile);
+router.get("/getuserbyid/:id", auth, getUserByID);
 
 export default router;

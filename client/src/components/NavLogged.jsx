@@ -146,16 +146,17 @@ const NavLogged = () => {
             </Navbar.Collapse>
           </Container>
         </Navbar>
-        <div className=" float-right m-2">
-          {isOpened && (
+
+        {isOpened && (
+          <div className=" absolute right-0 m-2">
             <ProfileCard
               photo={user?.profile?.profilePicture}
               username={user?.username}
               role={user?.role}
               id={user?._id}
             />
-          )}
-        </div>
+          </div>
+        )}
       </>
     );
   }
