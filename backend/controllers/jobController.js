@@ -1,9 +1,9 @@
 import { Job } from "../models/job.js";
 
-export const getAllJobs = async () => {
+export const getAllJobs = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
-    const perPage = 5;
+    const perPage = 4;
 
     const skip = (page - 1) * perPage;
 
@@ -14,7 +14,7 @@ export const getAllJobs = async () => {
       page: page,
       perPage: perPage,
       totalJobs: await Job.countDocuments(),
-      data: jobs,
+      jobs,
     });
   } catch (error) {
     console.error(error.message);
@@ -22,7 +22,7 @@ export const getAllJobs = async () => {
   }
 };
 
-export const getJob = async () => {
+export const getJob = async (req, res) => {
   try {
     const { id } = req.params;
     const job = await Job.findById(id);
@@ -42,8 +42,7 @@ export const createJob = async (req, res) => {
       !req.body.description ||
       !req.body.category ||
       !req.body.budget ||
-      !req.body.skillsRequired ||
-      !req.body.deadline
+      !req.body.skillsRequired
     ) {
       return res.status(400).send({
         message: "Please fill all the required details",
@@ -60,7 +59,7 @@ export const createJob = async (req, res) => {
   }
 };
 
-export const editJob = async () => {
+export const editJob = async (req, res) => {
   try {
     if (
       !req.body.title ||
@@ -89,7 +88,7 @@ export const editJob = async () => {
   }
 };
 
-export const deleteJob = async () => {
+export const deleteJob = async (req, res) => {
   try {
     const { id } = req.params;
 

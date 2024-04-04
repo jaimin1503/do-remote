@@ -33,7 +33,7 @@ const jobSchema = mongoose.Schema({
   deadline: {
     type: Date,
     required: true,
-    default: Date.now + 7 * 24 * 60 * 60 * 1000, // Set default deadline to 7 days from now
+    default: Date.now() + 7 * 24 * 60 * 60 * 1000, // Set default deadline to 7 days from now
   },
   location: {
     type: String,
