@@ -3,6 +3,7 @@ import Navebar from "../components/Navebar";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setuser } from "../reducers/userReducer";
+import { jwtDecode } from "jwt-decode";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -20,13 +21,6 @@ export default function Home() {
         console.error("Error fetching user data:", error);
       });
   }, [dispatch]);
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      window.location.href = "/flh";
-    }
-  });
 
   return (
     <div>

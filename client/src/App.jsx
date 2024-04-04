@@ -6,8 +6,9 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Welcome from "./pages/Welcome";
 import VerifyEmail from "./pages/VerifyEmail";
-import FLH from "./pages/FLH";
+import DB from "./pages/DB";
 import Profile from "./pages/Profile";
+import ClientDB from "./pages/ClientDB";
 
 function App() {
   return (
@@ -20,7 +21,8 @@ function App() {
         <Route path="/signup/:role" element={<Signup />} />
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/verify-email" element={<VerifyEmail />} />
-        <Route path="/flh" element={<FLH />} />
+        <Route path="/db" element={<DB />} />
+        <Route path="/client" element={<ClientDB />} />
         <Route path="/profile/:id" element={<Profile />} />
       </Routes>
     </>

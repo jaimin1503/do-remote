@@ -111,7 +111,7 @@ const NavLogged = () => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className=" items-center">
-                <NavDropdown title="Find-work" id="basic-nav-dropdown">
+                <NavDropdown title="Find-Talent" id="basic-nav-dropdown">
                   <NavDropdown.Item as={Link} to="/dev">
                     Find Talent
                   </NavDropdown.Item>
