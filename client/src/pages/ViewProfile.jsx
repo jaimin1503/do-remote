@@ -2,21 +2,21 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-const ViewProfile = () => {
-  const [user, setUser] = useState({});
-  const id = useParams().id;
-  useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_BASE_URL}/user/getuserbyid/${id}`, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        setUser(res.data.user);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+const ViewProfile = ({ user }) => {
+  // const [user, setUser] = useState({});
+  // const id = useParams().id;
+  // useEffect(() => {
+  //   axios
+  //     .get(`${import.meta.env.VITE_BASE_URL}/user/getuserbyid/${id}`, {
+  //       withCredentials: true,
+  //     })
+  //     .then((res) => {
+  //       setUser(res.data.user);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
   const time = new Date().toLocaleTimeString("In", {
     hour: "2-digit",
     minute: "2-digit",
@@ -24,7 +24,7 @@ const ViewProfile = () => {
 
   return (
     <>
-      <div className=" md:border md:rounded-2xl md:m-5">
+      <div className=" md:border md:rounded-2xl md:m-5 w-[70vw]">
         <div className="row1 p-5 pb-5 flex flex-col sm:flex-row items-center">
           <div className="user-info flex flex-col items-center sm:flex-row h-fit">
             <img

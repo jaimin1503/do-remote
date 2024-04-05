@@ -5,11 +5,20 @@ import { useState } from "react";
 import axios from "axios";
 import FlCard from "../components/FlCard";
 import JobCardSm from "../components/JobCardSm";
+import Drawer from "@mui/material/Drawer";
+import ViewProfile from "./ViewProfile";
 
 function ClientDB() {
   const { user } = useSelector((state) => state.user);
   const [users, setUsers] = useState([]);
   const [jobs, setJobs] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [drawerUser, setDrawerUser] = useState({});
+
+  const toggleDrawer = (newOpen, user) => () => {
+    setOpen(newOpen);
+    setDrawerUser(user);
+  };
 
   useEffect(() => {
     axios
@@ -50,20 +59,21 @@ function ClientDB() {
               ))}
           </div>
         </div>
-        <div className="browse-talents w-full my-10 overflow-x-auto whitespace-nowrap">
-          <h1 className="text-4xl font-medium">Browse Freelancers</h1>
+        <h1 className="text-4xl font-medium my-4">Browse Freelancers</h1>
+        <div className="browse-talents w-full overflow-x-auto whitespace-nowrap">
           <div className="fl-card-container my-4 flex whitespace-nowrap w-full">
             {users &&
               users.map((user) => (
-                <div key={user?._id}>
-                  <Link to={`/viewprofile/${user?._id}`}>
-                    <FlCard user={user} />
-                  </Link>
+                <div onClick={toggleDrawer(true, user)} key={user?._id}>
+                  <FlCard user={user} />
                 </div>
               ))}
           </div>
         </div>
       </div>
+      <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
+        <ViewProfile user={drawerUser} />
+      </Drawer>
     </>
   );
 }
