@@ -7,19 +7,23 @@ import EditInfo from "../forms/EditInfo";
 import EditSkills from "../forms/EditSkills";
 import Rate from "../forms/Rate";
 import EditLangs from "../forms/EditLangs";
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
+import style from "../Styles";
 
 const Profile = () => {
   const { user } = useSelector((state) => state.user);
-  const [isOpenEditPP, setIsOpenEditPP] = useState(false);
   const [isOpenEditInfo, setIsOpenEditInfo] = useState(false);
   const [isOpenSkills, setIsOpenSkills] = useState(false);
   const [isOpenRate, setIsOpenRate] = useState(false);
   const [isOpenLangs, setIsOpenLangs] = useState(false);
   const editLangsRef = useRef(null);
-  const editPPRef = useRef(null);
   const editInfoRef = useRef(null);
   const editSkillsRef = useRef(null);
   const editRateRef = useRef(null);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const time = new Date().toLocaleTimeString("In", {
     hour: "2-digit",
@@ -29,8 +33,6 @@ const Profile = () => {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
-        editPPRef.current &&
-        !editPPRef.current.contains(event.target) &&
         editInfoRef.current &&
         !editInfoRef.current.contains(event.target) &&
         editSkillsRef.current &&
@@ -40,7 +42,6 @@ const Profile = () => {
         editLangsRef.current &&
         !editLangsRef.current.contains(event.target)
       ) {
-        setIsOpenEditPP(false);
         setIsOpenEditInfo(false);
         setIsOpenSkills(false);
         setIsOpenRate(false);
@@ -56,11 +57,12 @@ const Profile = () => {
   return (
     <>
       <NavLogged />
-      <div>
-        {isOpenEditPP && (
-          <EditPP pId={user?.profile?._id} setIsOpenEditPP={setIsOpenEditPP} />
-        )}
-      </div>
+
+      <Modal open={open} onClose={handleClose}>
+        <Box>
+          <EditPP pId={user?.profile?._id} />
+        </Box>
+      </Modal>
       <div>
         {isOpenEditInfo && (
           <EditInfo
@@ -97,10 +99,7 @@ const Profile = () => {
             />
             <button
               id="edit-profile"
-              onClick={(e) => {
-                e.stopPropagation;
-                setIsOpenEditPP(!isOpenEditPP);
-              }}
+              onClick={handleOpen}
               className="absolute p-1 ml-[4.5rem] bg-gray-200 mt-16 border-gray-600 rounded-full border-2"
             >
               <img id="edit-profile" src={editLogo} alt="edit" />

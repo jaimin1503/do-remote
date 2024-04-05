@@ -4,12 +4,12 @@ import { useSelector } from "react-redux";
 import { updateDisplayPicture } from "../services/profile.js";
 import "./formStyles.css";
 
-const EditPP = ({ pId, setIsOpenEditPP }) => {
+const EditPP = ({ pId }) => {
   const [File, setFile] = useState(null);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   const inputRef = useRef(null);
-  const editPPRef = useRef(null);
+  // const editPPRef = useRef(null);
   const [loading, setLoading] = useState(false);
   const [previewSource, setPreviewSource] = useState(null);
 
@@ -30,7 +30,7 @@ const EditPP = ({ pId, setIsOpenEditPP }) => {
       console.log("formdata", formData);
       dispatch(updateDisplayPicture(formData, pId)).then(() => {
         setLoading(false);
-        setIsOpenEditPP(false);
+        // setIsOpenEditPP(false);
       });
     } catch (error) {
       setLoading(false);
@@ -43,10 +43,10 @@ const EditPP = ({ pId, setIsOpenEditPP }) => {
   };
 
   return (
-    <div id="edit-profile" className="overlay">
+    <>
       <div className="upload-img absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-10">
         <div
-          ref={editPPRef}
+          // ref={editPPRef}
           className=" items-center flex flex-col bg-white rounded-2xl w-[300px] sm:w-[350px] "
         >
           <h1 className="text-2xl font-semibold my-4 text-center">
@@ -82,7 +82,7 @@ const EditPP = ({ pId, setIsOpenEditPP }) => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 export default EditPP;
