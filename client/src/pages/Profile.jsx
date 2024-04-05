@@ -2,14 +2,13 @@ import NavLogged from "../components/NavLogged";
 import { useSelector } from "react-redux";
 import editLogo from "./assets/editLogo.svg";
 import EditPP from "../forms/EditPP";
-import { useEffect, useState, useRef } from "react";
+import { useState } from "react";
 import EditInfo from "../forms/EditInfo";
 import EditSkills from "../forms/EditSkills";
 import Rate from "../forms/Rate";
 import EditLangs from "../forms/EditLangs";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
-import style from "../Styles";
 
 const Profile = () => {
   const { user } = useSelector((state) => state.user);
@@ -45,27 +44,42 @@ const Profile = () => {
 
       <Modal open={openPPModal} onClose={handleClosePPModal}>
         <Box>
-          <EditPP pId={user?.profile?._id} />
+          <EditPP
+            pId={user?.profile?._id}
+            handleClosePPModal={handleClosePPModal}
+          />
         </Box>
       </Modal>
       <Modal open={openInfoModal} onClose={handleCloseInfoModal}>
         <Box>
-          <EditInfo pId={user?.profile?._id} />
+          <EditInfo
+            pId={user?.profile?._id}
+            handleCloseInfoModal={handleCloseInfoModal}
+          />
         </Box>
       </Modal>
       <Modal open={openSkillsModal} onClose={handleCloseSkillsModal}>
         <Box>
-          <EditSkills pId={user?.profile?._id} />
+          <EditSkills
+            pId={user?.profile?._id}
+            handleCloseSkillsModal={handleCloseSkillsModal}
+          />
         </Box>
       </Modal>
       <Modal open={openRateModal} onClose={handleCloseRateModal}>
         <Box>
-          <Rate pId={user?.profile?._id} />
+          <Rate
+            pId={user?.profile?._id}
+            handleCloseRateModal={handleCloseRateModal}
+          />
         </Box>
       </Modal>
       <Modal open={openLangsModal} onClose={handleCloseLangsModal}>
         <Box>
-          <EditLangs pId={user?.profile?._id} />
+          <EditLangs
+            pId={user?.profile?._id}
+            handleCloseLangsModal={handleCloseLangsModal}
+          />
         </Box>
       </Modal>
       <div className=" md:border md:rounded-2xl md:m-5">

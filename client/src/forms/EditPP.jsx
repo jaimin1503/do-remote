@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { updateDisplayPicture } from "../services/profile.js";
 import "./formStyles.css";
 
-const EditPP = ({ pId }) => {
+const EditPP = ({ pId, handleClosePPModal }) => {
   const [File, setFile] = useState(null);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
@@ -30,7 +30,7 @@ const EditPP = ({ pId }) => {
       console.log("formdata", formData);
       dispatch(updateDisplayPicture(formData, pId)).then(() => {
         setLoading(false);
-        // setIsOpenEditPP(false);
+        handleClosePPModal();
       });
     } catch (error) {
       setLoading(false);

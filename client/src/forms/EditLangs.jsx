@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { updateLanguages } from "../services/profile.js";
 
-export default function ({ pId }) {
+export default function ({ pId,handleCloseLangsModal }) {
   const [languages, setLanguages] = useState(""); // Initialize as an empty string
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
@@ -18,6 +18,7 @@ export default function ({ pId }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(updateLanguages({ languages }, pId));
+    handleCloseLangsModal();
   };
 
   return (

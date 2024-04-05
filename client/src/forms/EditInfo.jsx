@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import "./formStyles.css";
 
-const EditInfo = ({ pId }) => {
+const EditInfo = ({ pId,handleCloseInfoModal }) => {
   const [formData, setFormData] = useState({});
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
@@ -25,6 +25,7 @@ const EditInfo = ({ pId }) => {
     console.log("submitting...");
     dispatch(updateInfo(formData, pId)).then(() => {
       console.log("submitted");
+      handleCloseInfoModal();
       dispatch({ type: "UPDATE_USER_PROFILE", payload: formData });
     });
   };

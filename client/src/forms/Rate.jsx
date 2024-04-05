@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { updateRate } from "../services/profile.js";
 
-function Rate({ pId }) {
+function Rate({ pId, handleCloseRateModal }) {
   const [rate, setRate] = useState(0);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
@@ -19,6 +19,7 @@ function Rate({ pId }) {
     e.preventDefault();
     dispatch(updateRate({ rate }, pId)).then(() => {
       console.log("submitted");
+      handleCloseRateModal();
     });
   };
 

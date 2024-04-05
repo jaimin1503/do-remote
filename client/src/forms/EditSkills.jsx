@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { updateSkills } from "../services/profile.js";
 import skillsArray from "./assets/skills.js";
 
-function EditSkills({ pId }) {
+function EditSkills({ pId,handleCloseSkillsModal }) {
   const [skills, setSkills] = useState([]);
   const [optiopns, setOptions] = useState([]);
   const dispatch = useDispatch();
@@ -39,7 +39,7 @@ function EditSkills({ pId }) {
       updateSkills({ skills: skills.map((skill) => skill.value) }, pId)
     ).then(() => {
       console.log("submitted");
-      setIsOpenSkills(false);
+      handleCloseSkillsModal();
     });
   };
 
