@@ -2,16 +2,15 @@ import Multiselect from "multiselect-react-dropdown";
 import "./formStyles.css";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { updateSkills } from "../services/profile.js";
 import skillsArray from "./assets/skills.js";
 
-function EditSkills({ setIsOpenSkills, pId }) {
+function EditSkills({ pId }) {
   const [skills, setSkills] = useState([]);
   const [optiopns, setOptions] = useState([]);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
-  const editSkillsRef = useRef(null);
 
   // Assuming user.profile.skills is the array of skills from your database
 
@@ -45,7 +44,7 @@ function EditSkills({ setIsOpenSkills, pId }) {
   };
 
   return (
-    <div ref={editSkillsRef} className="overlay">
+    <>
       <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-10">
         <div className="bg-white p-4 rounded-2xl flex flex-col w-[340px] sm:w-[50vw] items-center">
           <h1 className="my-4 text-2xl font-semibold">Edit Skills</h1>
@@ -76,7 +75,7 @@ function EditSkills({ setIsOpenSkills, pId }) {
           </form>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

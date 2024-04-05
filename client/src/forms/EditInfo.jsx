@@ -1,14 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { updateInfo } from "../services/profile";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import "./formStyles.css";
 
-const EditInfo = ({ pId, setIsOpenEditInfo }) => {
+const EditInfo = ({ pId }) => {
   const [formData, setFormData] = useState({});
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
-  const editInfoRef = useRef(null);
 
   const handelInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -26,16 +25,13 @@ const EditInfo = ({ pId, setIsOpenEditInfo }) => {
     console.log("submitting...");
     dispatch(updateInfo(formData, pId)).then(() => {
       console.log("submitted");
-      setIsOpenEditInfo(false);
-      // Dispatch an action to update the user profile in the Redux store
-      // This will trigger a re-render of components dependent on the user profile
       dispatch({ type: "UPDATE_USER_PROFILE", payload: formData });
     });
   };
 
   return (
     <div>
-      <div ref={editInfoRef} className="edit-details overlay">
+      <div className="edit-details">
         <div className=" absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-10">
           <div className=" bg-white p-4 rounded-2xl flex flex-col w-[340px] sm:w-[50vw] items-center">
             <div className="edit-details-header my-4">

@@ -1,14 +1,13 @@
 import "./formStyles.css";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { updateLanguages } from "../services/profile.js";
 
-export default function ({ setIsOpenLangs, pId }) {
+export default function ({ pId }) {
   const [languages, setLanguages] = useState(""); // Initialize as an empty string
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
-  const editLangsRef = useRef(null);
 
   useEffect(() => {
     if (user?.profile?.languages) {
@@ -19,11 +18,10 @@ export default function ({ setIsOpenLangs, pId }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(updateLanguages({ languages }, pId));
-    setIsOpenLangs(false);
   };
 
   return (
-    <div ref={editLangsRef} className="overlay">
+    <>
       <div className=" absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-10">
         <div className="bg-white p-4 rounded-2xl flex flex-col w-[340px] sm:w-[50vw] items-center">
           <h1 className="my-4 text-3xl font-semibold">Change Languages</h1>
@@ -55,6 +53,6 @@ export default function ({ setIsOpenLangs, pId }) {
           </form>
         </div>
       </div>
-    </div>
+    </>
   );
 }

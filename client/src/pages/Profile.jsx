@@ -13,82 +13,61 @@ import style from "../Styles";
 
 const Profile = () => {
   const { user } = useSelector((state) => state.user);
-  const [isOpenEditInfo, setIsOpenEditInfo] = useState(false);
-  const [isOpenSkills, setIsOpenSkills] = useState(false);
-  const [isOpenRate, setIsOpenRate] = useState(false);
-  const [isOpenLangs, setIsOpenLangs] = useState(false);
-  const editLangsRef = useRef(null);
-  const editInfoRef = useRef(null);
-  const editSkillsRef = useRef(null);
-  const editRateRef = useRef(null);
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [openPPModal, setOpenPPModal] = useState(false);
+  const [openInfoModal, setOpenInfoModal] = useState(false);
+  const [openSkillsModal, setOpenSkillsModal] = useState(false);
+  const [openRateModal, setOpenRateModal] = useState(false);
+  const [openLangsModal, setOpenLangsModal] = useState(false);
+
+  const handleOpenPPModal = () => setOpenPPModal(true);
+  const handleClosePPModal = () => setOpenPPModal(false);
+
+  const handleOpenInfoModal = () => setOpenInfoModal(true);
+  const handleCloseInfoModal = () => setOpenInfoModal(false);
+
+  const handleOpenSkillsModal = () => setOpenSkillsModal(true);
+  const handleCloseSkillsModal = () => setOpenSkillsModal(false);
+
+  const handleOpenRateModal = () => setOpenRateModal(true);
+  const handleCloseRateModal = () => setOpenRateModal(false);
+
+  const handleOpenLangsModal = () => setOpenLangsModal(true);
+  const handleCloseLangsModal = () => setOpenLangsModal(false);
 
   const time = new Date().toLocaleTimeString("In", {
     hour: "2-digit",
     minute: "2-digit",
   });
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        editInfoRef.current &&
-        !editInfoRef.current.contains(event.target) &&
-        editSkillsRef.current &&
-        !editSkillsRef.current.contains(event.target) &&
-        editRateRef.current &&
-        !editRateRef.current.contains(event.target) &&
-        editLangsRef.current &&
-        !editLangsRef.current.contains(event.target)
-      ) {
-        setIsOpenEditInfo(false);
-        setIsOpenSkills(false);
-        setIsOpenRate(false);
-        setIsOpenLangs(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
   return (
     <>
       <NavLogged />
 
-      <Modal open={open} onClose={handleClose}>
+      <Modal open={openPPModal} onClose={handleClosePPModal}>
         <Box>
           <EditPP pId={user?.profile?._id} />
         </Box>
       </Modal>
-      <div>
-        {isOpenEditInfo && (
-          <EditInfo
-            pId={user?.profile?._id}
-            setIsOpenEditInfo={setIsOpenEditInfo}
-          />
-        )}
-      </div>
-      <div>
-        {isOpenSkills && (
-          <EditSkills
-            pId={user?.profile?._id}
-            setIsOpenSkills={setIsOpenSkills}
-          />
-        )}
-      </div>
-      <div>
-        {isOpenRate && (
-          <Rate pId={user?.profile?._id} setIsOpenRate={setIsOpenRate} />
-        )}
-      </div>
-      <div>
-        {isOpenLangs && (
-          <EditLangs setIsOpenLangs={setIsOpenLangs} pId={user?.profile?._id} />
-        )}
-      </div>
+      <Modal open={openInfoModal} onClose={handleCloseInfoModal}>
+        <Box>
+          <EditInfo pId={user?.profile?._id} />
+        </Box>
+      </Modal>
+      <Modal open={openSkillsModal} onClose={handleCloseSkillsModal}>
+        <Box>
+          <EditSkills pId={user?.profile?._id} />
+        </Box>
+      </Modal>
+      <Modal open={openRateModal} onClose={handleCloseRateModal}>
+        <Box>
+          <Rate pId={user?.profile?._id} />
+        </Box>
+      </Modal>
+      <Modal open={openLangsModal} onClose={handleCloseLangsModal}>
+        <Box>
+          <EditLangs pId={user?.profile?._id} />
+        </Box>
+      </Modal>
       <div className=" md:border md:rounded-2xl md:m-5">
         <div className="row1 p-5 pb-5 flex flex-col sm:flex-row items-center">
           <div className="user-info flex flex-col items-center sm:flex-row h-fit">
@@ -99,7 +78,7 @@ const Profile = () => {
             />
             <button
               id="edit-profile"
-              onClick={handleOpen}
+              onClick={handleOpenPPModal}
               className="absolute p-1 ml-[4.5rem] bg-gray-200 mt-16 border-gray-600 rounded-full border-2"
             >
               <img id="edit-profile" src={editLogo} alt="edit" />
@@ -123,10 +102,7 @@ const Profile = () => {
         <div className="row2 border-t flex flex-col-reverse lg:flex-row">
           <div className="side-bar px-0 lg:border-r w-full lg:w-[400px]">
             <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setIsOpenRate(!isOpenRate);
-              }}
+              onClick={handleOpenRateModal}
               className=" float-right m-4 p-1 bg-gray-200 border-gray-600 rounded-full border-2"
             >
               <img src={editLogo} alt="edit" />
@@ -144,10 +120,7 @@ const Profile = () => {
                 <div className=" flex items-center justify-between w-full">
                   <h1 className=" text-xl pb-2 font-semibold">Languages</h1>
                   <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setIsOpenLangs(!isOpenLangs);
-                    }}
+                    onClick={handleOpenLangsModal}
                     className=" m-4 p-1 bg-gray-200 border-gray-600 rounded-full border-2"
                   >
                     <img src={editLogo} alt="edit" />
@@ -176,10 +149,7 @@ const Profile = () => {
 
           <div className=" w-full ">
             <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setIsOpenEditInfo(!isOpenEditInfo);
-              }}
+              onClick={handleOpenInfoModal}
               className=" float-right m-4 p-1 bg-gray-200 border-gray-600 rounded-full border-2"
             >
               <img src={editLogo} alt="edit" />
@@ -210,10 +180,7 @@ const Profile = () => {
             </div>
             <div className="skills p-0 md:p-4 border-b lg:border-none">
               <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setIsOpenSkills(!isOpenSkills);
-                }}
+                onClick={handleOpenSkillsModal}
                 className=" float-right m-4 p-1 bg-gray-200 border-gray-600 rounded-full border-2"
               >
                 <img src={editLogo} alt="edit" />

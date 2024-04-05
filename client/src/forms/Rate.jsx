@@ -1,14 +1,13 @@
 import "./formStyles.css";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { updateRate } from "../services/profile.js";
 
-function Rate({ setIsOpenRate, pId }) {
+function Rate({ pId }) {
   const [rate, setRate] = useState(0);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
-  const editRateRef = useRef(null);
 
   useEffect(() => {
     if (user?.profile?.hourlyRate) {
@@ -20,12 +19,11 @@ function Rate({ setIsOpenRate, pId }) {
     e.preventDefault();
     dispatch(updateRate({ rate }, pId)).then(() => {
       console.log("submitted");
-      setIsOpenRate(false);
     });
   };
 
   return (
-    <div ref={editRateRef} className="overlay">
+    <>
       <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-10">
         <div className="bg-white p-4 rounded-2xl flex flex-col w-[340px] sm:w-[50vw] items-center">
           <h1 className="my-4 text-3xl font-semibold">Change hourly rate</h1>
@@ -58,7 +56,7 @@ function Rate({ setIsOpenRate, pId }) {
           </form>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
