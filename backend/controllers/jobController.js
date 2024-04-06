@@ -137,7 +137,7 @@ export const getSavedJobs = async (req, res) => {
 
 export const saveJob = async (req, res) => {
   try {
-    const { jobId } = req.body;
+    const { jobId } = req.params;
 
     const user = await User.findById(req.user._id);
 

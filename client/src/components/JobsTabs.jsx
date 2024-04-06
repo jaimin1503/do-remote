@@ -3,10 +3,13 @@ import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
-import Jobs from "./Jobs";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import BestMatches from "./BestMatches";
+import MostRecent from "./MostRecent";
+import { useDispatch, useSelector } from "react-redux";
+import { setJobs } from "../reducers/jobReducer";
+import SavedJobs from "./SavedJobs";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -43,12 +46,10 @@ function a11yProps(index) {
 
 export default function BasicTabs() {
   const [value, setValue] = React.useState(0);
-  const [jobs, setJobs] = useState([]);
-  const [bestMatches, setBestMatches] = useState([]);
+  const { jobs } = useSelector((state) => state.job);
   const [mostRecent, setMostRecent] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { user } = useSelector((state) => state.user);
-  const userMatch = user?.profile?.current_position.split(" ")[0];
+  const dispatch = useDispatch();
 
   useEffect(() => {
     axios
@@ -56,28 +57,13 @@ export default function BasicTabs() {
         withCredentials: true,
       })
       .then((res) => {
-        setJobs(res.data.jobs);
+        dispatch(setJobs(res.data.jobs));
         setLoading(false);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
-
-  useEffect(() => {
-    jobs.filter((job) => {
-      if (job.category.includes(userMatch)) {
-        setBestMatches((prev) => [...prev, job]);
-      }
-    });
-  }, [jobs]);
-
-  useEffect(() => {
-    const sortedJobs = jobs.sort((a, b) => {
-      return new Date(b.createdDate) - new Date(a.createdDate);
-    });
-    setMostRecent(sortedJobs);
-  }, [jobs]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -97,13 +83,13 @@ export default function BasicTabs() {
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        <Jobs jobsType={bestMatches} loading={loading} />
+        <BestMatches jobs={jobs} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        <Jobs jobsType={mostRecent} loading={loading} />
+        <MostRecent jobs={jobs} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        Item
+        <SavedJobs />
       </CustomTabPanel>
     </Box>
   );
