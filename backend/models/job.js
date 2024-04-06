@@ -18,7 +18,7 @@ const jobSchema = mongoose.Schema({
   budget: {
     type: Number,
     required: true,
-    min: 0, // Add minimum value constraint
+    min: 500, // Add minimum value constraint
   },
   skillsRequired: [
     {
@@ -39,6 +39,11 @@ const jobSchema = mongoose.Schema({
     type: String,
     required: true,
     default: "India",
+  },
+  status: {
+    type: String,
+    enum: ["open", "closed"],
+    default: "open",
   },
   client: {
     type: Schema.Types.ObjectId,

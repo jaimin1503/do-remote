@@ -41,6 +41,24 @@ const userSchema = mongoose.Schema({
   tokenExpireTime: {
     type: "Date",
   },
+  savedJobs: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Job",
+    },
+  ],
+  jobs: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Job",
+    },
+  ],
+  proposals: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Proposal",
+    },
+  ],
 });
 
 export const User = mongoose.model("User", userSchema);

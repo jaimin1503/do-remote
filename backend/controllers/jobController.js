@@ -1,14 +1,18 @@
 import { Job } from "../models/job.js";
+import { User } from "../models/user.js";
 
 export const getAllJobs = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
-    const perPage = 4;
+    const perPage = 5;
 
     const skip = (page - 1) * perPage;
-
-    // Use your custom "Post" model to query the database.
-    const jobs = await Job.find({}).skip(skip).limit(perPage);
+    const jobs = await Job.find({
+      status: "open",
+    })
+      .skip(skip)
+      .limit(perPage)
+      .populate("client");
 
     res.status(200).json({
       page: page,
@@ -37,24 +41,38 @@ export const getJob = async (req, res) => {
 
 export const createJob = async (req, res) => {
   try {
-    if (
-      !req.body.title ||
-      !req.body.description ||
-      !req.body.category ||
-      !req.body.budget ||
-      !req.body.skillsRequired
-    ) {
+    const { title, description, category, budget, skillsRequired } = req.body;
+
+    if (!title || !description || !category || !budget || !skillsRequired) {
       return res.status(400).send({
         message: "Please fill all the required details",
       });
     }
-    const newJob = new Job(req.body);
+
+    const newJob = new Job({
+      title,
+      description,
+      category,
+      budget,
+      skillsRequired,
+      client: req.user._id,
+    });
+
+    // Save the job to the database
     const savedJob = await newJob.save();
+
+    // Update the user document with the new job ID
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: req.user._id },
+      { $push: { jobs: savedJob._id } }, // Push the job ID to the user's jobs array
+      { new: true }
+    );
+
     res.status(201).json({
       data: savedJob,
     });
   } catch (error) {
-    console.log(error.message);
+    console.error(error.message);
     res.status(500).send({ message: error.message });
   }
 };
@@ -101,6 +119,41 @@ export const deleteJob = async (req, res) => {
     return res.status(200).send({ message: "Post deleted successfully" });
   } catch (error) {
     console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+};
+
+export const getSavedJobs = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id).populate("savedJobs");
+    res.status(200).json({
+      data: user.savedJobs,
+    });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send({ message: error.message });
+  }
+};
+
+export const saveJob = async (req, res) => {
+  try {
+    const { jobId } = req.body;
+
+    const user = await User.findById(req.user._id);
+
+    if (user.savedJobs.includes(jobId)) {
+      //unsave job
+      user.savedJobs = user.savedJobs.filter((id) => id !== jobId);
+      await user.save();
+      return res.status(201).send({ message: "Job unsaved successfully" });
+    }
+
+    user.savedJobs.push(jobId);
+    await user.save();
+
+    res.status(201).send({ message: "Job saved successfully" });
+  } catch (error) {
+    console.error(error.message);
     res.status(500).send({ message: error.message });
   }
 };

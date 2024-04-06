@@ -3,12 +3,25 @@ import Likelogo from "./assets/like.svg";
 import pin from "./assets/pin.svg";
 
 const JobCard = ({ job }) => {
+  const now = new Date();
+  const createDate = new Date(job?.createdDate);
+  const timeDiffrence = now.getTime() - createDate.getTime();
+  const minutes = Math.floor(timeDiffrence / 60000);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+
   return (
     <>
       <div className="jobcard border-y w-full p-2 hover:bg-gray-100 cursor-pointer">
         <div className="header flex items-center justify-between my-2">
           <div>
-            <p className=" text-sm text-gray-500">Posted 10 minutes ago</p>
+            <p className=" text-sm text-gray-500">
+              {days > 0
+                ? days + " days ago"
+                : hours > 0
+                ? hours + " hours ago"
+                : minutes + " minutes ago"}
+            </p>
             <h1 className=" sm:text-xl font-medium my-2">{job?.title}</h1>
           </div>
 
