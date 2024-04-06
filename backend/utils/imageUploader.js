@@ -1,5 +1,4 @@
 import { v2 as cloudinaryV2 } from "cloudinary";
-import e from "express";
 
 const uploadImageToCloudinary = async (file, folder, height, quality) => {
   const options = { folder };
