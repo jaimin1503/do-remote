@@ -232,7 +232,9 @@ export const login = async (req, res) => {
 
 export const getUser = async (req, res) => {
   try {
-    const user = await User.findById(req.user._id).populate("profile");
+    const user = await User.findById(req.user._id)
+      .populate("profile")
+      .populate("savedJobs");
     if (!user) {
       return res.status(404).json({
         success: false,
@@ -391,7 +393,7 @@ export const getUserByID = async (req, res) => {
     }
     return res.status(200).json({
       success: true,
-      user
+      user,
     });
   } catch (error) {
     return res.status(500).json({

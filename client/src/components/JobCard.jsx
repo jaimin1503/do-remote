@@ -1,7 +1,8 @@
 import Rating from "@mui/material/Rating";
-import Likelogo from "./assets/like.svg";
+import React, { useEffect, useState } from "react";
 import pin from "./assets/pin.svg";
 import axios from "axios";
+import Like from "./assets/Like.jsx";
 
 const JobCard = ({ job }) => {
   const now = new Date();
@@ -10,6 +11,7 @@ const JobCard = ({ job }) => {
   const minutes = Math.floor(timeDiffrence / 60000);
   const hours = Math.floor(minutes / 60);
   const days = Math.floor(hours / 24);
+  const [saved, setSaved] = useState(false);
 
   const handleSave = () => {
     axios
@@ -23,6 +25,19 @@ const JobCard = ({ job }) => {
         console.log(err);
       });
   };
+
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_BASE_URL}/job/isjobsaved/${job?._id}`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        setSaved(res.data.saved);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <>
@@ -40,7 +55,7 @@ const JobCard = ({ job }) => {
           </div>
 
           <button onClick={() => handleSave()}>
-            <img src={Likelogo} alt="sakljhdkf" />
+            <Like saved={saved} />
           </button>
         </div>
         <p className=" text-sm text-gray-500 font-medium">

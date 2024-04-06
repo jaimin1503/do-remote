@@ -137,21 +137,38 @@ export const getSavedJobs = async (req, res) => {
 
 export const saveJob = async (req, res) => {
   try {
-    const { jobId } = req.params;
+    const { id } = req.params;
+    console.log(id);
 
     const user = await User.findById(req.user._id);
 
-    if (user.savedJobs.includes(jobId)) {
+    if (user.savedJobs.includes(id)) {
       //unsave job
-      user.savedJobs = user.savedJobs.filter((id) => id !== jobId);
+      user.savedJobs = user.savedJobs.filter((_id) => _id !== id);
       await user.save();
       return res.status(201).send({ message: "Job unsaved successfully" });
     }
 
-    user.savedJobs.push(jobId);
+    user.savedJobs.push(id);
     await user.save();
 
     res.status(201).send({ message: "Job saved successfully" });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send({ message: error.message });
+  }
+};
+
+export const isJobSaved = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findById(req.user._id);
+
+    if (user.savedJobs.includes(id)) {
+      return res.status(200).send({ saved: true });
+    }
+
+    return res.status(200).send({ saved: false });
   } catch (error) {
     console.error(error.message);
     res.status(500).send({ message: error.message });

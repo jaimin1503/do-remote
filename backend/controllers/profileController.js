@@ -10,7 +10,6 @@ export const editProfilePicture = async (req, res) => {
       displayPicture,
       process.env.FOLDER_NAME
     );
-    console.log(image);
     const updatedProfile = await Profile.findByIdAndUpdate(
       pId,
       { profilePicture: image.secure_url },
