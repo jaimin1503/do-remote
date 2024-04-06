@@ -1,6 +1,7 @@
 import JobCard from "./JobCard";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import JobSktn from "../skeletons/JobSktn";
 
 const Jobs = () => {
   const [jobs, setJobs] = useState([]);
@@ -22,9 +23,20 @@ const Jobs = () => {
 
   return (
     <>
-      {jobs.map((job, index) => (
-        <JobCard job={job} key={index} />
-      ))}
+      {loading ? (
+        <>
+          <JobSktn />
+          <JobSktn />
+          <JobSktn />
+          <JobSktn />
+        </>
+      ) : (
+        <>
+          {jobs.map((job, index) => (
+            <JobCard key={index} job={job} />
+          ))}
+        </>
+      )}
     </>
   );
 };

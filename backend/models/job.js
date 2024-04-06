@@ -40,12 +40,10 @@ const jobSchema = mongoose.Schema({
     required: true,
     default: "India",
   },
-  client: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Job",
-    },
-  ],
+  client: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
   proposals: [
     {
       type: Schema.Types.ObjectId,
