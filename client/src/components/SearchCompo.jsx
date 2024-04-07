@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import catagories from "./assets/catagories";
-import axios from "axios";
 
 const SearchCompo = () => {
   const [isOpened, setIsOpened] = useState(false);
   const [input, setInput] = useState("");
   const [suggestions, setSuggestions] = useState([]);
-  const [searchResults, setSearchResults] = useState([]);
 
   const handleChange = (e) => {
     const inputValue = e.target.value;
@@ -22,16 +20,9 @@ const SearchCompo = () => {
     setSuggestions(filteredSuggestions);
   };
 
-  const handleSearch = async () => {
-    try {
-      const res = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/job/searchjobs?query=${input}`,
-        { withCredentials: true }
-      );
-      setSearchResults(res.data.data);
-      console.log(res.data.data);
-    } catch (error) {
-      console.error(error.message);
+  const handleSearch = () => {
+    if (input.length > 0) {
+      window.location.href = `/search/job?q=${input}`;
     }
   };
 

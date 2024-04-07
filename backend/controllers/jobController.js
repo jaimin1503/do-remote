@@ -188,6 +188,7 @@ export const searchJobs = async (req, res) => {
     const jobs = await Job.find({
       $or: [
         { title: { $regex: query, $options: "i" } },
+        { category: { $regex: query, $options: "i" } },
         { description: { $regex: query, $options: "i" } },
         { skillsRequired: { $regex: query, $options: "i" } },
       ],

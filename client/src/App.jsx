@@ -10,6 +10,7 @@ import DB from "./pages/DB";
 import Profile from "./pages/Profile";
 import ClientDB from "./pages/ClientDB";
 import ViewProfile from "./pages/ViewProfile";
+import SearchJob from "./pages/SearchJob";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/client" element={<ClientDB />} />
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/viewprofile/:id" element={<ViewProfile />} />
+        <Route path="/search/job" element={<SearchJob />} />
       </Routes>
     </>
   );
