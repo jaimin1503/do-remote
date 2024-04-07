@@ -41,7 +41,3 @@ const port = process.env.PORT || 5555;
 app.listen(port, () => {
   console.log(`app is listening on port ${port}`);
 });
-
-app.get("/", (res) => {
-  res.send("Hello World!");
-});
