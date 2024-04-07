@@ -97,16 +97,20 @@ const ViewJob = ({ job, toggleDrawer }) => {
         </p>
       </div>
       <hr />
-      <div className="buttons bottom-0 m-4 flex justify-evenly w-full">
-        <button className=" px-5 py-2 rounded-full bg-blue-500 hover:bg-blue-600 text-white">
+      <div className="buttons my-4 flex justify-evenly w-full">
+        <button className=" px-4 py-2 md:w-full rounded-full md:mx-2 bg-blue-500 hover:bg-blue-600 text-white">
           Apply Now
         </button>
         <button
           onClick={handleSave}
-          className="flex px-5 py-2 border-2 border-blue-500 rounded-full"
+          className={`flex px-4 py-2 border-2 md:w-full md:mx-2 justify-center border-blue-500 rounded-full ${
+            saved ? " bg-blue-500" : ""
+          }`}
         >
-          <span className=" mx-2 text-blue-500">Save Job</span>{" "}
-          <Like saved={saved} />
+          <span className={`${saved ? "text-white" : " text-blue-500"}`}>
+            {saved ? "Unsave Job" : "Save Job"}
+          </span>{" "}
+          <Like saved={!saved} />
         </button>
       </div>
     </div>

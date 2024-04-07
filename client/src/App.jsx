@@ -16,10 +16,10 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/design" element={<DesignCreation />} />
         <Route path="/dev" element={<DevIT />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Login />} />
         <Route path="/signup/:role" element={<Signup />} />
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/verify-email" element={<VerifyEmail />} />

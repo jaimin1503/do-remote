@@ -40,8 +40,10 @@ export default function Login() {
 
   return (
     <>
-      <h1 className="text-4xl text-center mt-10">Login to Done-remote</h1>
-      <div className=" w-fit mx-auto md:border-2 max-w-lg border-blue-300 rounded-2xl p-10 mt-10">
+      <div className=" w-fit mx-auto md:border-2 max-w-lg border-blue-300 rounded-2xl p-10 mt-[25%]">
+        <h1 className="text-3xl sm:text-4xl text-center mb-10">
+          Login to Done-remote
+        </h1>
         {error && <div className="text-red-500 mb-4">{error}</div>}
         <form onSubmit={handleSubmit}>
           <input

@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import pin from "../assets/pin.svg";
 import axios from "axios";
 import Like from "../assets/Like.jsx";
+import Drawer from "@mui/material/Drawer";
+import ViewJob from "./ViewJob";
 
 const JobCard = ({ job }) => {
   const now = new Date();
@@ -12,6 +14,13 @@ const JobCard = ({ job }) => {
   const hours = Math.floor(minutes / 60);
   const days = Math.floor(hours / 24);
   const [saved, setSaved] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [drawerJob, setDrawerJob] = useState({});
+
+  const toggleDrawer = (newOpen, job) => () => {
+    setOpen(newOpen);
+    setDrawerJob(job);
+  };
 
   const handleSave = () => {
     axios
@@ -47,12 +56,17 @@ const JobCard = ({ job }) => {
           <div>
             <p className=" text-sm text-gray-500">
               {days > 0
-                ?"Posted " + days + " days ago"
-                :hours > 0
-                ?"Posted " + hours + " hours ago"
-                :"Posted " + minutes + " minutes ago"}
+                ? "Posted " + days + " days ago"
+                : hours > 0
+                ? "Posted " + hours + " hours ago"
+                : "Posted " + minutes + " minutes ago"}
             </p>
-            <h1 className=" sm:text-xl font-medium my-2">{job?.title}</h1>
+            <h1
+              onClick={toggleDrawer(true, job)}
+              className=" sm:text-xl hover:text-blue-500 hover:underline font-medium my-2"
+            >
+              {job?.title}
+            </h1>
           </div>
 
           <button onClick={() => handleSave()}>
@@ -87,6 +101,9 @@ const JobCard = ({ job }) => {
         </div>
         <p className=" text-sm my-2 text-gray-500">Proposals: 5 to 10</p>
       </div>
+      <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
+        <ViewJob job={drawerJob} toggleDrawer={toggleDrawer} />
+      </Drawer>
     </>
   );
 };

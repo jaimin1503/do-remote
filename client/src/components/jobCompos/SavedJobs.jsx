@@ -5,20 +5,11 @@ import JobSktn from "../../skeletons/JobSktn";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setSavedJobs } from "../../reducers/jobReducer";
-import Drawer from "@mui/material/Drawer";
-import ViewJob from "./ViewJob";
 
 const SavedJobs = () => {
   const [loading, setLoading] = useState(true);
   const savedJobs = useSelector((state) => state.job.savedJobs);
   const dispatch = useDispatch();
-  const [open, setOpen] = useState(false);
-  const [drawerJob, setDrawerJob] = useState({});
-
-  const toggleDrawer = (newOpen, job) => () => {
-    setOpen(newOpen);
-    setDrawerJob(job);
-  };
 
   useEffect(() => {
     axios
@@ -46,16 +37,9 @@ const SavedJobs = () => {
       ) : (
         <>
           {savedJobs &&
-            savedJobs.map((job, index) => (
-              <div onClick={toggleDrawer(true, job)} key={job._id}>
-                <JobCard job={job} />
-              </div>
-            ))}
+            savedJobs.map((job, index) => <JobCard job={job} key={job._id} />)}
         </>
       )}
-      <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
-        <ViewJob job={drawerJob} toggleDrawer={toggleDrawer} />
-      </Drawer>
     </>
   );
 };

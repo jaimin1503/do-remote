@@ -39,9 +39,9 @@ const SignupForm = ({ role }) => {
 
   return (
     <>
-      <div className=" w-fit mx-auto md:border-2 border-blue-300 rounded-2xl p-20 mt-10">
+      <div className=" w-fit mx-auto md:border-2 border-blue-300 rounded-2xl p-10 md:p-20 md:mt-10">
         <div className=" flex justify-center items-center">
-          <h1 className=" text-3xl pb-10 font-medium">
+          <h1 className=" text-2xl sm:text-3xl pb-10 font-medium text-center">
             {role === "client"
               ? "Join as a client and hire talented freelancers"
               : "Join as a freelancer and get hired"}

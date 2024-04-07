@@ -15,9 +15,9 @@ export default function Welcome() {
         <h1 className=" p-4">DO-REMOTE</h1>
       </nav>
 
-      <div className=" flex flex-col justify-center items-center md:border-2 p-10 rounded-xl max-w-xl border-blue-300 mx-auto">
+      <div className=" flex flex-col justify-center items-center md:border-2 px-10 md:p-10 rounded-xl max-w-xl border-blue-300 mx-auto">
         <div className="message">
-          <h1 className="text-3xl my-5 font-medium">
+          <h1 className="text-2xl sm:text-3xl mb-3 md:my-5 font-medium">
             Join as client or Freelancer
           </h1>
         </div>
@@ -58,7 +58,7 @@ export default function Welcome() {
           </div>
         </div>
         <div className="button">
-          <Link to={`/signup/${role}`}>
+          <Link to={`/signup/${role || "freelancer"}`}>
             <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 my-5 rounded-lg">
               {role === "client"
                 ? "Continue as Client"
@@ -70,7 +70,7 @@ export default function Welcome() {
           Already have an account?{" "}
           <a
             className=" text-gray-500 underline cursor-pointer font-medium hover:text-blue-500"
-            href="/login"
+            href="/"
           >
             Login
           </a>

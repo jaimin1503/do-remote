@@ -5,7 +5,7 @@ const Like = ({ saved }) => {
         height="26px"
         width="26px"
         xmlns="http://www.w3.org/2000/svg"
-        fill={saved ? "#60a5fa" : "none"}
+        fill={saved ? "#60a5fa" : "white"}
         aria-hidden="true"
         viewBox="0 0 24 24"
         role="img"
