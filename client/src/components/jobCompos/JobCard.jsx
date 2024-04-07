@@ -47,10 +47,10 @@ const JobCard = ({ job }) => {
           <div>
             <p className=" text-sm text-gray-500">
               {days > 0
-                ? days + " days ago"
-                : hours > 0
-                ? hours + " hours ago"
-                : minutes + " minutes ago"}
+                ?"Posted " + days + " days ago"
+                :hours > 0
+                ?"Posted " + hours + " hours ago"
+                :"Posted " + minutes + " minutes ago"}
             </p>
             <h1 className=" sm:text-xl font-medium my-2">{job?.title}</h1>
           </div>

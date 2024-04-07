@@ -52,6 +52,7 @@ const SearchCompo = () => {
                 onClick={() => {
                   setInput(suggestion);
                   setIsOpened(false);
+                  window.location.href = `/search/job?q=${suggestion}`;
                 }}
               >
                 {suggestion}

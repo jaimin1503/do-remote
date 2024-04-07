@@ -29,7 +29,7 @@ export const getAllJobs = async (req, res) => {
 export const getJob = async (req, res) => {
   try {
     const { id } = req.params;
-    const job = await Job.findById(id);
+    const job = await Job.findById(id).populate("client");
     res.status(201).json({
       data: job,
     });
@@ -192,7 +192,7 @@ export const searchJobs = async (req, res) => {
         { description: { $regex: query, $options: "i" } },
         { skillsRequired: { $regex: query, $options: "i" } },
       ],
-    });
+    }).populate("client");
 
     res.status(200).json({
       data: jobs,
