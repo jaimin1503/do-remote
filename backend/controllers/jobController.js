@@ -138,17 +138,22 @@ export const getSavedJobs = async (req, res) => {
 export const saveJob = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(id);
-
     const user = await User.findById(req.user._id);
 
-    if (user.savedJobs.includes(id)) {
-      //unsave job
-      user.savedJobs = user.savedJobs.filter((_id) => _id !== id);
-      await user.save();
-      return res.status(201).send({ message: "Job unsaved successfully" });
+    if (!user) {
+      return res.status(404).send({ message: "User not found" });
     }
 
+    const index = user.savedJobs.indexOf(id);
+
+    if (index !== -1) {
+      // If job is already saved, unsave it
+      user.savedJobs.splice(index, 1);
+      await user.save();
+      return res.status(200).send({ message: "Job unsaved successfully" });
+    }
+
+    // If job is not saved, save it
     user.savedJobs.push(id);
     await user.save();
 
@@ -169,6 +174,28 @@ export const isJobSaved = async (req, res) => {
     }
 
     return res.status(200).send({ saved: false });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send({ message: error.message });
+  }
+};
+
+export const searchJobs = async (req, res) => {
+  try {
+    const { query } = req.query;
+
+    // Perform search query
+    const jobs = await Job.find({
+      $or: [
+        { title: { $regex: query, $options: "i" } },
+        { description: { $regex: query, $options: "i" } },
+        { skillsRequired: { $regex: query, $options: "i" } },
+      ],
+    });
+
+    res.status(200).json({
+      data: jobs,
+    });
   } catch (error) {
     console.error(error.message);
     res.status(500).send({ message: error.message });

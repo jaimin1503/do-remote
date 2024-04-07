@@ -1,8 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useState } from "react";
 import SearchCompo from "../components/SearchCompo";
-import BasicTabs from "../components/JobsTabs";
+import JobsTabs from "../components/jobCompos/JobsTabs";
 
 const FreelancerDB = () => {
   const { user } = useSelector((state) => state.user);
@@ -10,7 +9,7 @@ const FreelancerDB = () => {
   return (
     <div>
       <div className="container">
-        <h1 className=" text-3xl font-medium my-4">
+        <h1 className=" text-4xl font-medium my-4">
           Hi, {user?.firstName} 👋{" "}
         </h1>
         <div className="search">
@@ -18,7 +17,7 @@ const FreelancerDB = () => {
         </div>
         <h1 className=" text-3xl font-medium my-4">Explore new jobs</h1>
         <div>
-          <BasicTabs />
+          <JobsTabs />
         </div>
       </div>
     </div>

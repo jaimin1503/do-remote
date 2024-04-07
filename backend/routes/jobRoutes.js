@@ -8,7 +8,8 @@ import {
   createJob,
   getSavedJobs,
   saveJob,
-  isJobSaved
+  isJobSaved,
+  searchJobs
 } from "../controllers/jobController.js";
 const router = express.Router();
 
@@ -20,4 +21,6 @@ router.delete("/deletejob/:id", auth, deleteJob);
 router.get("/getsavedjobs", auth, getSavedJobs);
 router.put("/savejob/:id", auth, saveJob);
 router.get("/isjobsaved/:id", auth, isJobSaved);
+router.get("/searchjobs", auth, searchJobs);
+
 export default router;

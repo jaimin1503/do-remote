@@ -1,8 +1,8 @@
 import Rating from "@mui/material/Rating";
 import React, { useEffect, useState } from "react";
-import pin from "./assets/pin.svg";
+import pin from "../assets/pin.svg";
 import axios from "axios";
-import Like from "./assets/Like.jsx";
+import Like from "../assets/Like.jsx";
 
 const JobCard = ({ job }) => {
   const now = new Date();
@@ -20,6 +20,7 @@ const JobCard = ({ job }) => {
       })
       .then((res) => {
         console.log(res.data.message);
+        setSaved(!saved);
       })
       .catch((err) => {
         console.log(err);

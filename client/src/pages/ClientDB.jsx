@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import axios from "axios";
 import FlCard from "../components/FlCard";
-import JobCardSm from "../components/JobCardSm";
+import JobCardSm from "../components/jobCompos/JobCardSm";
 import Drawer from "@mui/material/Drawer";
 import ViewProfile from "./ViewProfile";
 
@@ -69,7 +69,6 @@ function ClientDB() {
               ))}
           </div>
         </div>
-        
       </div>
       <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
         <ViewProfile user={drawerUser} />

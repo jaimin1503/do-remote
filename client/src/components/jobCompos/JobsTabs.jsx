@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import BestMatches from "./BestMatches";
 import MostRecent from "./MostRecent";
 import { useDispatch, useSelector } from "react-redux";
-import { setJobs } from "../reducers/jobReducer";
+import { setJobs } from "../../reducers/jobReducer";
 import SavedJobs from "./SavedJobs";
 
 function CustomTabPanel(props) {
@@ -44,7 +44,7 @@ function a11yProps(index) {
   };
 }
 
-export default function BasicTabs() {
+export default function JobsTabs() {
   const [value, setValue] = React.useState(0);
   const { jobs } = useSelector((state) => state.job);
   const [mostRecent, setMostRecent] = useState([]);

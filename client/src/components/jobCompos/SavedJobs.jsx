@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import JobCard from "./JobCard";
-import JobSktn from "../skeletons/JobSktn";
+import JobSktn from "../../skeletons/JobSktn";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setSavedJobs } from "../../reducers/jobReducer";
 
 const SavedJobs = () => {
-  const [savedJobs, setSavedJobs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const savedJobs = useSelector((state) => state.job.savedJobs);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     axios
@@ -13,8 +17,7 @@ const SavedJobs = () => {
         withCredentials: true,
       })
       .then((res) => {
-        setSavedJobs(res.data.data);
-        console.log(res.data.data);
+        dispatch(setSavedJobs(res.data.data));
         setLoading(false);
       })
       .catch((err) => {
@@ -33,9 +36,8 @@ const SavedJobs = () => {
         </>
       ) : (
         <>
-          {savedJobs.map((job, index) => (
-            <JobCard key={index} job={job} />
-          ))}
+          {savedJobs &&
+            savedJobs.map((job, index) => <JobCard key={index} job={job} />)}
         </>
       )}
     </>

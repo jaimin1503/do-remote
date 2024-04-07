@@ -1,5 +1,5 @@
 import JobCard from "./JobCard";
-import JobSktn from "../skeletons/JobSktn";
+import JobSktn from "../../skeletons/JobSktn";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
