@@ -9,7 +9,7 @@ const Navebar = () => {
     <>
       <Navbar className=" border-b" expand="lg">
         <Container>
-          <Navbar.Brand href="/">
+          <Navbar.Brand href="/home">
             <h1 className="text-2xl font-bold">DO-REMOTE</h1>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
