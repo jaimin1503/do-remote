@@ -21,9 +21,14 @@ const Apply = () => {
   const hours = Math.floor(minutes / 60);
   const days = Math.floor(hours / 24);
   const inputRef = useRef(null);
+  const [Files, setFiles] = useState(null);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleImageClick = () => {
+    inputRef.current.click();
   };
 
   const handleSubmit = (e) => {
@@ -42,6 +47,22 @@ const Apply = () => {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const handleImageChange = (e) => {
+    const files = e.target.files;
+    const selectedFilesArray = Array.from(files);
+    setFiles(selectedFilesArray);
+  };
+
+  const handleDrop = (event) => {
+    event.preventDefault();
+    const droppedFiles = Array.from(event.dataTransfer.files);
+    setFiles(droppedFiles);
+  };
+
+  const handleDragOver = (event) => {
+    event.preventDefault();
   };
 
   useEffect(() => {
@@ -185,11 +206,43 @@ const Apply = () => {
             name="coverLetter"
           ></textarea>
           <h1 className=" font-medium my-4">Attachments</h1>
-          <input type="file" />
-          <div className="border-2 rounded-2xl border-blue-500 border-dashed w-full h-40 flex justify-center items-center">
+          <input
+            accept="image/*"
+            multiple
+            ref={inputRef}
+            hidden
+            onChange={handleImageChange}
+            type="file"
+          />
+
+          {Files?.map((file, index) => (
+            <div key={index} className="flex items-center my-2">
+              <img
+                className=" h-10 w-10 object-cover rounded-full"
+                src={URL.createObjectURL(file)}
+                alt="img"
+              />
+              <p className=" mx-4">{file.name}</p>
+              <button
+                onClick={() => {
+                  setFiles(Files.filter((f, i) => i !== index));
+                }}
+              >
+                <i className="fas fa-trash text-red-500">Delete</i>
+              </button>
+            </div>
+          ))}
+          <div
+            onDragOver={handleDragOver}
+            onDrop={handleDrop}
+            className="border-2 rounded-2xl border-blue-500 border-dashed w-full h-40 flex justify-center items-center"
+          >
             <p className=" text-center ">
               Drag or{" "}
-              <span className=" text-blue-500 underline cursor-pointer">
+              <span
+                onClick={handleImageClick}
+                className=" text-blue-500 underline cursor-pointer"
+              >
                 Upload
               </span>{" "}
               your files here
