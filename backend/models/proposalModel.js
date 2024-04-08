@@ -20,7 +20,7 @@ const proposalSchema = new mongoose.Schema({
     required: true,
   },
   deliveryTime: {
-    type: Date,
+    type: String,
     required: true,
   },
   attachments: [String], // Array of attachment URLs

@@ -1,21 +1,47 @@
 import NavLogged from "../components/NavLogged";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
 const Apply = () => {
   const id = useParams().id;
-  const [job, setJob] = useState({});
+  const [job, setJob] = useState(null);
+  const [formData, setFormData] = useState({
+    jobId: id,
+    coverLetter: "",
+    bidAmount: "",
+    deliveryTime: "",
+  });
+
   const now = new Date();
   const createDate = new Date(job?.createdDate);
   const timeDiffrence = now.getTime() - createDate.getTime();
   const minutes = Math.floor(timeDiffrence / 60000);
   const hours = Math.floor(minutes / 60);
   const days = Math.floor(hours / 24);
-  const [duration, setDuration] = useState("");
-  const handleChange = (event) => {
-    setDuration(event.target.value);
+  const inputRef = useRef(null);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post(
+        `${import.meta.env.VITE_BASE_URL}/proposal/createproposal`,
+        formData,
+        {
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   useEffect(() => {
@@ -39,7 +65,7 @@ const Apply = () => {
         <div className="job-details my-4 rounded-2xl border-2">
           <h1 className=" text-2xl font-medium m-4">Job Details</h1>
           <h1 className=" text-2xl font-medium m-4">{job?.title}</h1>
-          <div className=" m-4 flex items-center">
+          <div className=" m-4 flex items-center w-full">
             <p className=" py-2 px-4 bg-gray-200 w-fit rounded-full">
               {job?.category}
             </p>
@@ -50,6 +76,10 @@ const Apply = () => {
                 ? "Posted " + hours + " hours ago"
                 : "Posted " + minutes + " minutes ago"}
             </span>
+            <div className=" ml-auto mr-10 sm:mr-20">
+              <p className=" text-sm font-medium">Client Budget</p>
+              <p className=" text-sm text-gray-500 ">{job?.budget} &#8377;</p>
+            </div>
           </div>
           <p className=" m-4">{job?.description}</p>
           <hr />
@@ -77,8 +107,10 @@ const Apply = () => {
             <div className=" m-4">
               <input
                 type="number"
-                name="hourlyRate"
-                value={job?.budget}
+                name="bidAmount"
+                value={formData.bidAmount}
+                onChange={handleChange}
+                placeholder={job?.budget}
                 className=" p-2 border-2 border-gray-300 text-right rounded-md"
               />
               <span className=" font-medium mx-2">&#8377;</span>
@@ -91,7 +123,7 @@ const Apply = () => {
               <input
                 type="number"
                 name="hourlyRate"
-                value={-job?.budget * 0.1}
+                value={-formData.bidAmount * 0.1}
                 disabled
                 className=" p-2 border-2 cursor-not-allowed bg-gray-200 border-gray-300 text-right rounded-md"
               />
@@ -111,7 +143,7 @@ const Apply = () => {
                 type="number"
                 name="hourlyRate"
                 disabled
-                value={job?.budget - job?.budget * 0.1}
+                value={formData.bidAmount - formData.bidAmount * 0.1}
                 className=" p-2 border-2 border-gray-300 text-right rounded-md"
               />
               <span className=" font-medium mx-2">&#8377;</span>
@@ -128,9 +160,10 @@ const Apply = () => {
                 <InputLabel id="demo-simple-select-label">Time</InputLabel>
                 <Select
                   id="demo-simple-select"
-                  value={duration}
+                  value={formData.deliveryTime}
                   label="Age"
                   onChange={handleChange}
+                  name="deliveryTime"
                 >
                   <MenuItem value={1}>Less than 1 month</MenuItem>
                   <MenuItem value={3}>1 to 3 months</MenuItem>
@@ -147,6 +180,9 @@ const Apply = () => {
             className=" p-4 w-full border-2 rounded-xl"
             placeholder="Write a cover letter to the client"
             rows={10}
+            value={formData.coverLetter}
+            onChange={handleChange}
+            name="coverLetter"
           ></textarea>
           <h1 className=" font-medium my-4">Attachments</h1>
           <input type="file" />
@@ -167,7 +203,10 @@ const Apply = () => {
             Do-Remote. You also agree to the terms and conditions of the client
             who posted the job.
           </p>
-          <button className=" bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-xl w-full mt-4">
+          <button
+            onClick={handleSubmit}
+            className=" bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-xl w-full mt-4"
+          >
             Submit Proposal
           </button>
         </div>

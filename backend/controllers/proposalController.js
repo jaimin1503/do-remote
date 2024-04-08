@@ -1,5 +1,5 @@
 import { Proposal } from "../models/proposalModel.js";
-import { Profile } from "../models/profileModel.js";
+import { User } from "../models/user.js";
 import { Job } from "../models/job.js";
 
 export const getAllProposals = async (req, res) => {
@@ -18,10 +18,11 @@ export const getAllProposals = async (req, res) => {
 };
 
 export const createProposal = async (req, res) => {
+  const freelancerId = req.user._id;
+  console.log("id", freelancerId);
   try {
     if (
       !req.body.jobId ||
-      !req.body.freelancerId ||
       !req.body.coverLetter ||
       !req.body.bidAmount ||
       !req.body.deliveryTime
@@ -30,29 +31,35 @@ export const createProposal = async (req, res) => {
         message: "Please fill all the required details",
       });
     }
-    const newProposal = new Proposal(req.body);
-    const savedProposal = await newProposal.save();
-    res.status(201).json({
-      data: savedProposal,
+
+    const newProposal = new Proposal({
+      jobId: req.body.jobId,
+      coverLetter: req.body.coverLetter,
+      bidAmount: req.body.bidAmount,
+      deliveryTime: req.body.deliveryTime,
+      freelancerId: freelancerId,
     });
 
-    const job = await Job.findOne({
-      _id: req.body.jobId,
-    });
+    const savedProposal = await newProposal.save();
+
+    const job = await Job.findOne({ _id: req.body.jobId });
     if (!job) {
       return res.status(404).json({ message: "Job Not Found" });
     }
     job.proposals.push(savedProposal._id);
     await job.save();
 
-    const profile = await Profile.findOne({
-      _id: req.body.freelancerId,
-    });
-    if (!profile) {
-      return res.status(404).json({ message: "Profile Not Found" });
+    const user = await User.findOne({ _id: freelancerId });
+    if (!user) {
+      return res.status(404).json({ message: "User Not Found" });
     }
-    profile.proposals.push(savedProposal._id);
-    await profile.save();
+    user.proposals.push(savedProposal._id);
+    await user.save();
+
+    res.status(201).json({
+      message: "Proposal created successfully",
+      savedProposal,
+    });
   } catch (error) {
     console.log(error.message);
     res.status(500).send({ message: error.message });
