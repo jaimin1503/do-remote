@@ -78,7 +78,7 @@ const JobCard = ({ job }) => {
         </p>
         <div className=" my-2">
           <p>
-            {job?.description.length > 200
+            {job?.description?.length > 200
               ? job?.description.slice(0, 200) + "..."
               : job?.description}
           </p>

@@ -1,5 +1,6 @@
 import { Proposal } from "../models/proposalModel.js";
 import { Profile } from "../models/profileModel.js";
+import { Job } from "../models/job.js";
 
 export const getAllProposals = async (req, res) => {
   try {
@@ -34,6 +35,16 @@ export const createProposal = async (req, res) => {
     res.status(201).json({
       data: savedProposal,
     });
+
+    const job = await Job.findOne({
+      _id: req.body.jobId,
+    });
+    if (!job) {
+      return res.status(404).json({ message: "Job Not Found" });
+    }
+    job.proposals.push(savedProposal._id);
+    await job.save();
+
     const profile = await Profile.findOne({
       _id: req.body.freelancerId,
     });

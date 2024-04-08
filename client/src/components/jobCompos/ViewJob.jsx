@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import pin from "../assets/pin.svg";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const ViewJob = ({ job, toggleDrawer }) => {
   const now = new Date();
@@ -98,13 +99,16 @@ const ViewJob = ({ job, toggleDrawer }) => {
       </div>
       <hr />
       <div className="buttons my-4 flex justify-evenly w-full">
-        <button className=" px-4 py-2 md:w-full rounded-full md:mx-2 bg-blue-500 hover:bg-blue-600 text-white">
+        <Link
+          className=" md:w-full px-4 py-2 text-center rounded-full bg-blue-500 hover:bg-blue-600 text-white md:mx-2"
+          to={`/apply/${job?._id}`}
+        >
           Apply Now
-        </button>
+        </Link>
         <button
           onClick={handleSave}
           className={`flex px-4 py-2 border-2 md:w-full md:mx-2 justify-center border-blue-500 rounded-full ${
-            saved ? " bg-blue-500" : ""
+            saved ? " bg-blue-500 hover:bg-blue-600" : ""
           }`}
         >
           <span className={`${saved ? "text-white" : " text-blue-500"}`}>

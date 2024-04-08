@@ -31,7 +31,7 @@ export const getJob = async (req, res) => {
     const { id } = req.params;
     const job = await Job.findById(id).populate("client");
     res.status(201).json({
-      data: job,
+      job,
     });
   } catch (error) {
     console.log(error.message);
