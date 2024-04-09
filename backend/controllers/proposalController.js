@@ -1,6 +1,7 @@
 import { Proposal } from "../models/proposalModel.js";
 import { User } from "../models/user.js";
 import { Job } from "../models/job.js";
+import { uploadImagesToCloudinary } from "../utils/imageUploader.js";
 
 export const getAllProposals = async (req, res) => {
   try {
@@ -18,8 +19,9 @@ export const getAllProposals = async (req, res) => {
 };
 
 export const createProposal = async (req, res) => {
-  const freelancerId = req.user._id;
-  console.log("id", freelancerId);
+  const freelancerId = req.user._id; // Assuming this is how you retrieve the freelancer ID
+  const attachments = req.files; // Assuming you are uploading files as part of the proposal
+  console.log(attachments);
   try {
     if (
       !req.body.jobId ||
@@ -32,12 +34,24 @@ export const createProposal = async (req, res) => {
       });
     }
 
+    const urls = [];
+    if (attachments && attachments.length > 0) {
+      const images = await uploadImagesToCloudinary(
+        attachments,
+        process.env.FOLDER_NAME
+      );
+      images.forEach((image) => {
+        urls.push(image.secure_url);
+      });
+    }
+
     const newProposal = new Proposal({
       jobId: req.body.jobId,
       coverLetter: req.body.coverLetter,
       bidAmount: req.body.bidAmount,
       deliveryTime: req.body.deliveryTime,
       freelancerId: freelancerId,
+      attachments: urls,
     });
 
     const savedProposal = await newProposal.save();

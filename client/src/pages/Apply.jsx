@@ -12,16 +12,16 @@ const Apply = () => {
     coverLetter: "",
     bidAmount: "",
     deliveryTime: "",
+    attachments: [],
   });
-
+  const inputRef = useRef(null);
+  const [Files, setFiles] = useState([]);
   const now = new Date();
   const createDate = new Date(job?.createdDate);
   const timeDiffrence = now.getTime() - createDate.getTime();
   const minutes = Math.floor(timeDiffrence / 60000);
   const hours = Math.floor(minutes / 60);
   const days = Math.floor(hours / 24);
-  const inputRef = useRef(null);
-  const [Files, setFiles] = useState(null);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -29,30 +29,6 @@ const Apply = () => {
 
   const handleImageClick = () => {
     inputRef.current.click();
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    axios
-      .post(
-        `${import.meta.env.VITE_BASE_URL}/proposal/createproposal`,
-        formData,
-        {
-          withCredentials: true,
-        }
-      )
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const handleImageChange = (e) => {
-    const files = e.target.files;
-    const selectedFilesArray = Array.from(files);
-    setFiles(selectedFilesArray);
   };
 
   const handleDrop = (event) => {
@@ -63,6 +39,40 @@ const Apply = () => {
 
   const handleDragOver = (event) => {
     event.preventDefault();
+  };
+
+  const handleImageChange = (e) => {
+    const selectedFiles = Array.from(e.target.files);
+    setFiles(selectedFiles);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formDataWithFiles = new FormData();
+    formDataWithFiles.append("jobId", formData.jobId);
+    formDataWithFiles.append("coverLetter", formData.coverLetter);
+    formDataWithFiles.append("bidAmount", formData.bidAmount);
+    formDataWithFiles.append("deliveryTime", formData.deliveryTime);
+    Files.forEach((file, index) => {
+      formDataWithFiles.append(`attachments[${index}]`, file);
+    });
+
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/proposal/createproposal`,
+        formDataWithFiles,
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {

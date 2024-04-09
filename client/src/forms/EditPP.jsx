@@ -21,7 +21,7 @@ const EditPP = ({ pId, handleClosePPModal }) => {
       setPreviewSource(reader.result);
     };
   };
-
+  
   const handleUpload = () => {
     try {
       console.log("uploading...");

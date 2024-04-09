@@ -5,6 +5,7 @@ import { User } from "../models/user.js";
 export const editProfilePicture = async (req, res) => {
   try {
     const displayPicture = req.files.displayPicture;
+    console.log(displayPicture);
     const pId = req.params.id;
     const image = await uploadImageToCloudinary(
       displayPicture,

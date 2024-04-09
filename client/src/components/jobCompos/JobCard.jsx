@@ -99,7 +99,11 @@ const JobCard = ({ job }) => {
           <img className=" ml-4" src={pin} alt="pin" />
           <p className=" text-sm text-gray-500 mx-1">{job?.location}</p>
         </div>
-        <p className=" text-sm my-2 text-gray-500">Proposals: 5 to 10</p>
+        <p className=" text-sm my-2 text-gray-500">
+          {job?.proposals?.length < 6
+            ? "Proposals: 0 to 5 "
+            : "Proposals: more than 5"}
+        </p>
       </div>
       <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
         <ViewJob job={drawerJob} toggleDrawer={toggleDrawer} />

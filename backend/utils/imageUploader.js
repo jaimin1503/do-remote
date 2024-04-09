@@ -14,3 +14,22 @@ const uploadImageToCloudinary = async (file, folder, height, quality) => {
 };
 
 export default uploadImageToCloudinary;
+
+// upload multiple images to cloudinary
+
+export const uploadImagesToCloudinary = async (files, folder, height, quality) => {
+  const options = { folder };
+  if (height) {
+    options.height = height;
+  }
+  if (quality) {
+    options.quality = quality;
+  }
+  options.resource_type = "auto";
+
+  const promises = files.map((file) =>
+    cloudinaryV2.uploader.upload(file.tempFilePath, options)
+  );
+
+  return await Promise.all(promises);
+};
