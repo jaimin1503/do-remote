@@ -5,13 +5,19 @@ import { uploadImagesToCloudinary } from "../utils/imageUploader.js";
 
 export const getAllProposals = async (req, res) => {
   try {
-    const id = req.params.id;
-    const proposals = await Proposal.find({ jobId: id });
-    if (!proposals) {
-      return res.status(404).json({ message: "No proposals found" });
-    } else {
-      res.status(200).json(proposals);
-    }
+    //populate job and freelancer also populate freelancer's profile
+    const proposals = await Proposal.find()
+      .populate("job")
+      .populate({
+        path: "freelancer",
+        populate: {
+          path: "profile",
+        },
+      });
+    res.status(200).json({
+      proposals,
+      success: true,
+    });
   } catch (error) {
     console.log(error.message);
     res.status(500).send({ message: error.message });
@@ -19,12 +25,14 @@ export const getAllProposals = async (req, res) => {
 };
 
 export const createProposal = async (req, res) => {
-  const freelancerId = req.user._id; // Assuming this is how you retrieve the freelancer ID
+  const freelancer = req.user._id;
+  console.log("freelancer", freelancer); // Assuming this is how you retrieve the freelancer ID
   const attachments = req.files; // Assuming you are uploading files as part of the proposal
   console.log(attachments);
+  console.log(req.body);
   try {
     if (
-      !req.body.jobId ||
+      !req.body.job ||
       !req.body.coverLetter ||
       !req.body.bidAmount ||
       !req.body.deliveryTime
@@ -46,24 +54,24 @@ export const createProposal = async (req, res) => {
     }
 
     const newProposal = new Proposal({
-      jobId: req.body.jobId,
+      job: req.body.job,
       coverLetter: req.body.coverLetter,
       bidAmount: req.body.bidAmount,
       deliveryTime: req.body.deliveryTime,
-      freelancerId: freelancerId,
+      freelancer: freelancer,
       attachments: urls,
     });
 
     const savedProposal = await newProposal.save();
 
-    const job = await Job.findOne({ _id: req.body.jobId });
+    const job = await Job.findOne({ _id: req.body.job });
     if (!job) {
       return res.status(404).json({ message: "Job Not Found" });
     }
     job.proposals.push(savedProposal._id);
     await job.save();
 
-    const user = await User.findOne({ _id: freelancerId });
+    const user = await User.findOne({ _id: freelancer });
     if (!user) {
       return res.status(404).json({ message: "User Not Found" });
     }

@@ -8,7 +8,7 @@ const Apply = () => {
   const id = useParams().id;
   const [job, setJob] = useState(null);
   const [formData, setFormData] = useState({
-    jobId: id,
+    job: id,
     coverLetter: "",
     bidAmount: "",
     deliveryTime: "",
@@ -50,7 +50,7 @@ const Apply = () => {
     e.preventDefault();
 
     const formDataWithFiles = new FormData();
-    formDataWithFiles.append("jobId", formData.jobId);
+    formDataWithFiles.append("job", formData.job);
     formDataWithFiles.append("coverLetter", formData.coverLetter);
     formDataWithFiles.append("bidAmount", formData.bidAmount);
     formDataWithFiles.append("deliveryTime", formData.deliveryTime);
@@ -196,10 +196,14 @@ const Apply = () => {
                   onChange={handleChange}
                   name="deliveryTime"
                 >
-                  <MenuItem value={1}>Less than 1 month</MenuItem>
-                  <MenuItem value={3}>1 to 3 months</MenuItem>
-                  <MenuItem value={6}>3 to 6 months</MenuItem>
-                  <MenuItem value={8}>More than 6 months</MenuItem>
+                  <MenuItem value={"Less than 1 month"}>
+                    Less than 1 month
+                  </MenuItem>
+                  <MenuItem value={"1 to 3 months"}>1 to 3 months</MenuItem>
+                  <MenuItem value={"3 to 6 months"}>3 to 6 months</MenuItem>
+                  <MenuItem value={"More than 6 months"}>
+                    More than 6 months
+                  </MenuItem>
                 </Select>
               </FormControl>
             </Box>
