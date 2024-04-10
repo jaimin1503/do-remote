@@ -122,7 +122,7 @@ const NavLogged = () => {
                     proposals
                   </NavDropdown.Item>
                 </NavDropdown>
-                <Nav.Link as={Link} to="/dev">
+                <Nav.Link as={Link} to="/myjobs">
                   My jobs
                 </Nav.Link>
                 <Nav.Link as={Link} to="/design">

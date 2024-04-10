@@ -14,6 +14,7 @@ import SearchJob from "./pages/SearchJob";
 import Apply from "./pages/Apply";
 import EditJob from "./pages/client/EditJob";
 import Proposals from "./pages/client/Proposals";
+import MyJobs from "./pages/client/MyJobs";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path="/apply/:id" element={<Apply />} />
         <Route path="/editJob/:id" element={<EditJob />} />
         <Route path="/proposals" element={<Proposals />} />
+        <Route path="/myjobs" element={<MyJobs />} />
       </Routes>
     </>
   );

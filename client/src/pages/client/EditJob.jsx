@@ -65,7 +65,9 @@ const EditJob = () => {
         <hr />
         <div className=" my-4 ml-4 pr-0 md:m-5">
           <div className=" flex items-center">
-            <p className=" font-light">{job?.description}</p>
+            <p className=" whitespace-pre-wrap max-w-[80%] text-justify font-light">
+              {job?.description}
+            </p>
             <EditButton />
           </div>
           <p className=" my-3">

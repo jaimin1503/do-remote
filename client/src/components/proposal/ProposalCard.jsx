@@ -17,7 +17,7 @@ const ProposalCard = ({ proposal }) => {
       <div className="proposal-card border-b">
         <div className=" flex justify-between items-center">
           <Link to={`/editJob/${proposal?.job?._id}`}>
-            <h1 className=" text-3xl font-medium my-4 hover:text-blue-500 hover:underline cursor-pointer">
+            <h1 className=" text-2xl sm:text-3xl font-medium my-4 hover:text-blue-500 hover:underline cursor-pointer">
               {proposal?.job?.title || "Job Title"}
             </h1>
           </Link>
@@ -43,7 +43,7 @@ const ProposalCard = ({ proposal }) => {
             <h2 className=" text-sm text-gray-500">{proposal?.deliveryTime}</h2>
           </div>
         </div>
-        <p className=" text-gray-600 my-4 mr-4 text-justify">
+        <p className=" whitespace-pre-wrap text-gray-600 my-4 mr-4 text-justify">
           {proposal?.coverLetter.length > 300
             ? proposal?.coverLetter.substring(0, 300) + "..."
             : proposal?.coverLetter}
@@ -54,7 +54,7 @@ const ProposalCard = ({ proposal }) => {
         </div>
       </div>
       <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
-        <ViewProfile user={drawerProfile} />
+        <ViewProfile user={drawerProfile} toggleDrawer={toggleDrawer} />
       </Drawer>
     </>
   );

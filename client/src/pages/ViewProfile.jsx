@@ -1,22 +1,6 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import axios from "axios";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
-const ViewProfile = ({ user }) => {
-  // const [user, setUser] = useState({});
-  // const id = useParams().id;
-  // useEffect(() => {
-  //   axios
-  //     .get(`${import.meta.env.VITE_BASE_URL}/user/getuserbyid/${id}`, {
-  //       withCredentials: true,
-  //     })
-  //     .then((res) => {
-  //       setUser(res.data.user);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
+const ViewProfile = ({ user, toggleDrawer }) => {
   const time = new Date().toLocaleTimeString("In", {
     hour: "2-digit",
     minute: "2-digit",
@@ -24,8 +8,14 @@ const ViewProfile = ({ user }) => {
 
   return (
     <>
-      <div className=" md:border md:rounded-2xl md:m-5 w-[70vw]">
-        <div className="row1 p-5 pb-5 flex flex-col sm:flex-row items-center">
+      <div className=" md:border md:rounded-2xl md:m-5">
+        <div className=" m-4">
+          <ArrowBackIcon
+            onClick={toggleDrawer(false)}
+            className="cursor-pointer"
+          />
+        </div>
+        <div className="row1 sm:p-5 pb-5 flex flex-col sm:flex-row items-center">
           <div className="user-info flex flex-col items-center sm:flex-row h-fit">
             <img
               className=" h-24 w-24 rounded-full object-cover"
