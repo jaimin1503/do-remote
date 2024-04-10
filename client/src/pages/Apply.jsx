@@ -96,18 +96,18 @@ const Apply = () => {
         <div className="job-details my-4 rounded-2xl border-2">
           <h1 className=" text-2xl font-medium m-4">Job Details</h1>
           <h1 className=" text-2xl font-medium m-4">{job?.title}</h1>
-          <div className=" m-4 flex items-center w-full">
+          <div className=" m-4 flex items-start w-full flex-col sm:flex-row sm:items-center">
             <p className=" py-2 px-4 bg-gray-200 w-fit rounded-full">
               {job?.category}
             </p>
-            <span className=" text-sm text-gray-500 mx-4">
+            <span className="my-2 sm:my-0 text-sm text-gray-500 sm:mx-4">
               {days > 0
                 ? "Posted " + days + " days ago"
                 : hours > 0
                 ? "Posted " + hours + " hours ago"
                 : "Posted " + minutes + " minutes ago"}
             </span>
-            <div className=" ml-auto mr-10 sm:mr-20">
+            <div className=" my-2 sm:my-0 sm:ml-auto mr-10 sm:mr-20">
               <p className=" text-sm font-medium">Client Budget</p>
               <p className=" text-sm text-gray-500 ">{job?.budget} &#8377;</p>
             </div>
@@ -116,11 +116,11 @@ const Apply = () => {
           <hr />
           <div className=" m-4">
             <h1 className=" text-2xl font-medium">Skills and Expertise</h1>
-            <div className=" flex items-center my-4">
+            <div className=" flex items-center my-4 flex-wrap">
               {job?.skillsRequired?.map((skill, index) => (
                 <p
                   key={index}
-                  className=" py-2 px-4 bg-gray-200 w-fit rounded-full text-sm mx-2"
+                  className="my-2 py-2 px-4 bg-blue-200 w-fit rounded-full text-sm mx-2"
                 >
                   {skill}
                 </p>
@@ -130,12 +130,12 @@ const Apply = () => {
         </div>
         <div className="job-proposal my-4 rounded-2xl border-2">
           <h1 className=" text-2xl font-medium m-4">Terms</h1>
-          <div className=" bid flex justify-between">
-            <div className=" m-4">
+          <div className=" bid flex justify-between flex-col sm:flex-row">
+            <div className=" mx-4 sm:m-4">
               <h1 className=" font-medium">Bid</h1>
               <h1 className=" text-sm text-gray-500 py-2">Your bid amout</h1>
             </div>
-            <div className=" m-4">
+            <div className=" mx-4 mb-4 sm:m-4">
               <input
                 type="number"
                 name="bidAmount"
@@ -148,9 +148,9 @@ const Apply = () => {
             </div>
           </div>
           <hr />
-          <div className=" flex items-center justify-between">
-            <h1 className="font-medium m-4">10% Do-Remote service fee</h1>
-            <div className=" m-4">
+          <div className=" flex justify-between m-4 flex-col sm:flex-row sm:items-center">
+            <h1 className="font-medium my-2">10% Do-Remote service fee</h1>
+            <div className=" my-2">
               <input
                 type="number"
                 name="hourlyRate"
@@ -162,14 +162,14 @@ const Apply = () => {
             </div>
           </div>
           <hr />
-          <div className=" bid flex justify-between">
-            <div className=" m-4">
+          <div className="m-4 bid flex justify-between flex-col sm:flex-row">
+            <div className="">
               <h1 className=" font-medium">You'll Receive</h1>
               <h1 className=" text-sm text-gray-500 py-2">
-                The estimated amount you'll receive after service fees
+                The estimated amount you'll receive.
               </h1>
             </div>
-            <div className=" m-4">
+            <div className=" ">
               <input
                 type="number"
                 name="hourlyRate"
@@ -219,7 +219,7 @@ const Apply = () => {
             onChange={handleChange}
             name="coverLetter"
           ></textarea>
-          <h1 className=" font-medium my-4">Attachments</h1>
+          <h1 className=" font-medium my-4 text-2xl">Attachments</h1>
           <input
             accept="image/*"
             multiple
