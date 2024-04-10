@@ -12,6 +12,8 @@ import ClientDB from "./pages/ClientDB";
 import ViewProfile from "./pages/ViewProfile";
 import SearchJob from "./pages/SearchJob";
 import Apply from "./pages/Apply";
+import EditJob from "./pages/client/EditJob";
+import Proposals from "./pages/client/Proposals";
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
         <Route path="/viewprofile/:id" element={<ViewProfile />} />
         <Route path="/search/job" element={<SearchJob />} />
         <Route path="/apply/:id" element={<Apply />} />
+        <Route path="/editJob/:id" element={<EditJob />} />
+        <Route path="/proposals" element={<Proposals />} />
       </Routes>
     </>
   );

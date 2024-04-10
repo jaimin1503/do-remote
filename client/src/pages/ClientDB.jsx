@@ -6,6 +6,7 @@ import FlCard from "../components/FlCard";
 import JobCardSm from "../components/jobCompos/JobCardSm";
 import Drawer from "@mui/material/Drawer";
 import ViewProfile from "./ViewProfile";
+import { Link } from "react-router-dom";
 
 function ClientDB() {
   const { user } = useSelector((state) => state.user);
@@ -53,7 +54,9 @@ function ClientDB() {
             {jobs &&
               jobs.map((job) => (
                 <div key={job?._id}>
-                  <JobCardSm job={job} />
+                  <Link to={`/editJob/${job._id}`}>
+                    <JobCardSm job={job} />
+                  </Link>
                 </div>
               ))}
           </div>
