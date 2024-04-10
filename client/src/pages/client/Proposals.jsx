@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import NavLogged from "../../components/NavLogged";
-import { Link } from "react-router-dom";
 import ProposalCard from "../../components/proposal/ProposalCard";
+import JobSktn from "../../skeletons/JobSktn";
 
 const Proposals = () => {
   const [proposals, setProposals] = useState([]);
@@ -28,7 +28,7 @@ const Proposals = () => {
         <h1 className=" text-4xl m-4 font-medium">All Proposals</h1>
         <hr />
         {loading ? (
-          <h1>Loading...</h1>
+          <JobSktn />
         ) : (
           <div>
             {proposals &&

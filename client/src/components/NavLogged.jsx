@@ -118,7 +118,7 @@ const NavLogged = () => {
                   <NavDropdown.Item as={Link} to="/design">
                     Saved Profiles
                   </NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to="/design">
+                  <NavDropdown.Item as={Link} to="/proposals">
                     proposals
                   </NavDropdown.Item>
                 </NavDropdown>

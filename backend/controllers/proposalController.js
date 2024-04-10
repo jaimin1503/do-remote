@@ -5,19 +5,20 @@ import { uploadImagesToCloudinary } from "../utils/imageUploader.js";
 
 export const getAllProposals = async (req, res) => {
   try {
-    //populate job and freelancer also populate freelancer's profile
-    const proposals = await Proposal.find()
-      .populate("job")
-      .populate({
-        path: "freelancer",
-        populate: {
-          path: "profile",
-        },
-      });
-    res.status(200).json({
-      proposals,
-      success: true,
-    });
+    //find all proposals from Job where cliendId is equal to req.user._id and populate the job and freelancer fields
+    //also populate freelancer's profile
+
+    const proprosals = await Job.find({ client: req.user._id }).populate([
+      {
+        path: "proposals",
+        populate: { path: "job", populate: { path: "client" } },
+      },
+      {
+        path: "proposals",
+        populate: { path: "freelancer", populate: "profile" },
+      },
+    ]);
+    res.status(200).json({ proposals: proprosals[0].proposals });
   } catch (error) {
     console.log(error.message);
     res.status(500).send({ message: error.message });
