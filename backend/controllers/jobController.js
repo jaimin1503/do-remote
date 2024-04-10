@@ -9,6 +9,30 @@ export const getAllJobs = async (req, res) => {
     const skip = (page - 1) * perPage;
     const jobs = await Job.find({
       status: "open",
+    })
+      .skip(skip)
+      .limit(perPage)
+      .populate("client");
+
+    res.status(200).json({
+      page: page,
+      perPage: perPage,
+      totalJobs: await Job.countDocuments(),
+      jobs,
+    });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send({ message: error.message });
+  }
+};
+export const getAllJobsC = async (req, res) => {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const perPage = 5;
+
+    const skip = (page - 1) * perPage;
+    const jobs = await Job.find({
+      status: "open",
       client: req.user._id,
     })
       .skip(skip)

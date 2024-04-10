@@ -15,7 +15,7 @@ const MyJobs = () => {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BASE_URL}/job/getalljobs`, {
+      .get(`${import.meta.env.VITE_BASE_URL}/job/getalljobsc`, {
         withCredentials: true,
       })
       .then((res) => {
