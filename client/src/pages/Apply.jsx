@@ -185,7 +185,7 @@ const Apply = () => {
           <h1 className="text-2xl font-medium m-4">
             The time you will take to finish the project.
           </h1>
-          <div className=" w-1/3 m-4 text-sm">
+          <div className=" w-full md:w-1/3 m-4 text-sm">
             <Box sx={{ minWidth: 120 }}>
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Time</InputLabel>
