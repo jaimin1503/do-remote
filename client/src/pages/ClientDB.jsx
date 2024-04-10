@@ -22,7 +22,9 @@ function ClientDB() {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BASE_URL}/client/randomUsers`)
+      .get(`${import.meta.env.VITE_BASE_URL}/client/randomUsers`, {
+        withCredentials: true,
+      })
       .then((res) => {
         setUsers(res.data);
       })
