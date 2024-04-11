@@ -53,17 +53,12 @@ const NavLogged = () => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className=" items-center">
-                <NavDropdown title="Find-work" id="basic-nav-dropdown">
-                  <NavDropdown.Item as={Link} to="/dev">
-                    Find-work
-                  </NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to="/design">
-                    Saved jobs
-                  </NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to="/design">
-                    proposals
-                  </NavDropdown.Item>
-                </NavDropdown>
+                <Nav.Link as={Link} to="/db">
+                  Find-work
+                </Nav.Link>
+                <Nav.Link as={Link} to="/proposals">
+                  proposals
+                </Nav.Link>
                 <Nav.Link as={Link} to="/dev">
                   All Contracts
                 </Nav.Link>

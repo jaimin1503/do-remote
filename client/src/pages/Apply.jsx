@@ -12,6 +12,7 @@ const Apply = () => {
     coverLetter: "",
     bidAmount: "",
     deliveryTime: "",
+    client: job?.client._id,
     attachments: [],
   });
   const inputRef = useRef(null);
@@ -54,6 +55,8 @@ const Apply = () => {
     formDataWithFiles.append("coverLetter", formData.coverLetter);
     formDataWithFiles.append("bidAmount", formData.bidAmount);
     formDataWithFiles.append("deliveryTime", formData.deliveryTime);
+    formDataWithFiles.append("client", job?.client._id);
+
     Files.forEach((file, index) => {
       formDataWithFiles.append(`attachments[${index}]`, file);
     });

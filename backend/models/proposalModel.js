@@ -33,6 +33,10 @@ const proposalSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  client: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
 });
 
 export const Proposal = mongoose.model("Proposal", proposalSchema);

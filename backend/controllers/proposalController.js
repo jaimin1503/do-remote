@@ -5,38 +5,39 @@ import { uploadImagesToCloudinary } from "../utils/imageUploader.js";
 
 export const getAllProposals = async (req, res) => {
   try {
-    //find all proposals from Job where cliendId is equal to req.user._id and populate the job and freelancer fields
-    //also populate freelancer's profile
+    // Find all proposals from Jobs where clientId is equal to req.user._id and populate the job and freelancer fields
+    // Also populate freelancer's profile
 
-    const proprosals = await Job.find({ client: req.user._id }).populate([
+    const proposals = await Proposal.find({ client: req.user._id }).populate([
       {
-        path: "proposals",
-        populate: { path: "job", populate: { path: "client" } },
+        path: "job",
+        populate: { path: "client" },
       },
       {
-        path: "proposals",
-        populate: { path: "freelancer", populate: "profile" },
+        path: "freelancer",
+        populate: { path: "profile" },
       },
     ]);
-    res.status(200).json({ proposals: proprosals[0].proposals });
+
+    console.log(proposals);
+
+    res.status(200).json({ proposals });
   } catch (error) {
     console.log(error.message);
-    res.status(500).send({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
 export const createProposal = async (req, res) => {
   const freelancer = req.user._id;
-  console.log("freelancer", freelancer); // Assuming this is how you retrieve the freelancer ID
-  const attachments = req.files; // Assuming you are uploading files as part of the proposal
-  console.log(attachments);
-  console.log(req.body);
+  const attachments = req.files;
   try {
     if (
       !req.body.job ||
       !req.body.coverLetter ||
       !req.body.bidAmount ||
-      !req.body.deliveryTime
+      !req.body.deliveryTime ||
+      !req.body.client
     ) {
       return res.status(400).send({
         message: "Please fill all the required details",
@@ -61,6 +62,7 @@ export const createProposal = async (req, res) => {
       deliveryTime: req.body.deliveryTime,
       freelancer: freelancer,
       attachments: urls,
+      client: req.body.client,
     });
 
     const savedProposal = await newProposal.save();
