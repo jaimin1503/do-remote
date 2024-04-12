@@ -5,30 +5,27 @@ import { useParams } from "react-router-dom";
 import EditButton from "../../smallComponents/EditButton";
 import pin from "../../components/assets/pin.svg";
 import { Link } from "react-router-dom";
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
+import EditTitle from "../../forms/EditTitle";
+import EditDes from "../../forms/EditDes";
+import EditRskills from "../../forms/EditRskills";
 
 const EditJob = () => {
   const [job, setJob] = useState({});
-  const now = new Date();
-  const createDate = new Date(job?.createdDate);
-  const timeDiffrence = now.getTime() - createDate.getTime();
-  const minutes = Math.floor(timeDiffrence / 60000);
-  const hours = Math.floor(minutes / 60);
-  const days = Math.floor(hours / 24);
-  const [saved, setSaved] = useState(false);
+  const [openTitle, setOpenTitle] = useState(false);
+  const [openDescription, setOpenDescription] = useState(false);
+  const [openSkills, setOpenSkills] = useState(false);
   const { id } = useParams();
 
-  useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_BASE_URL}/job/isjobsaved/${job?._id}`, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        setSaved(res.data.saved);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  const handleCloseTitle = () => setOpenTitle(false);
+  const handleOpenTitle = () => setOpenTitle(true);
+
+  const handleCloseDescription = () => setOpenDescription(false);
+  const handleOpenDescription = () => setOpenDescription(true);
+
+  const handleCloseSkills = () => setOpenSkills(false);
+  const handleOpenSkills = () => setOpenSkills(true);
 
   useEffect(() => {
     axios
@@ -45,12 +42,43 @@ const EditJob = () => {
 
   return (
     <>
+      <Modal open={openTitle} onClose={handleCloseTitle}>
+        <Box>
+          <EditTitle
+            jId={job?._id}
+            handleCloseTitle={handleCloseTitle}
+            title={job?.title}
+            category={job?.category}
+          />
+        </Box>
+      </Modal>
+      <Modal open={openDescription} onClose={handleCloseDescription}>
+        <Box>
+          <EditDes
+            jId={job?._id}
+            handleCloseDescription={handleCloseDescription}
+            title={job?.title}
+          />
+        </Box>
+      </Modal>
+      <Modal open={openSkills} onClose={handleCloseSkills}>
+        <Box>
+          <EditRskills
+            jId={job?._id}
+            handleCloseSkills={handleCloseSkills}
+            title={job?.title}
+          />
+        </Box>
+      </Modal>
+
       <NavLogged />
       <div className=" md:mx-10">
         <div className=" m-4 md:m-5">
           <div className=" flex items-center">
             <h1 className=" text-2xl md:text-3xl font-medium">{job?.title}</h1>
-            <EditButton />
+            <div onClick={handleOpenTitle}>
+              <EditButton />
+            </div>
           </div>
           <div className=" flex items-center">
             <p className=" py-2 px-4 bg-gray-200 w-fit rounded-full">
@@ -66,7 +94,9 @@ const EditJob = () => {
         <div className=" m-4 pr-0 md:m-5">
           <div className=" flex items-center">
             <h1 className="text-2xl font-medium">Job Requirements</h1>
-            <EditButton />
+            <div onClick={handleOpenDescription}>
+              <EditButton />
+            </div>
           </div>
           <p className=" whitespace-pre-wrap md:max-w-[80%] text-justify font-light">
             {job?.description}
@@ -78,7 +108,9 @@ const EditJob = () => {
         <hr />
         <div className=" m-4 flex items-center md:m-5">
           <h1 className=" text-2xl font-medium">Skills and Expertise</h1>
-          <EditButton />
+          <div onClick={handleOpenSkills}>
+            <EditButton />
+          </div>
         </div>
         <div className=" flex mx-4 mb-4 flex-wrap ">
           {job?.skillsRequired?.map((skill, index) => (

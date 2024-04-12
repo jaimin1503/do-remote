@@ -107,6 +107,7 @@ export const editJob = async (req, res) => {
   try {
     const { id } = req.params;
     const { title, description, category, budget, skillsRequired } = req.body;
+    console.log(req.body);
     if ((title, category)) {
       const result = await Job.findByIdAndUpdate(id, title, category);
       if (!result) {
