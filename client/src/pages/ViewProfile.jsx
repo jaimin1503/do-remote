@@ -8,7 +8,7 @@ const ViewProfile = ({ user, toggleDrawer }) => {
 
   return (
     <>
-      <div className=" md:border md:rounded-2xl md:m-5">
+      <div className=" md:border md:rounded-2xl md:m-5 md:w-[70vw] w-screen">
         <div className=" m-4">
           <ArrowBackIcon
             onClick={toggleDrawer(false)}

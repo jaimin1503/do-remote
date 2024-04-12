@@ -18,9 +18,6 @@ export const getAllProposals = async (req, res) => {
         populate: { path: "profile" },
       },
     ]);
-
-    console.log(proposals);
-
     res.status(200).json({ proposals });
   } catch (error) {
     console.log(error.message);

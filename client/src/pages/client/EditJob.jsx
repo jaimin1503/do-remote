@@ -63,13 +63,14 @@ const EditJob = () => {
           </div>
         </div>
         <hr />
-        <div className=" my-4 ml-4 pr-0 md:m-5">
+        <div className=" m-4 pr-0 md:m-5">
           <div className=" flex items-center">
-            <p className=" whitespace-pre-wrap max-w-[80%] text-justify font-light">
-              {job?.description}
-            </p>
+            <h1 className="text-2xl font-medium">Job Requirements</h1>
             <EditButton />
           </div>
+          <p className=" whitespace-pre-wrap md:max-w-[80%] text-justify font-light">
+            {job?.description}
+          </p>
           <p className=" my-3">
             Budget: <span className=" text-gray-500">&#8377;{job?.budget}</span>
           </p>
