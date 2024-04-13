@@ -106,28 +106,34 @@ export const createJob = async (req, res) => {
 export const editJob = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, description, category, budget, skillsRequired } = req.body;
-    console.log(req.body);
+    const { title, category, description, budget, skillsRequired } = req.body;
+
     if ((title, category)) {
-      const result = await Job.findByIdAndUpdate(id, title, category);
+      const result = await Job.findByIdAndUpdate(id, { title, category });
       if (!result) {
         return res.status(404).json({ message: "Job Not Found" });
       }
-      return res.status(200).json({ message: "Job updated successfully" });
+      return res
+        .status(200)
+        .json({ message: "Job updated successfully", result });
     }
     if ((description, budget)) {
-      const result = await Job.findByIdAndUpdate(id, description, budget);
+      const result = await Job.findByIdAndUpdate(id, { description, budget });
       if (!result) {
         return res.status(404).json({ message: "Job Not Found" });
       }
-      return res.status(200).json({ message: "Job updated successfully" });
+      return res
+        .status(200)
+        .json({ message: "Job updated successfully", result });
     }
     if (skillsRequired) {
-      const result = await Job.findByIdAndUpdate(id, skillsRequired);
+      const result = await Job.findByIdAndUpdate(id, { skillsRequired });
       if (!result) {
         return res.status(404).json({ message: "Job Not Found" });
       }
-      return res.status(200).json({ message: "Job updated successfully" });
+      return res
+        .status(200)
+        .json({ message: "Job updated successfully", result });
     }
   } catch (error) {
     console.error(error.message);

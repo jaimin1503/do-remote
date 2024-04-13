@@ -7,13 +7,16 @@ import JobCardSm from "../components/jobCompos/JobCardSm";
 import Drawer from "@mui/material/Drawer";
 import ViewProfile from "./ViewProfile";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setJobs } from "../reducers/jobReducer";
 
 function ClientDB() {
   const { user } = useSelector((state) => state.user);
   const [users, setUsers] = useState([]);
-  const [jobs, setJobs] = useState([]);
+  const { jobs } = useSelector((state) => state.job);
   const [open, setOpen] = useState(false);
   const [drawerUser, setDrawerUser] = useState({});
+  const dispatch = useDispatch();
 
   const toggleDrawer = (newOpen, user) => () => {
     setOpen(newOpen);
@@ -39,7 +42,7 @@ function ClientDB() {
         withCredentials: true,
       })
       .then((res) => {
-        setJobs(res.data.jobs);
+        dispatch(setJobs(res.data.jobs));
       })
       .catch((err) => {
         console.log(err);
