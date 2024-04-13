@@ -1,6 +1,6 @@
 import NavLogged from "../../components/NavLogged";
 import { useEffect, useState } from "react";
-import { setJob } from "../../reducers/jobReducer";
+import axios from "axios";
 import { useParams } from "react-router-dom";
 import EditButton from "../../smallComponents/EditButton";
 import pin from "../../components/assets/pin.svg";
@@ -10,17 +10,13 @@ import Box from "@mui/material/Box";
 import EditTitle from "../../forms/EditTitle";
 import EditDes from "../../forms/EditDes";
 import EditRskills from "../../forms/EditRskills";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
 
 const EditJob = () => {
-  const { job } = useSelector((state) => state.job);
+  const [job, setJob] = useState({});
   const [openTitle, setOpenTitle] = useState(false);
   const [openDescription, setOpenDescription] = useState(false);
   const [openSkills, setOpenSkills] = useState(false);
   const { id } = useParams();
-  const dispatch = useDispatch();
-  const { jobs } = useSelector((state) => state.job);
 
   const handleCloseTitle = () => setOpenTitle(false);
   const handleOpenTitle = () => setOpenTitle(true);
@@ -32,25 +28,17 @@ const EditJob = () => {
   const handleOpenSkills = () => setOpenSkills(true);
 
   useEffect(() => {
-    jobs.forEach((job) => {
-      if (job._id === id) {
-        dispatch(setJob(job));
-      }
-    });
-  }, [jobs, id]);
-
-  // useEffect(() => {
-  //   axios
-  //     .get(`${import.meta.env.VITE_BASE_URL}/job/getjob/${id}`, {
-  //       withCredentials: true,
-  //     })
-  //     .then((res) => {
-  //       setJob(res.data.job);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, [id]);
+    axios
+      .get(`${import.meta.env.VITE_BASE_URL}/job/getjob/${id}`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        setJob(res.data.job);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [id]);
 
   return (
     <>
