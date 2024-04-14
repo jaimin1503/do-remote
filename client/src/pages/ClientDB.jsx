@@ -9,6 +9,7 @@ import ViewProfile from "./ViewProfile";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setJobs } from "../reducers/jobReducer";
+import PostFirstJob from "../components/PostFirstJob";
 
 function ClientDB() {
   const { user } = useSelector((state) => state.user);
@@ -56,6 +57,7 @@ function ClientDB() {
         <h1 className=" text-3xl my-4 font-medium">Your Jobs</h1>
         <div className="your-jobs overflow-x-auto whitespace-nowrap w-full">
           <div className="jobs-container flex whitespace-nowrap w-full">
+            {jobs.length === 0 && <PostFirstJob />}
             {jobs &&
               jobs.map((job) => (
                 <div key={job?._id}>

@@ -17,6 +17,7 @@ export default function Login() {
     e.preventDefault();
     console.log(formData);
     setError("");
+    const toastId = toast.loading("Logging in...");
     // Send a POST request to the server
     try {
       const response = await axios.post(
@@ -45,6 +46,7 @@ export default function Login() {
         setError("An error occurred. Please try again later.");
       }
     }
+    toast.dismiss(toastId);
   };
 
   useEffect(() => {
