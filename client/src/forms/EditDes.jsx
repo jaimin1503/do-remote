@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import axios from "axios";
-import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { setJobs } from "../reducers/jobReducer";
+import { editJob } from "../services/job";
+import { toast } from "react-hot-toast";
 
 const EditDes = ({ jId, handleCloseDescription, description, budget }) => {
   const [formData, setFormData] = useState({
@@ -10,28 +9,22 @@ const EditDes = ({ jId, handleCloseDescription, description, budget }) => {
     budget: budget,
   });
   const dispatch = useDispatch();
-  const { jobs } = useSelector((state) => state.job);
 
   const handelInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
+    const toastId = toast.loading("Loading...");
     e.preventDefault();
-    axios
-      .put(`${import.meta.env.VITE_BASE_URL}/job/editjob/${jId}`, formData, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        console.log(res.data);
-        dispatch(
-          setJobs(jobs.map((job) => (job._id === jId ? formData : job)))
-        );
+    dispatch(editJob(jId, formData))
+      .then(() => {
         handleCloseDescription();
       })
       .catch((err) => {
         console.log(err);
       });
+    toast.dismiss(toastId);
   };
 
   return (
@@ -77,7 +70,7 @@ const EditDes = ({ jId, handleCloseDescription, description, budget }) => {
                 Save
               </button>
               <button
-                onClick={() => setIsOpenEditInfo(false)}
+                onClick={handleCloseDescription}
                 className="py-2 px-4 float-right text-blue-500 mt-4"
               >
                 Cancle

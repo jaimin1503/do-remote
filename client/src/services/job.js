@@ -1,4 +1,4 @@
-import { setJobs } from "../reducers/jobReducer";
+import { setJob } from "../reducers/jobReducer";
 import axios from "axios";
 
 export function saveJob(id) {
@@ -15,11 +15,8 @@ export function editJob(id, formData) {
           withCredentials: true,
         })
         .then((res) => {
-          console.log(res);
-          dispatch(
-            (setJobs[setJobs.findIndex((job) => job._id === id)] =
-              res.data.result)
-          );
+          console.log(res.data.result);
+          dispatch(setJob(res.data.result));
         })
         .catch((error) => {
           console.log("error accure in update display", error);

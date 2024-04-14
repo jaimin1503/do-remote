@@ -10,13 +10,18 @@ import Box from "@mui/material/Box";
 import EditTitle from "../../forms/EditTitle";
 import EditDes from "../../forms/EditDes";
 import EditRskills from "../../forms/EditRskills";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { setJob } from "../../reducers/jobReducer";
 
 const EditJob = () => {
-  const [job, setJob] = useState({});
+  // const [job, setJob] = useState({});
+  const job = useSelector((state) => state.job.job);
   const [openTitle, setOpenTitle] = useState(false);
   const [openDescription, setOpenDescription] = useState(false);
   const [openSkills, setOpenSkills] = useState(false);
   const { id } = useParams();
+  const dispatch = useDispatch();
 
   const handleCloseTitle = () => setOpenTitle(false);
   const handleOpenTitle = () => setOpenTitle(true);
@@ -33,12 +38,13 @@ const EditJob = () => {
         withCredentials: true,
       })
       .then((res) => {
-        setJob(res.data.job);
+        // setJob(res.data);
+        dispatch(setJob(res.data.job));
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [id]);
+  }, [dispatch, id]);
 
   return (
     <>

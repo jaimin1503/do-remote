@@ -109,7 +109,11 @@ export const editJob = async (req, res) => {
     const { title, category, description, budget, skillsRequired } = req.body;
 
     if ((title, category)) {
-      const result = await Job.findByIdAndUpdate(id, { title, category });
+      const result = await Job.findByIdAndUpdate(
+        id,
+        { title, category },
+        { new: true }
+      );
       if (!result) {
         return res.status(404).json({ message: "Job Not Found" });
       }
@@ -118,7 +122,11 @@ export const editJob = async (req, res) => {
         .json({ message: "Job updated successfully", result });
     }
     if ((description, budget)) {
-      const result = await Job.findByIdAndUpdate(id, { description, budget });
+      const result = await Job.findByIdAndUpdate(
+        id,
+        { description, budget },
+        { new: true }
+      );
       if (!result) {
         return res.status(404).json({ message: "Job Not Found" });
       }
@@ -127,7 +135,11 @@ export const editJob = async (req, res) => {
         .json({ message: "Job updated successfully", result });
     }
     if (skillsRequired) {
-      const result = await Job.findByIdAndUpdate(id, { skillsRequired });
+      const result = await Job.findByIdAndUpdate(
+        id,
+        { skillsRequired },
+        { new: true }
+      );
       if (!result) {
         return res.status(404).json({ message: "Job Not Found" });
       }
