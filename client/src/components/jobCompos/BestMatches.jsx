@@ -12,8 +12,11 @@ const BestMatches = () => {
 
   useEffect(() => {
     if (jobs && jobs.length > 0) {
-      const filteredJobs = jobs.filter((job) =>
-        job.category.includes(userMatch)
+      const filteredJobs = jobs.filter(
+        (job) =>
+          job.category.includes(userMatch) || // Check if user match is in category
+          job.description.includes(userMatch) || // Check if user match is in description
+          job.title.includes(userMatch) // Check if user match is in title
       );
       setBestMatches(filteredJobs);
       setLoading(false);
