@@ -44,7 +44,7 @@ export function signUp(data, navigate) {
           withCredentials: true,
         })
         .then(() => {
-          navigate("/login");
+          navigate("/");
         })
         .catch((error) => {
           alert("Error occurred");

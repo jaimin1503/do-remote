@@ -11,13 +11,14 @@ const BestMatches = () => {
   const userMatch = user?.profile?.current_position.split(" ")[0];
 
   useEffect(() => {
-    jobs.filter((job) => {
-      if (job.category.includes(userMatch)) {
-        setBestMatches((prev) => [...prev, job]);
-        setLoading(false);
-      }
-    });
-  }, [jobs]);
+    if (jobs && jobs.length > 0) {
+      const filteredJobs = jobs.filter((job) =>
+        job.category.includes(userMatch)
+      );
+      setBestMatches(filteredJobs);
+      setLoading(false);
+    }
+  }, [jobs, userMatch]);
 
   return (
     <>
@@ -30,7 +31,7 @@ const BestMatches = () => {
         </>
       ) : (
         <>
-          {bestMatches.map((job, index) => (
+          {bestMatches.map((job) => (
             <JobCard key={job._id} job={job} />
           ))}
         </>

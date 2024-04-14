@@ -143,7 +143,7 @@ export const sendotp = async (req, res) => {
       lowerCaseAlphabets: false,
       specialChars: false,
     });
-    // console.log("otp generated ", otp);
+    console.log("otp generated ", otp);
     const otpBOdy = await OTP.create({
       email,
       otp,
