@@ -5,6 +5,7 @@ import { sendOtp } from "../pages/SendOtp";
 import { useDispatch } from "react-redux";
 import { setLoading, setsignupdata } from "../reducers/authReducer";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 const SignupForm = ({ role }) => {
   const [formData, setFormData] = useState({

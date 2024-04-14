@@ -23,7 +23,10 @@ export function sendOtp(email, navigate) {
           console.log(error);
         });
 
-      toast.success("OTP Sent Successfully");
+      toast.success("OTP Sent Successfully", {
+        duration: 4000,
+        position: "top-right",
+      });
       navigate("/verify-email");
     } catch (error) {
       console.log("SENDOTP API ERROR............", error);

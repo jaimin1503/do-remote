@@ -5,6 +5,7 @@ import axios from "axios";
 import Like from "../assets/Like.jsx";
 import Drawer from "@mui/material/Drawer";
 import ViewJob from "./ViewJob";
+import { toast } from "react-hot-toast";
 
 const JobCard = ({ job }) => {
   const now = new Date();
@@ -30,6 +31,10 @@ const JobCard = ({ job }) => {
       .then((res) => {
         console.log(res.data.message);
         setSaved(!saved);
+        toast.success(res.data.message, {
+          duration: 4000,
+          position: "top-right",
+        });
       })
       .catch((err) => {
         console.log(err);

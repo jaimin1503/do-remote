@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Apply = () => {
   const id = useParams().id;
@@ -23,6 +24,7 @@ const Apply = () => {
   const minutes = Math.floor(timeDiffrence / 60000);
   const hours = Math.floor(minutes / 60);
   const days = Math.floor(hours / 24);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -73,6 +75,7 @@ const Apply = () => {
         }
       );
       console.log(response.data);
+      navigate("/proposals");
     } catch (error) {
       console.log(error);
     }
@@ -85,6 +88,7 @@ const Apply = () => {
       })
       .then((res) => {
         setJob(res.data.job);
+        console.log(res.data.job);
       })
       .catch((err) => {
         console.log(err);

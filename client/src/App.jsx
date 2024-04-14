@@ -15,10 +15,12 @@ import Apply from "./pages/Apply";
 import EditJob from "./pages/client/EditJob";
 import Proposals from "./pages/client/Proposals";
 import MyJobs from "./pages/client/MyJobs";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
     <>
+      <Toaster />
       <Routes>
         <Route path="/home" element={<Home />} />
         <Route path="/design" element={<DesignCreation />} />

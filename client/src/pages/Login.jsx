@@ -2,6 +2,7 @@ import "../components/styles.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 export default function Login() {
   const [formData, setFormData] = useState({});
@@ -26,8 +27,16 @@ export default function Login() {
       if (response.status === 200) {
         localStorage.setItem("token", response.data.token);
         navigate("/db");
+        toast.success(`Welcome ${formData.identifier}`, {
+          duration: 4000,
+          position: "top-right",
+        });
       } else {
         setError("An error occurred. Please try again later.");
+        toast.error("An error occurred. Please try again.", {
+          duration: 4000,
+          position: "top-right",
+        });
       }
     } catch (error) {
       if (error.response && error.response.data.message) {
