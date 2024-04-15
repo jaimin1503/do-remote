@@ -16,7 +16,7 @@ function VerifyEmail() {
   useEffect(() => {
     // Only allow access of this route when user has filled the signup form
     if (!signupdata) {
-      navigate("/signup");
+      navigate(`/signup/${signupdata.role}`);
     }
   }, []);
 
@@ -68,14 +68,14 @@ function VerifyEmail() {
             </button>
           </form>
           <div className="mt-6 flex items-center justify-between">
-            <Link to="/signup">
+            <Link to={`/signup/${signupdata?.role}`}>
               <p className="text-richblack-5 flex items-center gap-x-2">
                 <BiArrowBack /> Back To Signup
               </p>
             </Link>
             <button
               className="flex items-center text-blue-100 gap-x-2"
-              onClick={() => dispatch(sendOtp(signupData.email))}
+              onClick={() => dispatch(sendOtp(signupdata.email))}
             >
               <RxCountdownTimer />
               Resend it

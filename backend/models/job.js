@@ -26,14 +26,24 @@ const jobSchema = mongoose.Schema({
       required: true,
     },
   ],
+  experience: {
+    type: String,
+    required: true,
+    enum: ["Fresher", "Intermediate", "Expert"],
+  },
   createdDate: {
     type: Date,
     default: Date.now,
   },
   deadline: {
-    type: Date,
+    type: String,
     required: true,
-    default: Date.now() + 7 * 24 * 60 * 60 * 1000, // Set default deadline to 7 days from now
+    enum: [
+      "less than a month",
+      "1 to 3 months",
+      "3 to 6 months",
+      "more than 6 month",
+    ],
   },
   location: {
     type: String,
