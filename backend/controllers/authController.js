@@ -72,6 +72,8 @@ export const signup = async (req, res) => {
 
     try {
       profile = await Profile.create({
+        about: "Write something about yourself or your organization",
+        current_position: "Add your current position",
         hourlyRate: "5",
         proposals: [],
         jobs: [],
@@ -128,7 +130,7 @@ export const signup = async (req, res) => {
 
 export const sendotp = async (req, res) => {
   try {
-    // console.log("inside send otp controller");
+    console.log("inside send otp controller");
     const { email } = req.body;
     const user = await User.findOne({ email });
     if (user) {
