@@ -21,12 +21,12 @@ const Navebar = () => {
               <Nav.Link as={Link} to="/design">
                 Design & Creative
               </Nav.Link>
-              <Nav.Link as={Link} to="/design">
+              <Nav.Link as={Link} to="/aids">
                 AI and Data Science
               </Nav.Link>
             </Nav>
             <Nav className="ml-auto items-center">
-              <Nav.Link className=" float-right" as={Link} to="/login">
+              <Nav.Link className=" float-right" as={Link} to="/">
                 Login
               </Nav.Link>
               <Nav.Link as={Link} to="/welcome">

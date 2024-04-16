@@ -1,6 +1,6 @@
 import Navebar from "../components/Navebar";
 
-export default function DesignCreation() {
+const AIDS = () => {
   return (
     <>
       <Navebar />
@@ -9,4 +9,5 @@ export default function DesignCreation() {
       </div>
     </>
   );
-}
+};
+export default AIDS;

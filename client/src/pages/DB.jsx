@@ -5,11 +5,13 @@ import FreelancerDB from "./FreelancerDB";
 
 const DB = () => {
   const { user } = useSelector((state) => state.user);
-  return (
+  return localStorage.getItem("token") ? (
     <div className=" relative">
       <NavLogged />
       {user?.role === "freelancer" ? <FreelancerDB /> : <ClientDB />}
     </div>
+  ) : (
+    (window.location.href = "/")
   );
 };
 export default DB;

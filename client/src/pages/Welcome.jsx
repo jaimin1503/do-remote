@@ -12,7 +12,9 @@ export default function Welcome() {
   return (
     <div>
       <nav>
-        <h1 className=" p-4">DO-REMOTE</h1>
+        <Link to={"/home"}>
+          <h1 className=" p-4">DO-REMOTE</h1>
+        </Link>
       </nav>
 
       <div className=" flex flex-col justify-center items-center md:border-2 px-10 md:p-10 rounded-xl max-w-xl border-blue-300 mx-auto">

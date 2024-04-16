@@ -17,6 +17,7 @@ import Proposals from "./pages/client/Proposals";
 import MyJobs from "./pages/client/MyJobs";
 import { Toaster } from "react-hot-toast";
 import PostJob from "./pages/client/PostJob";
+import AIDS from "./pages/AIDS";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/design" element={<DesignCreation />} />
         <Route path="/dev" element={<DevIT />} />
+        <Route path="/aids" element={<AIDS />} />
         <Route path="/" element={<Login />} />
         <Route path="/signup/:role" element={<Signup />} />
         <Route path="/welcome" element={<Welcome />} />

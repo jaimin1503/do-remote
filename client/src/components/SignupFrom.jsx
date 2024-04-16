@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { setLoading, setsignupdata } from "../reducers/authReducer";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 const SignupForm = ({ role }) => {
   const [formData, setFormData] = useState({
@@ -40,6 +41,11 @@ const SignupForm = ({ role }) => {
 
   return (
     <>
+      <nav>
+        <Link to={"/home"}>
+          <h1 className=" p-4">DO-REMOTE</h1>
+        </Link>
+      </nav>
       <div className=" w-fit mx-auto md:border-2 border-blue-300 rounded-2xl p-10 md:p-20 md:mt-10">
         <div className=" flex justify-center items-center">
           <h1 className=" text-2xl sm:text-3xl pb-10 font-medium text-center">
