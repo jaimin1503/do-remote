@@ -1,6 +1,10 @@
 const Budget = () => {
   return (
-	<div>Budget</div>
-  )
-}
-export default Budget
+    <>
+      <div className="container">
+        
+      </div>
+    </>
+  );
+};
+export default Budget;

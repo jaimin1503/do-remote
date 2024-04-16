@@ -2,9 +2,7 @@ import Multiselect from "multiselect-react-dropdown";
 import "./formStyles.css";
 import { useEffect, useState } from "react";
 import skillsArray from "./assets/skills.js";
-import axios from "axios";
 import { useDispatch } from "react-redux";
-import { setJob } from "../reducers/jobReducer.js";
 import { editJob } from "../services/job.js";
 
 function EditRskills({ jId, handleCloseSkills, skillsRequired }) {
@@ -32,12 +30,6 @@ function EditRskills({ jId, handleCloseSkills, skillsRequired }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // axios
-    //   .put(
-    //     `${import.meta.env.VITE_BASE_URL}/job/editjob/${jId}`,
-    //     { skillsRequired: selectedSkills.map((skill) => skill.value) },
-    //     { withCredentials: true }
-    //   )
     dispatch(
       editJob(jId, {
         skillsRequired: selectedSkills.map((skill) => skill.value),

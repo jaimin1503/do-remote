@@ -1,7 +1,7 @@
-const Title = () => {
+const Title = ({ formData, handleChange }) => {
   return (
     <>
-      <div className="flex border bg-blue-400 rounded-2xl md:items-center flex-col md:flex-row">
+      <div className="container flex border p-4 relative mb-10 rounded-2xl md:items-center flex-col md:flex-row">
         <div className="info md:w-1/2">
           <h1 className=" text-3xl font-medium">
             Let's start with a strong title.
@@ -18,7 +18,9 @@ const Title = () => {
           <input
             type="text"
             name="title"
-            className=" border-2 border-gray-200 p-2 w-full mt-2 rounded-lg"
+            className=" border-2 border-gray-200 outline-none p-2 w-full mt-2 rounded-lg"
+            value={formData.title}
+            onChange={handleChange}
           />
           <div className="examples">
             <h1 className=" text-lg font-medium my-2">Example titles </h1>

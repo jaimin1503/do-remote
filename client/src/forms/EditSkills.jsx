@@ -12,8 +12,6 @@ function EditSkills({ pId,handleCloseSkillsModal }) {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
 
-  // Assuming user.profile.skills is the array of skills from your database
-
   useEffect(() => {
     const skills = skillsArray.map((skill) => ({
       name: skill,
