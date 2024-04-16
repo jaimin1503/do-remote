@@ -51,12 +51,15 @@ const PostJob = () => {
     <div className=" h-screen">
       <NavLogged />
       <h1 className=" text-3xl font-medium m-4">Post a new Job</h1>
+      <p className=" mx-4">STEP {step}</p>
       <div className="container md:mt-20">
         {step === 1 && (
           <Title formData={formData} handleChange={handleChange} />
         )}
         {step === 2 && <Skills skills={skills} setSkills={setSkills} />}
-        {step === 3 && <Budget />}
+        {step === 3 && (
+          <Budget formData={formData} handleChange={handleChange} />
+        )}
         {step === 4 && <Description />}
       </div>
       <div className=" my-4 bottom-0 sm:fixed z-50 w-full left-0">
