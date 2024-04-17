@@ -20,6 +20,7 @@ import PostJob from "./pages/client/PostJob";
 import AIDS from "./pages/AIDS";
 import SavedProfiles from "./pages/client/SavedProfiles";
 import Messages from "./pages/Messages";
+import ViewProposal from "./components/proposal/ViewProposal";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
         <Route path="/client" element={<ClientDB />} />
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/viewprofile/:id" element={<ViewProfile />} />
+        <Route path="/viewproposal/:id" element={<ViewProposal />} />
         <Route path="/search/job" element={<SearchJob />} />
         <Route path="/apply/:id" element={<Apply />} />
         <Route path="/editJob/:id" element={<EditJob />} />

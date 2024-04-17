@@ -24,12 +24,14 @@ const ProposalCard = ({ proposal }) => {
               {proposal?.job?.title || "Job Title"}
             </h1>
           </Link>
-          <button
-            style={{ transition: "0.3s" }}
-            className=" mx-4 py-2 px-5 text-white bg-green-500 hover:bg-green-600 rounded-full"
-          >
-            Hire
-          </button>
+          <Link to={`/viewproposal/${proposal?._id}`}>
+            <button
+              style={{ transition: "0.3s" }}
+              className=" mx-4 py-2 px-5 text-white bg-green-500 hover:bg-green-600 rounded-full"
+            >
+              Hire
+            </button>
+          </Link>
         </div>
         <div className=" mb-2 flex justify-between">
           <div>

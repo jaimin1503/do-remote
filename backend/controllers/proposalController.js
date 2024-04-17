@@ -1,7 +1,7 @@
 import { Proposal } from "../models/proposalModel.js";
 import { User } from "../models/user.js";
 import { Job } from "../models/job.js";
-import { uploadImagesToCloudinary } from "../utils/imageUploader.js";
+import uploadImageToCloudinary from "../utils/imageUploader.js";
 
 export const getAllProposals = async (req, res) => {
   try {
@@ -27,7 +27,6 @@ export const getAllProposals = async (req, res) => {
 
 export const createProposal = async (req, res) => {
   const freelancer = req.user._id;
-  const attachments = req.files;
   try {
     if (
       !req.body.job ||
@@ -41,16 +40,7 @@ export const createProposal = async (req, res) => {
       });
     }
 
-    const urls = [];
-    if (attachments && attachments.length > 0) {
-      const images = await uploadImagesToCloudinary(
-        attachments,
-        process.env.FOLDER_NAME
-      );
-      images.forEach((image) => {
-        urls.push(image.secure_url);
-      });
-    }
+    const image = await uploadImageToCloudinary(req.files.attachments);
 
     const newProposal = new Proposal({
       job: req.body.job,
@@ -58,7 +48,7 @@ export const createProposal = async (req, res) => {
       bidAmount: req.body.bidAmount,
       deliveryTime: req.body.deliveryTime,
       freelancer: freelancer,
-      attachments: urls,
+      attachments: image?.secure_url,
       client: req.body.client,
     });
 
@@ -85,6 +75,29 @@ export const createProposal = async (req, res) => {
   } catch (error) {
     console.log(error.message);
     res.status(500).send({ message: error.message });
+  }
+};
+
+export const getProposal = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const proposal = await Proposal.findById(id).populate([
+      {
+        path: "job",
+        populate: { path: "client" },
+      },
+      {
+        path: "freelancer",
+        populate: { path: "profile" },
+      },
+    ]);
+    if (!proposal) {
+      return res.status(404).json({ message: "Proposal Not Found" });
+    }
+    res.status(200).json({ proposal });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({ message: error.message });
   }
 };
 

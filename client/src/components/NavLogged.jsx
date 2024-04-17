@@ -57,37 +57,47 @@ const NavLogged = () => {
             <Navbar.Brand href="/home">
               <h1 className="text-2xl font-bold">DO-REMOTE</h1>
             </Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className=" items-center">
-                <Nav.Link as={Link} to="/db">
-                  Find-work
-                </Nav.Link>
-                <Nav.Link as={Link} to="/proposals">
-                  proposals
-                </Nav.Link>
-                <Nav.Link as={Link} to="/dev">
-                  All Contracts
-                </Nav.Link>
-                <Nav.Link as={Link} to="/design">
-                  Messages
-                </Nav.Link>
-              </Nav>
-              <Nav className="ml-auto items-center">
-                <Nav.Link>
-                  <img src={notificationLogo} alt="notification" />
-                </Nav.Link>
-                <Nav.Link>
-                  <img
-                    className=" h-7 w-7 rounded-full object-cover "
-                    src={user?.profile?.profilePicture}
-                    alt="img"
-                    id="profile"
-                    onClick={() => setIsOpened(!isOpened)}
-                  />
-                </Nav.Link>
-              </Nav>
-            </Navbar.Collapse>
+            <div
+              onClick={toggleDrawer(true)}
+              className=" cursor-pointer lg:hidden"
+            >
+              <FormatAlignRightIcon />
+            </div>
+            <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
+              <ResponsiveNav
+                toggleDrawer={toggleDrawer}
+                id={user?._id}
+                role={user?.role}
+              />
+            </Drawer>
+            <Nav className=" items-center hidden lg:flex">
+              <Nav.Link as={Link} to="/db">
+                Find-work
+              </Nav.Link>
+              <Nav.Link as={Link} to="/proposals">
+                proposals
+              </Nav.Link>
+              <Nav.Link as={Link} to="/dev">
+                All Contracts
+              </Nav.Link>
+              <Nav.Link as={Link} to="/design">
+                Messages
+              </Nav.Link>
+            </Nav>
+            <Nav className="ml-auto items-center hidden lg:flex">
+              <Nav.Link>
+                <img src={notificationLogo} alt="notification" />
+              </Nav.Link>
+              <Nav.Link>
+                <img
+                  className=" h-7 w-7 rounded-full object-cover "
+                  src={user?.profile?.profilePicture}
+                  alt="img"
+                  id="profile"
+                  onClick={() => setIsOpened(!isOpened)}
+                />
+              </Nav.Link>
+            </Nav>
           </Container>
         </Navbar>
         <div className=" float-right m-2">
@@ -117,7 +127,11 @@ const NavLogged = () => {
               <FormatAlignRightIcon />
             </div>
             <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
-              <ResponsiveNav toggleDrawer={toggleDrawer} id={user?._id} />
+              <ResponsiveNav
+                toggleDrawer={toggleDrawer}
+                id={user?._id}
+                role={user?.role}
+              />
             </Drawer>
             <Nav className=" items-center hidden lg:flex">
               <NavDropdown title="Find-Talent" id="basic-nav-dropdown">

@@ -14,10 +14,14 @@ const uploadImageToCloudinary = async (file, folder, height, quality) => {
 };
 
 export default uploadImageToCloudinary;
-
 // upload multiple images to cloudinary
 
-export const uploadImagesToCloudinary = async (files, folder, height, quality) => {
+export const uploadImagesToCloudinary = async (
+  files,
+  folder,
+  height,
+  quality
+) => {
   const options = { folder };
   if (height) {
     options.height = height;

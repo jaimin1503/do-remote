@@ -13,11 +13,11 @@ const Apply = () => {
     coverLetter: "",
     bidAmount: "",
     deliveryTime: "",
-    client: job?.client._id,
-    attachments: [],
+    client: "",
   });
   const inputRef = useRef(null);
-  const [Files, setFiles] = useState([]);
+  const [File, setFile] = useState(null);
+  const [previewSource, setPreviewSource] = useState(null);
   const now = new Date();
   const createDate = new Date(job?.createdDate);
   const timeDiffrence = now.getTime() - createDate.getTime();
@@ -37,7 +37,7 @@ const Apply = () => {
   const handleDrop = (event) => {
     event.preventDefault();
     const droppedFiles = Array.from(event.dataTransfer.files);
-    setFiles(droppedFiles);
+    setFile(droppedFiles);
   };
 
   const handleDragOver = (event) => {
@@ -45,23 +45,28 @@ const Apply = () => {
   };
 
   const handleImageChange = (e) => {
-    const selectedFiles = Array.from(e.target.files);
-    setFiles(selectedFiles);
+    setFile(e.target.files[0]);
+    const reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onloadend = () => {
+      setPreviewSource(reader.result);
+    };
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formDataWithFiles = new FormData();
-    formDataWithFiles.append("job", formData.job);
+    formDataWithFiles.append("job", id);
     formDataWithFiles.append("coverLetter", formData.coverLetter);
     formDataWithFiles.append("bidAmount", formData.bidAmount);
     formDataWithFiles.append("deliveryTime", formData.deliveryTime);
-    formDataWithFiles.append("client", job?.client._id);
+    formDataWithFiles.append("client", job?.client?._id);
 
-    Files.forEach((file, index) => {
-      formDataWithFiles.append(`attachments[${index}]`, file);
-    });
+    // Append files if any
+    if (File) {
+      formDataWithFiles.append("attachments", File);
+    }
 
     try {
       const response = await axios.post(
@@ -88,7 +93,6 @@ const Apply = () => {
       })
       .then((res) => {
         setJob(res.data.job);
-        console.log(res.data.job);
       })
       .catch((err) => {
         console.log(err);
@@ -236,23 +240,6 @@ const Apply = () => {
             type="file"
           />
 
-          {Files?.map((file, index) => (
-            <div key={index} className="flex items-center my-2">
-              <img
-                className=" h-10 w-10 object-cover rounded-full"
-                src={URL.createObjectURL(file)}
-                alt="img"
-              />
-              <p className=" mx-4">{file.name}</p>
-              <button
-                onClick={() => {
-                  setFiles(Files.filter((f, i) => i !== index));
-                }}
-              >
-                <i className="fas fa-trash text-red-500">Delete</i>
-              </button>
-            </div>
-          ))}
           <div
             onDragOver={handleDragOver}
             onDrop={handleDrop}
