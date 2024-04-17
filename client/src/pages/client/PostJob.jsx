@@ -6,19 +6,23 @@ import Title from "./postjobforms/Title";
 import Description from "./postjobforms/Description";
 import Skills from "./postjobforms/Skills";
 import Budget from "./postjobforms/Budget";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { toast } from "react-hot-toast";
 
 const PostJob = () => {
-  const { user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.user);
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    location: `${user?.location}`,
+    location: user?.location,
     category: "",
     budget: "",
     experience: "",
     skillsRequired: "",
     deadline: "",
   });
+  const dispatch = useDispatch();
   const [skills, setSkills] = useState([]);
   const [isBackDisabled, setIsBackDisabled] = useState(true);
   const [isNextDisabled, setIsNextDisabled] = useState(false);
@@ -47,12 +51,35 @@ const PostJob = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const postJob = () => {
+    const formDataWithSkills = {
+      ...formData,
+      skillsRequired: skills.map((skill) => skill.value),
+    };
+    axios
+      .post(
+        `${import.meta.env.VITE_BASE_URL}/job/postjob`,
+        formDataWithSkills,
+        {
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        console.log(res.data.savedJob);
+        toast.success("Job posted successfully");
+        window.location.href = "/myjobs";
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
-    <div className=" h-screen">
+    <div className="h-screen relative">
       <NavLogged />
-      <h1 className=" text-3xl font-medium m-4">Post a new Job</h1>
-      <p className=" mx-4">STEP {step}</p>
-      <div className="container md:mt-20">
+      <h1 className="text-3xl font-medium m-4">Post a new Job</h1>
+      <p className="ml-10 mb-2">STEP {step}</p>
+      <div className="container pb-16">
         {step === 1 && (
           <Title formData={formData} handleChange={handleChange} />
         )}
@@ -60,25 +87,36 @@ const PostJob = () => {
         {step === 3 && (
           <Budget formData={formData} handleChange={handleChange} />
         )}
-        {step === 4 && <Description />}
+        {step === 4 && (
+          <Description formData={formData} handleChange={handleChange} />
+        )}
       </div>
-      <div className=" my-4 bottom-0 sm:fixed z-50 w-full left-0">
+      <div className="fixed bottom-0 w-full bg-white">
         <ProgressBar currentStep={step} totalSteps={4} />
-        <div className="buttons flex justify-between items-center">
+        <div className="buttons flex justify-between items-center px-4 py-4">
           <button
             onClick={prevStep}
             disabled={isBackDisabled}
-            className=" mx-4 hover:bg-gray-100 py-2 px-5 rounded-full text-blue-500 border-2 border-blue-500 my-4"
+            className="hover:bg-gray-100 py-2 px-5 rounded-full text-blue-500 border-2 border-blue-500"
           >
             Back
           </button>
-          <button
-            onClick={nextStep}
-            disabled={isNextDisabled}
-            className=" mx-4 py-2 px-5 rounded-full text-white bg-blue-500 hover:bg-blue-600 border-2 my-4 border-blue-500"
-          >
-            Next
-          </button>
+          {step === 4 ? (
+            <button
+              onClick={postJob}
+              className="hover:bg-blue-500 py-2 px-5 rounded-full text-white bg-blue-400"
+            >
+              Post Job
+            </button>
+          ) : (
+            <button
+              onClick={nextStep}
+              disabled={isNextDisabled}
+              className="hover:bg-blue-500 py-2 px-5 rounded-full text-white bg-blue-400"
+            >
+              Next
+            </button>
+          )}
         </div>
       </div>
     </div>

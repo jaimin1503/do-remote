@@ -67,9 +67,25 @@ export const getJob = async (req, res) => {
 
 export const createJob = async (req, res) => {
   try {
-    const { title, description, category, budget, skillsRequired } = req.body;
+    const {
+      title,
+      description,
+      category,
+      budget,
+      skillsRequired,
+      experience,
+      deadline,
+    } = req.body;
 
-    if (!title || !description || !category || !budget || !skillsRequired) {
+    if (
+      !title ||
+      !description ||
+      !category ||
+      !budget ||
+      !skillsRequired ||
+      !experience ||
+      !deadline
+    ) {
       return res.status(400).send({
         message: "Please fill all the required details",
       });
@@ -81,6 +97,8 @@ export const createJob = async (req, res) => {
       category,
       budget,
       skillsRequired,
+      experience,
+      deadline,
       client: req.user._id,
     });
 
@@ -95,7 +113,8 @@ export const createJob = async (req, res) => {
     );
 
     res.status(201).json({
-      data: savedJob,
+      savedJob,
+      message: "Job posted successfully",
     });
   } catch (error) {
     console.error(error.message);

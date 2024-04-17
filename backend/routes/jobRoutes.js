@@ -14,7 +14,7 @@ import {
 } from "../controllers/jobController.js";
 const router = express.Router();
 
-router.post("/createjob", auth, createJob);
+router.post("/postjob", auth, createJob);
 router.get("/getalljobs", auth, getAllJobs);
 router.get("/getalljobsc", auth, getAllJobsC);
 router.get("/getjob/:id", auth, getJob);
