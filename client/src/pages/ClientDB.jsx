@@ -52,7 +52,7 @@ function ClientDB() {
 
   return (
     <>
-      <div className="container my-10 ">
+      <div className="m-4 sm:p-4 my-10 ">
         <h1 className=" text-4xl font-medium">Hello, {user?.firstName} 👋</h1>
         <h1 className=" text-3xl my-4 font-medium">Your Jobs</h1>
         <div className="your-jobs overflow-x-auto whitespace-nowrap w-full">

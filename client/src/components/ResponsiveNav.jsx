@@ -1,7 +1,11 @@
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import CloseIcon from "@mui/icons-material/Close";
 
 const ResponsiveNav = ({ toggleDrawer, id }) => {
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.href = "/";
+  };
+
   return (
     <>
       <div className=" p-4 w-full flex justify-end">
@@ -26,6 +30,14 @@ const ResponsiveNav = ({ toggleDrawer, id }) => {
           </li>
           <li className=" p-4 border-b">
             <a href="/design">Messages</a>
+          </li>
+          <li className=" p-4 border-b">
+            <button
+              onClick={handleLogout}
+              className=" text-white py-2 px-5 rounded-full bg-red-500 hover:bg-red-600"
+            >
+              Logout
+            </button>
           </li>
         </ul>
       </div>
