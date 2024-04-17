@@ -17,10 +17,10 @@ const ResponsiveNav = ({ toggleDrawer, id }) => {
             <a href={`/profile/${id}`}>My Profile</a>
           </li>
           <li className=" p-4 border-b">
-            <a href="/dev">Find Talent</a>
+            <a href="/db">Find Talent</a>
           </li>
           <li className=" p-4 border-b">
-            <a href="/design">Saved Profiles</a>
+            <a href="/savedprofiles">Saved Profiles</a>
           </li>
           <li className=" p-4 border-b">
             <a href="/proposals">Proposals</a>
@@ -29,7 +29,7 @@ const ResponsiveNav = ({ toggleDrawer, id }) => {
             <a href="/myjobs">My Jobs</a>
           </li>
           <li className=" p-4 border-b">
-            <a href="/design">Messages</a>
+            <a href="/messages">Messages</a>
           </li>
           <li className=" p-4 border-b">
             <button

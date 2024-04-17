@@ -18,6 +18,8 @@ import MyJobs from "./pages/client/MyJobs";
 import { Toaster } from "react-hot-toast";
 import PostJob from "./pages/client/PostJob";
 import AIDS from "./pages/AIDS";
+import SavedProfiles from "./pages/client/SavedProfiles";
+import Messages from "./pages/Messages";
 
 function App() {
   return (
@@ -40,8 +42,10 @@ function App() {
         <Route path="/apply/:id" element={<Apply />} />
         <Route path="/editJob/:id" element={<EditJob />} />
         <Route path="/proposals" element={<Proposals />} />
+        <Route path="/savedprofiles" element={<SavedProfiles />} />
         <Route path="/myjobs" element={<MyJobs />} />
         <Route path="/postjob" element={<PostJob />} />
+        <Route path="/messages" element={<Messages />} />
       </Routes>
     </>
   );

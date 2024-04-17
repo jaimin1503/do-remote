@@ -121,10 +121,10 @@ const NavLogged = () => {
             </Drawer>
             <Nav className=" items-center hidden lg:flex">
               <NavDropdown title="Find-Talent" id="basic-nav-dropdown">
-                <NavDropdown.Item as={Link} to="/dev">
+                <NavDropdown.Item as={Link} to="/db">
                   Find Talent
                 </NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/design">
+                <NavDropdown.Item as={Link} to="/savedprofiles">
                   Saved Profiles
                 </NavDropdown.Item>
                 <NavDropdown.Item as={Link} to="/proposals">
@@ -134,7 +134,7 @@ const NavLogged = () => {
               <Nav.Link as={Link} to="/myjobs">
                 My jobs
               </Nav.Link>
-              <Nav.Link as={Link} to="/design">
+              <Nav.Link as={Link} to="/messages">
                 Messages
               </Nav.Link>
             </Nav>
