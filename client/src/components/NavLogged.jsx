@@ -11,11 +11,18 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { setuser } from "../reducers/userReducer";
+import FormatAlignRightIcon from "@mui/icons-material/FormatAlignRight";
+import Drawer from "@mui/material/Drawer";
+import ResponsiveNav from "./ResponsiveNav";
 
 const NavLogged = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   const [isOpened, setIsOpened] = useState(false);
+  const [open, setOpen] = useState(false);
+  const toggleDrawer = (newOpen) => () => {
+    setOpen(newOpen);
+  };
 
   useEffect(() => {
     const handleClickedOutside = (e) => {
@@ -103,42 +110,48 @@ const NavLogged = () => {
             <Navbar.Brand href="/">
               <h1 className="text-2xl font-bold">DO-REMOTE</h1>
             </Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className=" items-center">
-                <NavDropdown title="Find-Talent" id="basic-nav-dropdown">
-                  <NavDropdown.Item as={Link} to="/dev">
-                    Find Talent
-                  </NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to="/design">
-                    Saved Profiles
-                  </NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to="/proposals">
-                    proposals
-                  </NavDropdown.Item>
-                </NavDropdown>
-                <Nav.Link as={Link} to="/myjobs">
-                  My jobs
-                </Nav.Link>
-                <Nav.Link as={Link} to="/design">
-                  Messages
-                </Nav.Link>
-              </Nav>
-              <Nav className="ml-auto items-center">
-                <Nav.Link>
-                  <img src={notificationLogo} alt="notification" />
-                </Nav.Link>
-                <Nav.Link>
-                  <img
-                    className=" h-7 w-7 rounded-full object-cover "
-                    src={user?.profile?.profilePicture}
-                    alt="img"
-                    id="profile"
-                    onClick={() => setIsOpened(!isOpened)}
-                  />
-                </Nav.Link>
-              </Nav>
-            </Navbar.Collapse>
+            <div
+              onClick={toggleDrawer(true)}
+              className=" cursor-pointer lg:hidden"
+            >
+              <FormatAlignRightIcon />
+            </div>
+            <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
+              <ResponsiveNav toggleDrawer={toggleDrawer} id={user?._id} />
+            </Drawer>
+            <Nav className=" items-center hidden lg:flex">
+              <NavDropdown title="Find-Talent" id="basic-nav-dropdown">
+                <NavDropdown.Item as={Link} to="/dev">
+                  Find Talent
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/design">
+                  Saved Profiles
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/proposals">
+                  proposals
+                </NavDropdown.Item>
+              </NavDropdown>
+              <Nav.Link as={Link} to="/myjobs">
+                My jobs
+              </Nav.Link>
+              <Nav.Link as={Link} to="/design">
+                Messages
+              </Nav.Link>
+            </Nav>
+            <Nav className="ml-auto items-center hidden lg:flex">
+              <Nav.Link>
+                <img src={notificationLogo} alt="notification" />
+              </Nav.Link>
+              <Nav.Link>
+                <img
+                  className=" h-7 w-7 rounded-full object-cover "
+                  src={user?.profile?.profilePicture}
+                  alt="img"
+                  id="profile"
+                  onClick={() => setIsOpened(!isOpened)}
+                />
+              </Nav.Link>
+            </Nav>
           </Container>
         </Navbar>
 
