@@ -6,8 +6,12 @@ const JobCardSm = ({ job }) => {
           {job?.title.substring(0, 30)}
           {job?.title.length > 30 ? "..." : ""}
         </h1>
-        <p className="text-lg text-wrap mx-4">
-          {job?.description.substring(0, 100)}
+        <h2 className="text-xs text-gray-500 mx-4">
+          {job?.budget}
+          <span className=" pl-1">&#8377;</span>
+        </h2>
+        <p className="text-wrap mx-4">
+          {job?.description.substring(0, 80)}
           {"..."}
         </p>
         <div className=" flex justify-center">

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import NavLogged from "../NavLogged";
 import Rating from "@mui/material/Rating";
+import { toast } from "react-hot-toast";
 
 const ViewProposal = () => {
   const [proposal, setProposal] = useState({});
@@ -19,6 +20,42 @@ const ViewProposal = () => {
         console.log(err);
       });
   }, [id]);
+
+  const handleApprove = () => {
+    axios
+      .put(
+        `${import.meta.env.VITE_BASE_URL}/proposal/acceptproposal/${id}`,
+        {},
+        {
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        console.log(res.data.message);
+        toast.success(res.data.message);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const rejectProposal = () => {
+    axios
+      .put(
+        `${import.meta.env.VITE_BASE_URL}/proposal/rejectproposal/${id}`,
+        {},
+        {
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        console.log(res.data.message);
+        toast.error(res.data.message);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <>
@@ -86,14 +123,34 @@ const ViewProposal = () => {
             ))}
           </div>
         </div>
-        <div className="buttons  flex justify-evenly">
-          <button className="bg-green-600 hover:bg-green-700 text-white py-2 px-5 rounded-full">
-            Approve
-          </button>
-          <button className="bg-red-500 hover:bg-red-600 text-white py-2 px-5 rounded-full">
-            Reject
-          </button>
-        </div>
+        {proposal?.status === "submitted" ? (
+          <div className="buttons  flex justify-evenly">
+            <button
+              onClick={handleApprove}
+              className="bg-green-600 hover:bg-green-700 text-white py-2 px-5 rounded-full"
+            >
+              Approve
+            </button>
+            <button
+              onClick={rejectProposal}
+              className="bg-red-500 hover:bg-red-600 text-white py-2 px-5 rounded-full"
+            >
+              Reject
+            </button>
+          </div>
+        ) : (
+          <>
+            {proposal?.status === "accepted" ? (
+              <div className="text-center text-green-500 font-medium">
+                <h1>Proposal Accepted</h1>
+              </div>
+            ) : (
+              <div className="text-center text-red-500 font-medium">
+                <h1>Proposal Rejected</h1>
+              </div>
+            )}
+          </>
+        )}
       </div>
     </>
   );
