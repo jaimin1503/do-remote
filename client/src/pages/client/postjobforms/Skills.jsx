@@ -14,7 +14,7 @@ const Skills = ({ skills, setSkills }) => {
   }, []);
   return (
     <>
-      <div className="container md:mt-10 flex flex-col md:flex-row md:items-center border p-4 rounded-2xl">
+      <div className="container md:mt-10 mb-5 flex flex-col md:flex-row md:items-center border p-4 rounded-2xl">
         <div className="info md:w-1/2 m-4">
           <h1 className=" text-3xl font-medium">
             What skills are required for this job?
@@ -24,7 +24,7 @@ const Skills = ({ skills, setSkills }) => {
             understand your needs.
           </p>
         </div>
-        <div className="form md:w-1/2 m-4">
+        <div className="form md:w-1/2 mx-4">
           <label htmlFor="skillsRequired" className="block mt-4 font-medium">
             Enter skills required for this job
           </label>

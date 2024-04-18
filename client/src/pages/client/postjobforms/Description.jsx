@@ -26,6 +26,7 @@ const Description = ({ formData, handleChange }) => {
             value={formData?.description}
             onChange={handleChange}
             rows={6}
+            required
           />
           <div className="examples">
             <h1 className=" text-lg font-medium my-2">Example descriptions </h1>

@@ -24,7 +24,7 @@ const Budget = ({ formData, handleChange }) => {
             freelancers.
           </p>
         </div>
-        <div className="md:w-1/2 m-4">
+        <div className="md:w-1/2 sm:m-4">
           <Accordion defaultExpanded>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -32,11 +32,11 @@ const Budget = ({ formData, handleChange }) => {
               id="panel1a-header"
             >
               <div className=" flex flex-col justify-center">
-                <p className=" mx-4 text-xl font-medium">
+                <p className=" sm:mx-4 text-xl font-medium">
                   How long your work will take?
                 </p>
 
-                <p className=" ml-6">
+                <p className=" sm:ml-6">
                   {formData?.deadline || "less than a month"}
                 </p>
               </div>
@@ -47,6 +47,7 @@ const Budget = ({ formData, handleChange }) => {
                 value={formData.deadline}
                 onChange={handleChange}
                 className=" mx-4"
+                required
               >
                 <FormControlLabel
                   value="less than a month"
@@ -78,14 +79,14 @@ const Budget = ({ formData, handleChange }) => {
               id="panel1a-header"
             >
               <div className=" flex flex-col justify-center">
-                <p className=" mx-4 text-xl font-medium">
+                <p className=" sm:mx-4 text-xl font-medium">
                   Estimated job budget?
                 </p>
-                <p className=" ml-6">{formData?.budget || "1000"} &#8377;</p>
+                <p className=" sm:ml-6">{formData?.budget || "1000"} &#8377;</p>
               </div>
             </AccordionSummary>
             <AccordionDetails>
-              <div className=" mx-4">
+              <div className=" sm:mx-4">
                 <h1 className=" text-xl font-medium ">
                   What is the best cost estimate for your project?
                 </h1>
@@ -95,6 +96,7 @@ const Budget = ({ formData, handleChange }) => {
                   name="budget"
                   value={formData.budget}
                   onChange={handleChange}
+                  required
                 />
                 <span className=" pl-2">&#8377;</span>
               </div>
@@ -107,10 +109,10 @@ const Budget = ({ formData, handleChange }) => {
               id="panel1a-header"
             >
               <div className=" flex flex-col justify-center">
-                <p className=" mx-4 text-xl font-medium">
+                <p className=" sm:mx-4 text-xl font-medium">
                   How much experience is required?
                 </p>
-                <p className=" ml-6">
+                <p className=" sm:ml-6">
                   {formData?.experience || "Intermediate"}
                 </p>
               </div>
@@ -121,6 +123,7 @@ const Budget = ({ formData, handleChange }) => {
                 value={formData.experience}
                 onChange={handleChange}
                 className=" mx-4"
+                required
               >
                 <FormControlLabel
                   value="Beginner"

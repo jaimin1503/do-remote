@@ -25,6 +25,7 @@ const Title = ({ formData, handleChange }) => {
             className=" border-2 border-gray-200 outline-none p-2 w-full mt-2 rounded-lg"
             value={formData.title}
             onChange={handleChange}
+            required
           />
           <div className="examples">
             <h1 className=" text-lg font-medium my-2">Example titles </h1>
@@ -44,6 +45,7 @@ const Title = ({ formData, handleChange }) => {
             className=" border-2 border-gray-200 outline-none p-2 w-full mt-2 rounded-lg"
             value={formData.category}
             onChange={handleChange}
+            required
           />
           <div className="examples">
             <h1 className=" text-lg font-medium my-2">Example categories </h1>
