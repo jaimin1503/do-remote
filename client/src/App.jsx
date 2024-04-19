@@ -21,6 +21,7 @@ import AIDS from "./pages/AIDS";
 import SavedProfiles from "./pages/client/SavedProfiles";
 import Messages from "./pages/Messages";
 import ViewProposal from "./components/proposal/ViewProposal";
+import EditProposal from "./pages/EditProposal";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
         <Route path="/apply/:id" element={<Apply />} />
         <Route path="/editJob/:id" element={<EditJob />} />
         <Route path="/proposals" element={<Proposals />} />
+        <Route path="/editproposal/:id" element={<EditProposal />} />
         <Route path="/savedprofiles" element={<SavedProfiles />} />
         <Route path="/myjobs" element={<MyJobs />} />
         <Route path="/postjob" element={<PostJob />} />

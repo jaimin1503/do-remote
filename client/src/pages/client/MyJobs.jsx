@@ -26,6 +26,9 @@ const MyJobs = () => {
         console.log(err);
       });
   }, []);
+
+
+  
   return (
     <>
       <NavLogged />

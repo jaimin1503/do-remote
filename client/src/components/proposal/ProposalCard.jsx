@@ -2,36 +2,67 @@ import Drawer from "@mui/material/Drawer";
 import ViewProfile from "../../pages/ViewProfile";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import ViewJob from "../jobCompos/ViewJob";
+import EditButton from "../../smallComponents/EditButton";
 
 const ProposalCard = ({ proposal }) => {
   const [open, setOpen] = useState(false);
+  const [openJob, setOpenJob] = useState(false);
+  const [drawerJob, setDrawerJob] = useState({});
   const [drawerProfile, setDrawerProfile] = useState({});
+  const { user } = useSelector((state) => state.user);
 
   const toggleDrawer = (newOpen, profile) => () => {
     setOpen(newOpen);
     setDrawerProfile(profile);
   };
 
+  const toggleJobDrawer = (newOpen, job) => () => {
+    setOpenJob(newOpen);
+    setDrawerJob(job);
+  };
+
   return (
     <>
+      <Drawer anchor="right" open={openJob} onClose={toggleJobDrawer(false)}>
+        <ViewJob job={drawerJob} toggleDrawer={toggleJobDrawer} />
+      </Drawer>
       <div className="proposal-card border-b">
         <div className=" flex justify-between items-center">
-          <Link to={`/editJob/${proposal?.job?._id}`}>
-            <h1
-              className=" text-2xl sm:text-3xl font-medium mt-2 mb-4 hover:text-blue-500 hover:underline cursor-pointer"
-              style={{ transition: "0.3s" }}
-            >
-              {proposal?.job?.title || "Job Title"}
-            </h1>
-          </Link>
-          <Link to={`/viewproposal/${proposal?._id}`}>
-            <button
-              style={{ transition: "0.3s" }}
-              className=" mx-4 py-2 px-5 text-white bg-green-500 hover:bg-green-600 rounded-full"
-            >
-              Hire
-            </button>
-          </Link>
+          {user?.role === "client" ? (
+            <Link to={`/editJob/${proposal?.job?._id}`}>
+              <h1
+                className=" text-2xl font-medium mt-2 mb-2 hover:text-blue-500 hover:underline cursor-pointer"
+                style={{ transition: "0.3s" }}
+              >
+                {proposal?.job?.title || "Job Title"}
+              </h1>
+            </Link>
+          ) : (
+            <>
+              <h1
+                onClick={toggleJobDrawer(true, proposal?.job)}
+                className=" text-2xl font-medium mt-2 mb-2 hover:text-blue-500 hover:underline cursor-pointer"
+              >
+                {proposal?.job?.title || "Job Title"}
+              </h1>
+            </>
+          )}
+          {user?.role === "client" ? (
+            <Link to={`/viewproposal/${proposal?._id}`}>
+              <button
+                style={{ transition: "0.3s" }}
+                className=" mx-4 py-2 px-5 text-white bg-green-500 hover:bg-green-600 rounded-full"
+              >
+                Hire
+              </button>
+            </Link>
+          ) : (
+            <Link to={`/editproposal/${proposal?._id}`}>
+              <EditButton />
+            </Link>
+          )}
         </div>
         <div className=" mb-2 flex justify-between">
           <div>
@@ -42,7 +73,7 @@ const ProposalCard = ({ proposal }) => {
             >
               {proposal?.freelancer?.username || "Jon Doe."}
             </h2>
-            <h2 className=" text-gray-500">
+            <h2 className=" text-sm text-gray-500">
               {proposal?.freelancer?.profile?.current_position ||
                 "Web developer"}
             </h2>
@@ -58,8 +89,10 @@ const ProposalCard = ({ proposal }) => {
             : proposal?.coverLetter}
         </p>
         <div className="my-2">
-          <h2 className=" text-xl font-medium">Bid Amount</h2>
-          <h2 className=" text-gray-500">&#8377; {proposal?.bidAmount}</h2>
+          <h2 className="  font-medium">Bid Amount</h2>
+          <h2 className=" text-sm text-gray-500">
+            &#8377; {proposal?.bidAmount}
+          </h2>
         </div>
       </div>
       <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>

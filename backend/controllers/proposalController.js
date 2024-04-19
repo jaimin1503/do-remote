@@ -7,18 +7,33 @@ export const getAllProposals = async (req, res) => {
   try {
     // Find all proposals from Jobs where clientId is equal to req.user._id and populate the job and freelancer fields
     // Also populate freelancer's profile
-
-    const proposals = await Proposal.find({ client: req.user._id }).populate([
-      {
-        path: "job",
-        populate: { path: "client" },
-      },
-      {
-        path: "freelancer",
-        populate: { path: "profile" },
-      },
-    ]);
-    res.status(200).json({ proposals });
+    if (req.user.role === "client") {
+      const proposals = await Proposal.find({ client: req.user._id }).populate([
+        {
+          path: "job",
+          populate: { path: "client" },
+        },
+        {
+          path: "freelancer",
+          populate: { path: "profile" },
+        },
+      ]);
+      return res.status(200).json({ proposals });
+    } else if (req.user.role === "freelancer") {
+      const proposals = await Proposal.find({
+        freelancer: req.user._id,
+      }).populate([
+        {
+          path: "job",
+          populate: { path: "client" },
+        },
+        {
+          path: "freelancer",
+          populate: { path: "profile" },
+        },
+      ]);
+      return res.status(200).json({ proposals });
+    }
   } catch (error) {
     console.log(error.message);
     res.status(500).json({ message: error.message });
