@@ -1,0 +1,13 @@
+.header-gradient {
+  background: #00ddff;
+  background: linear-gradient(to right, #00ddff 0%, #c354cf 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.sub-header-gradient {
+  background: #dede3a;
+  background: linear-gradient(to right, #e8e83e 0%, #b9b9b9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
