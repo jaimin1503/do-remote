@@ -21,7 +21,7 @@ import AIDS from "./pages/AIDS";
 import SavedProfiles from "./pages/client/SavedProfiles";
 import Messages from "./pages/Messages";
 import ViewProposal from "./components/proposal/ViewProposal";
-import EditProposal from "./pages/EditProposal";
+import EditProposal from "./components/proposal/EditProposal";
 
 function App() {
   return (
