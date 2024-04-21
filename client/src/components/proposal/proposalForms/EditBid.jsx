@@ -13,7 +13,7 @@ const EditBid = ({ handleCloseBidModal, bidAmount, budget }) => {
         <h1 className=" text-2xl md:text-3xl font-medium">Edit your bid</h1>
         <div className="job-proposal my-4 rounded-2xl border-2">
           <div className=" bid flex justify-between flex-col sm:flex-row">
-            <div className=" mx-4 sm:m-4">
+            <div className=" mx-4 mt-4 sm:m-4">
               <h1 className=" font-medium py-2">Your bid amout</h1>
             </div>
             <div className=" mx-4 mb-4 sm:m-4">
@@ -30,8 +30,8 @@ const EditBid = ({ handleCloseBidModal, bidAmount, budget }) => {
           </div>
           <hr />
           <div className=" flex justify-between m-4 flex-col sm:flex-row sm:items-center">
-            <h1 className=" my-2 font-medium">10% Do-Remote service fee</h1>
-            <div className=" my-2 md:flex md:items-center">
+            <h1 className=" mt-2 font-medium">10% Do-Remote service fee</h1>
+            <div className=" my-2 sm:flex sm:items-center">
               <input
                 type="number"
                 name="hourlyRate"
@@ -45,7 +45,7 @@ const EditBid = ({ handleCloseBidModal, bidAmount, budget }) => {
           <hr />
           <div className="m-4 bid flex justify-between flex-col sm:flex-row">
             <div className="">
-              <h1 className=" font-medium">You'll Receive</h1>
+              <h1 className="mb-2 font-medium">You'll Receive</h1>
             </div>
             <div className=" md:flex md:items-center">
               <input
