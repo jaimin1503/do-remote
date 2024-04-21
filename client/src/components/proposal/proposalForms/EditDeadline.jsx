@@ -1,13 +1,31 @@
 import React from "react";
 import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useState } from "react";
+import { editProposal } from "../../../services/proposal";
+import { useDispatch } from "react-redux";
+import { toast } from "react-hot-toast";
 
-const EditDeadline = ({ handleCloseDeadlineModal }) => {
+const EditDeadline = ({ id, handleCloseDeadlineModal, deliveryTime }) => {
   const [formData, setFormData] = useState({
-    deliveryTime: "",
+    deliveryTime: deliveryTime,
   });
+  const dispatch = useDispatch();
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    const toastId = toast.loading("Loading...");
+    e.preventDefault();
+    dispatch(editProposal(id, formData))
+      .then(() => {
+        handleCloseDeadlineModal();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    toast.dismiss(toastId);
   };
 
   return (
@@ -38,7 +56,7 @@ const EditDeadline = ({ handleCloseDeadlineModal }) => {
           </Box>
         </div>
         <button
-          type="submit"
+          onClick={handleSubmit}
           className="btn bg-blue-500 hover:bg-blue-600 py-2 px-5 rounded-lg float-right text-white mt-4"
         >
           Save

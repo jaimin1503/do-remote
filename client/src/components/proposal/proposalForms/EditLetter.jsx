@@ -1,11 +1,27 @@
 import React, { useState } from "react";
+import { editProposal } from "../../../services/proposal";
+import { useDispatch } from "react-redux";
+import { toast } from "react-hot-toast";
 
-const EditLetter = ({ handleCloseLetterModal }) => {
+const EditLetter = ({ handleCloseLetterModal, coverLetter, id }) => {
   const [formData, setFormData] = useState({
-    coverLetter: "",
+    coverLetter: coverLetter,
   });
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+  const dispatch = useDispatch();
+  const handleSubmit = (e) => {
+    const toastId = toast.loading("Loading...");
+    e.preventDefault();
+    dispatch(editProposal(id, formData))
+      .then(() => {
+        handleCloseLetterModal();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    toast.dismiss(toastId);
   };
   return (
     <>
@@ -20,7 +36,7 @@ const EditLetter = ({ handleCloseLetterModal }) => {
           name="coverLetter"
         ></textarea>
         <button
-          type="submit"
+          onClick={handleSubmit}  
           className="btn bg-blue-500 hover:bg-blue-600 py-2 px-5 rounded-lg float-right text-white mt-4"
         >
           Save

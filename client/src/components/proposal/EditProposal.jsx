@@ -10,12 +10,15 @@ import EditLetter from "./proposalForms/EditLetter";
 import EditBid from "./proposalForms/EditBid";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
+import { useDispatch, useSelector } from "react-redux";
+import { setProposal } from "../../reducers/proposalReducer";
 
 const EditProposal = () => {
-  const [proposal, setProposal] = useState({});
+  const { proposal } = useSelector((state) => state.proposal);
   const [openDeadlineModal, setOpenDeadlineModal] = useState(false);
   const [openLetterModal, setOpenLetterModal] = useState(false);
   const [openBidModal, setOpenBidModal] = useState(false);
+  const dispatch = useDispatch();
 
   const handleOpenDeadlineModal = () => setOpenDeadlineModal(true);
   const handleCloseDeadlineModal = () => setOpenDeadlineModal(false);
@@ -34,7 +37,7 @@ const EditProposal = () => {
         withCredentials: true,
       })
       .then((res) => {
-        setProposal(res.data.proposal);
+        dispatch(setProposal(res.data.proposal));
       })
       .catch((err) => {
         console.log(err);
@@ -45,17 +48,26 @@ const EditProposal = () => {
     <>
       <Modal open={openDeadlineModal} onClose={handleCloseDeadlineModal}>
         <Box>
-          <EditDeadline handleCloseDeadlineModal={handleCloseDeadlineModal} />
+          <EditDeadline
+            id={id}
+            deliveryTime={proposal?.deliveryTime}
+            handleCloseDeadlineModal={handleCloseDeadlineModal}
+          />
         </Box>
       </Modal>
       <Modal open={openLetterModal} onClose={handleCloseLetterModal}>
         <Box>
-          <EditLetter handleCloseLetterModal={handleCloseLetterModal} />
+          <EditLetter
+            id={id}
+            coverLetter={proposal?.coverLetter}
+            handleCloseLetterModal={handleCloseLetterModal}
+          />
         </Box>
       </Modal>
       <Modal open={openBidModal} onClose={handleCloseBidModal}>
         <Box>
           <EditBid
+            id={id}
             handleCloseBidModal={handleCloseBidModal}
             bidAmount={proposal?.bidAmount}
             budget={proposal?.job?.budget}

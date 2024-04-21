@@ -1,9 +1,27 @@
 import React, { useState } from "react";
+import { editProposal } from "../../../services/proposal";
+import { useDispatch } from "react-redux";
+import { toast } from "react-hot-toast";
 
-const EditBid = ({ handleCloseBidModal, bidAmount, budget }) => {
+const EditBid = ({ handleCloseBidModal, bidAmount, budget, id }) => {
   const [formData, setFormData] = useState({
     bidAmount: bidAmount,
   });
+  const dispatch = useDispatch();
+
+  const handleSubmit = (e) => {
+    const toastId = toast.loading("Loading...");
+    e.preventDefault();
+    dispatch(editProposal(id, formData))
+      .then(() => {
+        handleCloseBidModal();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    toast.dismiss(toastId);
+  };
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -60,7 +78,7 @@ const EditBid = ({ handleCloseBidModal, bidAmount, budget }) => {
           </div>
         </div>
         <button
-          type="submit"
+          onClick={handleSubmit}
           className="btn bg-blue-500 hover:bg-blue-600 py-2 px-5 rounded-lg float-right text-white"
         >
           Save

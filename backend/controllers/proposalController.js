@@ -118,26 +118,24 @@ export const getProposal = async (req, res) => {
 
 export const editProposal = async (req, res) => {
   try {
-    if (
-      !req.body.jobId ||
-      !req.body.freelancerId ||
-      !req.body.coverLetter ||
-      !req.body.bidAmount ||
-      !req.body.deliveryTime
-    ) {
-      return res.status(400).send({
-        message: "Please fill all the required details",
-      });
-    }
     const { id } = req.params;
-
-    const result = await Proposal.findByIdAndUpdate(id, req.body);
-
-    if (!result) {
+    const proposal = await Proposal.findById(id);
+    if (!proposal) {
       return res.status(404).json({ message: "Proposal Not Found" });
     }
-
-    return res.status(200).send({ message: "Proposal Updated successfully" });
+    if (req.body.coverLetter) {
+      proposal.coverLetter = req.body.coverLetter;
+    }
+    if (req.body.bidAmount) {
+      proposal.bidAmount = req.body.bidAmount;
+    }
+    if (req.body.deliveryTime) {
+      proposal.deliveryTime = req.body.deliveryTime;
+    }
+    const updatedProposal = await proposal.save();
+    res
+      .status(200)
+      .json({ message: "Proposal updated successfully", updatedProposal });
   } catch (error) {
     console.log(error.message);
     res.status(500).send({ message: error.message });
