@@ -45,17 +45,21 @@ const EditProposal = () => {
     <>
       <Modal open={openDeadlineModal} onClose={handleCloseDeadlineModal}>
         <Box>
-          <EditDeadline />
+          <EditDeadline handleCloseDeadlineModal={handleCloseDeadlineModal} />
         </Box>
       </Modal>
       <Modal open={openLetterModal} onClose={handleCloseLetterModal}>
         <Box>
-          <EditLetter />
+          <EditLetter handleCloseLetterModal={handleCloseLetterModal} />
         </Box>
       </Modal>
       <Modal open={openBidModal} onClose={handleCloseBidModal}>
         <Box>
-          <EditBid />
+          <EditBid
+            handleCloseBidModal={handleCloseBidModal}
+            bidAmount={proposal?.bidAmount}
+            budget={proposal?.job?.budget}
+          />
         </Box>
       </Modal>
 
