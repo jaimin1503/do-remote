@@ -45,7 +45,7 @@ const profileSchema = mongoose.Schema({
       required: true,
     },
   ],
-  education: [educationSchema],
+  education: educationSchema,
   linkedAccounts: socialSchema,
   skills: [
     {

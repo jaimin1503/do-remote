@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { updateLanguages } from "../services/profile.js";
 
-export default function ({ pId,handleCloseLangsModal }) {
+export default function ({ pId, handleCloseLangsModal }) {
   const [languages, setLanguages] = useState(""); // Initialize as an empty string
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
@@ -46,7 +46,7 @@ export default function ({ pId,handleCloseLangsModal }) {
               Save
             </button>
             <button
-              onClick={() => setIsOpenLangs(false)}
+              onClick={handleCloseLangsModal}
               className=" py-2 px-4 mt-4 float-right text-blue-500"
             >
               Cancel

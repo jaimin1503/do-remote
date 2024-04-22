@@ -114,3 +114,24 @@ export const editLanguages = async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 };
+
+export const editEducation = async (req, res) => {
+  try {
+    const pId = req.params.id;
+    const { school, degree } = req.body;
+    const newProfile = await Profile.findByIdAndUpdate(pId, {
+      education: { school, degree },
+    });
+    const updatedUser = await User.findOne({ profile: pId }).populate(
+      "profile"
+    );
+    res.status(201).json({
+      message: "Profile updated",
+      success: true,
+      data: updatedUser,
+    });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send({ message: error.message });
+  }
+};

@@ -6,6 +6,7 @@ import { useState } from "react";
 import EditInfo from "../forms/EditInfo";
 import EditSkills from "../forms/EditSkills";
 import Rate from "../forms/Rate";
+import EditEducation from "../forms/EditEducation";
 import EditLangs from "../forms/EditLangs";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
@@ -17,6 +18,10 @@ const Profile = () => {
   const [openSkillsModal, setOpenSkillsModal] = useState(false);
   const [openRateModal, setOpenRateModal] = useState(false);
   const [openLangsModal, setOpenLangsModal] = useState(false);
+  const [openEduModal, setOpenEduModal] = useState(false);
+
+  const handleOpenEduModal = () => setOpenEduModal(true);
+  const handleCloseEduModal = () => setOpenEduModal(false);
 
   const handleOpenPPModal = () => setOpenPPModal(true);
   const handleClosePPModal = () => setOpenPPModal(false);
@@ -79,6 +84,14 @@ const Profile = () => {
           <EditLangs
             pId={user?.profile?._id}
             handleCloseLangsModal={handleCloseLangsModal}
+          />
+        </Box>
+      </Modal>
+      <Modal open={openEduModal} onClose={handleCloseEduModal}>
+        <Box>
+          <EditEducation
+            pId={user?.profile?._id}
+            handleCloseEduModal={handleCloseEduModal}
           />
         </Box>
       </Modal>
@@ -147,9 +160,21 @@ const Profile = () => {
                 ))}
               </li>
               <li className="py-2">
-                <h1 className=" text-xl pb-2 font-semibold">Education</h1>
-                <p className="text-gray-900 font-medium text-xl">NIT Surat</p>
-                <p className="text-gray-600">B.Tech</p>
+                <div className=" flex items-center justify-between">
+                  <h1 className=" text-xl pb-2 font-semibold">Education</h1>
+                  <button
+                    onClick={handleOpenEduModal}
+                    className=" m-4 p-1 bg-gray-200 border-gray-600 rounded-full border-2"
+                  >
+                    <img src={editLogo} alt="edit" />
+                  </button>
+                </div>
+                <p className="text-gray-900 font-medium text-xl">
+                  {user?.profile?.education?.school}
+                </p>
+                <p className="text-gray-600">
+                  {user?.profile?.education?.degree}
+                </p>
               </li>
 
               <li className="py-2">
