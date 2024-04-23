@@ -4,6 +4,7 @@ import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 const Apply = () => {
   const id = useParams().id;
@@ -55,7 +56,7 @@ const Apply = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    const toastId = toast.loading("Submitting Proposal");
     const formDataWithFiles = new FormData();
     formDataWithFiles.append("job", id);
     formDataWithFiles.append("coverLetter", formData.coverLetter);
@@ -81,9 +82,11 @@ const Apply = () => {
       );
       console.log(response.data);
       navigate("/proposals");
+      toast.success("Proposal Submitted Successfully!");
     } catch (error) {
       console.log(error);
     }
+    toast.dismiss(toastId);
   };
 
   useEffect(() => {
@@ -239,6 +242,30 @@ const Apply = () => {
             onChange={handleImageChange}
             type="file"
           />
+
+          {previewSource && (
+            <div className="flex items-center">
+              <img
+                src={previewSource}
+                alt="chosen"
+                className="my-4 w-[40px] h-[40px] object-cover rounded-full"
+              />
+              <p className=" px-4">
+                {File?.name} - {File?.size / 1000} KB
+              </p>
+              <div>
+                <button
+                  onClick={() => {
+                    setFile(null);
+                    setPreviewSource(null);
+                  }}
+                  className=" text-red-500 underline cursor-pointer"
+                >
+                  Remove
+                </button>
+              </div>
+            </div>
+          )}
 
           <div
             onDragOver={handleDragOver}

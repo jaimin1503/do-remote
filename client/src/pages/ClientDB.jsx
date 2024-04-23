@@ -54,7 +54,14 @@ function ClientDB() {
     <>
       <div className="m-4 sm:p-4 my-10 ">
         <h1 className=" text-4xl font-medium">Hello, {user?.firstName} 👋</h1>
-        <h1 className=" text-3xl my-4 font-medium">Your Jobs</h1>
+        <div className=" flex items-center justify-between">
+          <h1 className=" text-3xl my-4 font-medium">Your Jobs</h1>
+          <Link to={`/postjob`}>
+            <button className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-full">
+              Post a Job 🚀
+            </button>
+          </Link>
+        </div>
         <div className="your-jobs overflow-x-auto whitespace-nowrap w-full">
           <div className="jobs-container flex whitespace-nowrap w-full">
             {jobs.length === 0 && <PostFirstJob />}
