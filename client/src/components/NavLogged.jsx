@@ -134,17 +134,15 @@ const NavLogged = () => {
               />
             </Drawer>
             <Nav className=" items-center hidden lg:flex">
-              <NavDropdown title="Find-Talent" id="basic-nav-dropdown">
-                <NavDropdown.Item as={Link} to="/db">
-                  Find Talent
-                </NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/savedprofiles">
-                  Saved Profiles
-                </NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/proposals">
-                  proposals
-                </NavDropdown.Item>
-              </NavDropdown>
+              <Nav.Link as={Link} to="/db">
+                Find Talent
+              </Nav.Link>
+              <Nav.Link as={Link} to="/savedprofiles">
+                Saved Profiles
+              </Nav.Link>
+              <Nav.Link as={Link} to="/proposals">
+                proposals
+              </Nav.Link>
               <Nav.Link as={Link} to="/myjobs">
                 My jobs
               </Nav.Link>

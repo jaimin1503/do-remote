@@ -175,14 +175,13 @@ export const editJob = async (req, res) => {
 export const deleteJob = async (req, res) => {
   try {
     const { id } = req.params;
-
-    const result = await Post.findByIdAndDelete(id);
+    const result = await Job.findByIdAndDelete(id);
 
     if (!result) {
-      return res.status(404).json({ message: "Post Not Found" });
+      return res.status(404).json({ message: "Job Not Found" });
     }
 
-    return res.status(200).send({ message: "Post deleted successfully" });
+    return res.status(200).send({ message: "Job deleted successfully" });
   } catch (error) {
     console.log(error.message);
     res.status(500).send({ message: error.message });

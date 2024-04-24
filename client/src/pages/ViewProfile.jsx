@@ -1,6 +1,6 @@
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
-const ViewProfile = ({ user, toggleDrawer }) => {
+const ViewProfile = ({ user, toggleDrawer, role }) => {
   const time = new Date().toLocaleTimeString("In", {
     hour: "2-digit",
     minute: "2-digit",
@@ -15,7 +15,7 @@ const ViewProfile = ({ user, toggleDrawer }) => {
             className="cursor-pointer"
           />
         </div>
-        <div className="row1 sm:p-5 pb-5 flex flex-col sm:flex-row items-center">
+        <div className="row1 sm:p-5 pb-5 flex flex-col sm:flex-row items-center justify-between">
           <div className="user-info flex flex-col items-center sm:flex-row h-fit">
             <img
               className=" h-24 w-24 rounded-full object-cover"
@@ -31,6 +31,14 @@ const ViewProfile = ({ user, toggleDrawer }) => {
               <span> {time}</span>
             </div>
           </div>
+
+          {role === "client" && (
+            <div className="button">
+              <button className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-full mt-4 sm:mt-0">
+                Save Profile
+              </button>
+            </div>
+          )}
         </div>
 
         <div className="row2 border-t flex flex-col-reverse lg:flex-row">

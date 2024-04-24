@@ -13,6 +13,7 @@ import EditRskills from "../../forms/EditRskills";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { setJob } from "../../reducers/jobReducer";
+import Dialogue from "../../components/Dialogue";
 
 const EditJob = () => {
   // const [job, setJob] = useState({});
@@ -22,6 +23,15 @@ const EditJob = () => {
   const [openSkills, setOpenSkills] = useState(false);
   const { id } = useParams();
   const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleCloseTitle = () => setOpenTitle(false);
   const handleOpenTitle = () => setOpenTitle(true);
@@ -141,9 +151,21 @@ const EditJob = () => {
           >
             View all proposals
           </Link>
-          <button className="py-2 px-5 sm:w-1/3 w-3/4 bg-red-500 rounded-full text-white hover:bg-red-600 mx-4">
+          <button
+            onClick={handleClickOpen}
+            className="py-2 px-5 sm:w-1/3 w-3/4 bg-red-500 rounded-full text-white hover:bg-red-600 mx-4"
+          >
             Delete job
           </button>
+          {
+            open && (
+              <Dialogue
+                open={open}
+                handleClose={handleClose}
+                jId={job?._id}
+              />
+            )
+          }
         </div>
       </div>
     </>

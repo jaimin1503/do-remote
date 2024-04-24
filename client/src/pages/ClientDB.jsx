@@ -88,7 +88,11 @@ function ClientDB() {
         </div>
       </div>
       <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
-        <ViewProfile user={drawerUser} toggleDrawer={toggleDrawer} />
+        <ViewProfile
+          user={drawerUser}
+          toggleDrawer={toggleDrawer}
+          role={user?.role}
+        />
       </Drawer>
     </>
   );
