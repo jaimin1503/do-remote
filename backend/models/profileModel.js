@@ -68,6 +68,12 @@ const profileSchema = mongoose.Schema({
       ref: "Job",
     },
   ],
+  savedProfiles: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
 });
 
 export const Profile = mongoose.model("Profile", profileSchema);

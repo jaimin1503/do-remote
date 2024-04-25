@@ -29,3 +29,29 @@ export const getRandomUsersWithProfile = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const saveProfile = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const userId = req.user._id;
+
+    const user = await User.findById(userId).populate("profile");
+    console.log(user);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    if (user.profile.savedProfiles.includes(id)) {
+      return res.status(400).json({ message: "Profile already saved" });
+    }
+
+    // If the profile doesn't exist in savedProfiles, add it
+    user.profile.savedProfiles.push(id);
+    await user.save();
+
+    res.json({ message: "Profile saved successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

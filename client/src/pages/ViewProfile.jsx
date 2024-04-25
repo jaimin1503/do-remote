@@ -1,10 +1,31 @@
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import axios from "axios";
+import { toast } from "react-hot-toast";
 
 const ViewProfile = ({ user, toggleDrawer, role }) => {
   const time = new Date().toLocaleTimeString("In", {
     hour: "2-digit",
     minute: "2-digit",
   });
+
+  const saveProfile = () => {
+    const toastId = toast.loading("Saving Profile...");
+    axios
+      .post(
+        `${import.meta.env.VITE_BASE_URL}/client/saveProfile/${user._id}`,
+        {},
+        {
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    toast.success("Profile saved successfully", { id: toastId });
+  };
 
   return (
     <>
@@ -33,11 +54,12 @@ const ViewProfile = ({ user, toggleDrawer, role }) => {
           </div>
 
           {role === "client" && (
-            <div className="button">
-              <button className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-full mt-4 sm:mt-0">
-                Save Profile
-              </button>
-            </div>
+            <button
+              onClick={saveProfile}
+              className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-full mt-4 sm:mt-0"
+            >
+              Save Profile
+            </button>
           )}
         </div>
 
