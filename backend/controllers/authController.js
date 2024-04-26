@@ -77,6 +77,8 @@ export const signup = async (req, res) => {
         hourlyRate: "5",
         proposals: [],
         jobs: [],
+        savedJobs: [],
+        savedProfiles: [],
       });
     } catch (error) {
       console.error("Error occurred while creating profile:", error);
