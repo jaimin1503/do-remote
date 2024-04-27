@@ -39,7 +39,7 @@ export default function Home() {
           />
         </div>
       </div>
-      <div className="row2 m-4 flex flex-col md:flex-row justify-evenly">
+      <div className="container row2 m-4 flex flex-col md:flex-row justify-evenly">
         <div className="image">
           <img
             className=" h-[50vh] w-full md:w-[50vw] rounded-2xl object-cover"
@@ -100,43 +100,41 @@ export default function Home() {
 
           <div className="my-4">
             <div className=" flex items-start ">
-              <div className="text-3xl text-blue-500">1</div>
+              <div className="text-3xl text-blue-500">1.</div>
               <div className=" pl-2">
-                <h1 className=" text-lg font-medium">Post a job</h1>
+                <h1 className=" text-xl font-medium">Post a job</h1>
                 <h1 className=" text-sm text-gray-600">
-                  Tell us about your project. Upwork connects you with top
+                  Tell us about your project. Do-Remote connects you with top
                   talent and agencies around the world, or near you.
                 </h1>
               </div>
             </div>
             <div className=" flex items-start mt-3 ">
-              <div className="text-3xl text-blue-500">2</div>
+              <div className="text-3xl text-blue-500">2.</div>
               <div className=" pl-2">
-                <h1 className=" text-lg font-medium">Hire</h1>
+                <h1 className=" text-xl font-medium">Hire</h1>
                 <h1 className=" text-sm text-gray-600">
-                  Upwork connects you with top talent and agencies around the
+                  Do-Remote connects you with top talent and agencies around the
                   world, or near you.
                 </h1>
               </div>
             </div>
             <div className=" flex items-start mt-3">
-              <div className="text-3xl text-blue-500">3</div>
+              <div className="text-3xl text-blue-500">3.</div>
               <div className=" pl-2">
-                <h1 className=" text-lg font-medium">Work</h1>
+                <h1 className=" text-xl font-medium">Work</h1>
                 <h1 className=" text-sm text-gray-600">
-                  Use Upwork to chat or video call, share files, and track
+                  Use Do-Remote to chat or video call, share files, and track
                   project milestones from your desktop or mobile.
                 </h1>
               </div>
             </div>
+            <Link to={"/welcome"}>
+              <button className=" mx-auto py-2 px-5 rounded-full bg-blue-500 hover:bg-blue-600 text-white mt-10">
+                Get Started
+              </button>
+            </Link>
           </div>
-        </div>
-        <div className="image">
-          <img
-            className=" h-[50vh] w-full md:w-[50vw] rounded-2xl object-cover"
-            src={img2}
-            alt="image"
-          />
         </div>
       </div>
     </div>

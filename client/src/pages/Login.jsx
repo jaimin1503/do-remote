@@ -61,11 +61,11 @@ export default function Login() {
     <>
       <nav>
         <Link to={"/home"}>
-          <h1 className=" p-4">DO-REMOTE</h1>
+          <h1 className=" font-bold p-4">DO-REMOTE</h1>
         </Link>
       </nav>
       <div className=" w-fit mx-auto md:border-2 max-w-lg border-blue-300 rounded-2xl p-10 mt-20">
-        <h1 className="text-3xl sm:text-4xl text-center mb-10">
+        <h1 className="text-3xl sm:text-4xl font-medium text-center mb-10">
           Login to Do-remote
         </h1>
         {error && <div className="text-red-500 mb-4">{error}</div>}

@@ -13,7 +13,7 @@ export default function Welcome() {
     <div>
       <nav>
         <Link to={"/home"}>
-          <h1 className=" p-4">DO-REMOTE</h1>
+          <h1 className=" font-bold p-4">DO-REMOTE</h1>
         </Link>
       </nav>
 
