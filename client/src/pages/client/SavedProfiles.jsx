@@ -2,6 +2,7 @@ import NavLogged from "../../components/NavLogged";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import UserCard from "../../components/UserCard";
+import UserSktn from "../../skeletons/UserSktn";
 
 const SavedProfiles = () => {
   const [profiles, setProfiles] = useState([]);
@@ -24,12 +25,19 @@ const SavedProfiles = () => {
       <div className="m-4 my-10 ">
         <h1 className=" text-3xl my-4 font-medium">Your Saved Profiles</h1>
       </div>
-      {profiles &&
-        profiles.map((profile) => (
-          <div key={profile?._id} className=" p-4 border-b">
+      {profiles.length === 0 ? (
+        <>
+          <UserSktn />
+          <UserSktn />
+          <UserSktn />
+        </>
+      ) : (
+        profiles.map((profile, index) => (
+          <div className=" p-4 border-b md:m-8" key={profile?._id}>
             <UserCard user={profile} />
           </div>
-        ))}
+        ))
+      )}
     </>
   );
 };
