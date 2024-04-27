@@ -11,6 +11,7 @@ import {
   isJobSaved,
   searchJobs,
   getAllJobsC,
+  getActiveJobs,
 } from "../controllers/jobController.js";
 const router = express.Router();
 
@@ -24,5 +25,6 @@ router.get("/getsavedjobs", auth, getSavedJobs);
 router.put("/savejob/:id", auth, saveJob);
 router.get("/isjobsaved/:id", auth, isJobSaved);
 router.get("/searchjobs", auth, searchJobs);
+router.get("/getActiveJobs", auth, getActiveJobs);
 
 export default router;

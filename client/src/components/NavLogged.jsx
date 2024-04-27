@@ -2,7 +2,6 @@ import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import { Link } from "react-router-dom";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import "bootstrap/dist/css/bootstrap.min.css";
 import notificationLogo from "./assets/notification.svg";
 import { useSelector } from "react-redux";
@@ -77,7 +76,7 @@ const NavLogged = () => {
               <Nav.Link as={Link} to="/proposals">
                 proposals
               </Nav.Link>
-              <Nav.Link as={Link} to="/dev">
+              <Nav.Link as={Link} to="/contracts">
                 All Contracts
               </Nav.Link>
               <Nav.Link as={Link} to="/design">

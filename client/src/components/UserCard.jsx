@@ -1,7 +1,5 @@
 import Drawer from "@mui/material/Drawer";
-import React, { useEffect, useState } from "react";
-import { toast } from "react-hot-toast";
-import axios from "axios";
+import React, { useState } from "react";
 import ViewProfile from "../pages/ViewProfile";
 
 const UserCard = ({ user }) => {
@@ -19,7 +17,7 @@ const UserCard = ({ user }) => {
         <ViewProfile
           user={drawerUser}
           toggleDrawer={toggleDrawer}
-          role="freelancer"
+          role="client"
         />
       </Drawer>
 

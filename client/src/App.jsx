@@ -22,6 +22,7 @@ import SavedProfiles from "./pages/client/SavedProfiles";
 import Messages from "./pages/Messages";
 import ViewProposal from "./components/proposal/ViewProposal";
 import EditProposal from "./components/proposal/EditProposal";
+import Contracts from "./pages/freelancer/Contracts";
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
         <Route path="/myjobs" element={<MyJobs />} />
         <Route path="/postjob" element={<PostJob />} />
         <Route path="/messages" element={<Messages />} />
+        <Route path="/contracts" element={<Contracts />} />
       </Routes>
     </>
   );

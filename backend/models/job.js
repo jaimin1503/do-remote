@@ -52,10 +52,14 @@ const jobSchema = mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ["open", "closed"],
+    enum: ["open", "closed", "active"],
     default: "open",
   },
   client: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
+  freeLancer: {
     type: Schema.Types.ObjectId,
     ref: "User",
   },

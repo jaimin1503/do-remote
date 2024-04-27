@@ -267,3 +267,16 @@ export const searchJobs = async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 };
+
+export const getActiveJobs = async (req, res) => {
+  try {
+    const jobs = await Job.find({ status: "active", freeLancer: req.user._id });
+    res.status(200).json({
+      jobs,
+      message: "success",
+    });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send({ message: error.message });
+  }
+};

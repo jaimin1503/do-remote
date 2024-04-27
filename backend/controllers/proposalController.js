@@ -163,6 +163,17 @@ export const acceptProposal = async (req, res) => {
     if (!result) {
       return res.status(404).json({ message: "Proposal Not Found" });
     }
+    const proposal = await Proposal.findById(id)
+      .populate("job")
+      .populate("freelancer");
+    if (proposal) {
+      await Job.findByIdAndUpdate(
+        proposal?.job?._id,
+        { $push: { freeLancer: proposal?.freelancer._id } },
+        { status: "active" },
+        { new: true }
+      );
+    }
     return res.status(200).send({ message: "Proposal accepted successfully" });
   } catch (error) {
     console.log(error.message);
