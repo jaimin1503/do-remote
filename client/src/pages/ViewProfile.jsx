@@ -1,11 +1,15 @@
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import axios from "axios";
+import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
 const ViewProfile = ({ user, toggleDrawer, role }) => {
+  const [isSaved, setIsSaved] = useState(false);
+
   const time = new Date().toLocaleTimeString("In", {
     hour: "2-digit",
     minute: "2-digit",
+    hour12: true,
   });
 
   const saveProfile = () => {
@@ -19,13 +23,30 @@ const ViewProfile = ({ user, toggleDrawer, role }) => {
         }
       )
       .then((res) => {
-        console.log(res.data);
+        setIsSaved(!isSaved);
+        toast.success(res.data.message);
       })
       .catch((err) => {
         console.log(err);
       });
-    toast.success("Profile saved successfully", { id: toastId });
+    toast.dismiss(toastId);
   };
+
+  useEffect(() => {
+    axios
+      .get(
+        `${import.meta.env.VITE_BASE_URL}/client/isProfileSaved/${user._id}`,
+        {
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        setIsSaved(res.data.saved);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <>
@@ -58,7 +79,7 @@ const ViewProfile = ({ user, toggleDrawer, role }) => {
               onClick={saveProfile}
               className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-full mt-4 sm:mt-0"
             >
-              Save Profile
+              {isSaved ? "Saved" : "Save Profile"}
             </button>
           )}
         </div>

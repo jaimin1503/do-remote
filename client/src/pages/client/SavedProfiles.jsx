@@ -1,20 +1,35 @@
 import NavLogged from "../../components/NavLogged";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import UserCard from "../../components/UserCard";
 
 const SavedProfiles = () => {
+  const [profiles, setProfiles] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_BASE_URL}/client/getSavedProfiles`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        setProfiles(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return (
     <>
       <NavLogged />
-      <div className="m-4 sm:p-4 my-10 ">
-        <h1 className=" text-4xl font-medium">Saved Profiles</h1>
+      <div className="m-4 my-10 ">
         <h1 className=" text-3xl my-4 font-medium">Your Saved Profiles</h1>
-        <div className="your-jobs overflow-x-auto whitespace-nowrap w-full">
-          <div className="jobs-container flex whitespace-nowrap w-full">
-            <div className="flex items-center justify-center w-full h-96">
-              <h1 className="text-2xl font-medium">No saved profiles yet</h1>
-            </div>
-          </div>
-        </div>
       </div>
+      {profiles &&
+        profiles.map((profile) => (
+          <div key={profile?._id} className=" p-4 border-b">
+            <UserCard user={profile} />
+          </div>
+        ))}
     </>
   );
 };

@@ -1,6 +1,5 @@
 import settingsLogo from "./assets/settings.svg";
 import logoutLogo from "./assets/logout.svg";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const ProfileCard = ({ id, photo, username, role }) => {
