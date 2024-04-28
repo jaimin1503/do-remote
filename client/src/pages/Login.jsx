@@ -50,13 +50,6 @@ export default function Login() {
     toast.dismiss(toastId);
   };
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      window.location.href = "/db";
-    }
-  });
-
   return (
     <>
       <nav>

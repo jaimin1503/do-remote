@@ -194,3 +194,24 @@ export const rejectProposal = async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 };
+
+export const isProposalSent = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const job = await Job.findById(id);
+    if (!job) {
+      return res.status(404).json({ message: "Job Not Found" });
+    }
+    if (job.freeLancer.toString() === req.user._id.toString()) {
+      return res.status(200).json({
+        message: "Already sent proposal",
+        data: true,
+      });
+    } else {
+      return res.status(400).json({ message: "Not sent", data: false });
+    }
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).send({ message: error.message });
+  }
+};

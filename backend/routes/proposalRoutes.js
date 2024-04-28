@@ -7,6 +7,7 @@ import {
   acceptProposal,
   rejectProposal,
   getProposal,
+  isProposalSent,
 } from "../controllers/proposalController.js";
 import { auth } from "../middlewares/auth.js";
 const router = express.Router();
@@ -18,5 +19,6 @@ router.put("/editproposal/:id", auth, editProposal);
 router.delete("/withdrawproposal/:id", auth, withdarawProposal);
 router.put("/acceptproposal/:id", auth, acceptProposal);
 router.put("/rejectproposal/:id", auth, rejectProposal);
+router.get("/isProposalSent/:id", auth, isProposalSent);
 
 export default router;

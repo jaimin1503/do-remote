@@ -14,6 +14,7 @@ const ViewJob = ({ job, toggleDrawer }) => {
   const hours = Math.floor(minutes / 60);
   const days = Math.floor(hours / 24);
   const [saved, setSaved] = useState(false);
+  const [isSent, setIsSent] = useState(false);
 
   useEffect(() => {
     axios
@@ -41,6 +42,18 @@ const ViewJob = ({ job, toggleDrawer }) => {
         console.log(err);
       });
   };
+
+  useEffect(() => {
+    axios
+      .get(
+        `${import.meta.env.VITE_BASE_URL}/proposal/isProposalSent/${job._id}`,
+        { withCredentials: true }
+      )
+      .then((res) => {
+        setIsSent(res.data.data);
+      })
+      .catch((error) => console.error(error));
+  }, []);
 
   return (
     <div className=" w-screen md:w-[70vw]">
@@ -99,12 +112,21 @@ const ViewJob = ({ job, toggleDrawer }) => {
       </div>
       <hr />
       <div className="buttons my-4 flex justify-evenly w-full">
-        <Link
-          className=" md:w-full px-4 py-2 text-center rounded-full bg-blue-500 hover:bg-blue-600 text-white md:mx-2"
-          to={`/apply/${job?._id}`}
-        >
-          Apply Now
-        </Link>
+        {!isSent ? (
+          <Link
+            className=" md:w-full px-4 py-2 flex items-center rounded-full bg-blue-500 hover:bg-blue-600 text-white md:mx-2"
+            to={`/apply/${job?._id}`}
+          >
+            Apply Now
+          </Link>
+        ) : (
+          <Link
+            className="md:w-full px-4 py-2 flex items-center rounded-full bg-blue-500 hover:bg-blue-600 text-white md:mx-2"
+            to={"/proposals"}
+          >
+            View proposal
+          </Link>
+        )}
         <button
           onClick={handleSave}
           className={`flex px-4 py-2 border-2 md:w-full md:mx-2 justify-center border-blue-500 rounded-full ${
