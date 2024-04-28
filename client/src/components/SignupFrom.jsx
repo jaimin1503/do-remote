@@ -43,7 +43,7 @@ const SignupForm = ({ role }) => {
     <>
       <nav>
         <Link to={"/home"}>
-          <h1 className=" font-bold p-4">DO-REMOTE</h1>
+          <h1 className=" text-2xl font-bold p-4">DO-REMOTE</h1>
         </Link>
       </nav>
       <div className=" w-fit mx-auto md:border-2 border-blue-300 rounded-2xl p-10 md:p-20 md:mt-10">
