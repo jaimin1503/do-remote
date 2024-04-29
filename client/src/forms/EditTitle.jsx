@@ -35,6 +35,7 @@ const EditTitle = ({ jId, handleCloseTitle, title, category }) => {
           </h1>
 
           <form onSubmit={handleSubmit} className="items-center w-full">
+            <h1 className=" text-xl font-medium mb-1">Title</h1>
             <input
               onChange={handelInputChange}
               name="title"
@@ -42,7 +43,7 @@ const EditTitle = ({ jId, handleCloseTitle, title, category }) => {
               value={formData.title}
               className="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none "
             />
-
+            <h1 className=" text-xl font-medium mb-1">Category</h1>
             <input
               onChange={handelInputChange}
               name="category"

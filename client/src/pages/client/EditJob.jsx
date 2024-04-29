@@ -91,8 +91,10 @@ const EditJob = () => {
       <NavLogged />
       <div className=" md:mx-10">
         <div className=" m-4 md:m-5">
-          <div className=" flex items-center">
-            <h1 className=" text-2xl md:text-3xl font-medium">{job?.title}</h1>
+          <div className=" flex items-center justify-between">
+            <h1 className=" text-2xl md:text-3xl text-blue-600 underline font-medium">
+              {job?.title}
+            </h1>
             <div onClick={handleOpenTitle}>
               <EditButton />
             </div>
@@ -109,7 +111,7 @@ const EditJob = () => {
         </div>
         <hr />
         <div className=" m-4 pr-0 md:m-5">
-          <div className=" flex items-center">
+          <div className=" flex items-center justify-between">
             <h1 className="text-2xl font-medium">Job Requirements</h1>
             <div onClick={handleOpenDescription}>
               <EditButton />
@@ -123,7 +125,7 @@ const EditJob = () => {
           </p>
         </div>
         <hr />
-        <div className=" m-4 flex items-center md:m-5">
+        <div className=" m-4 flex items-center justify-between md:m-5">
           <h1 className=" text-2xl font-medium">Skills and Expertise</h1>
           <div onClick={handleOpenSkills}>
             <EditButton />
@@ -133,7 +135,7 @@ const EditJob = () => {
           {job?.skillsRequired?.map((skill, index) => (
             <div
               key={index}
-              className="skills-list py-2 px-4 m-2 whitespace-nowrap bg-gray-200 w-fit rounded-full"
+              className="skills-list py-2 px-4 m-2 whitespace-nowrap bg-blue-200 w-fit rounded-full"
             >
               <h1 className=" text-sm font-medium">{skill}</h1>
             </div>
@@ -157,15 +159,9 @@ const EditJob = () => {
           >
             Delete job
           </button>
-          {
-            open && (
-              <Dialogue
-                open={open}
-                handleClose={handleClose}
-                jId={job?._id}
-              />
-            )
-          }
+          {open && (
+            <Dialogue open={open} handleClose={handleClose} jId={job?._id} />
+          )}
         </div>
       </div>
     </>

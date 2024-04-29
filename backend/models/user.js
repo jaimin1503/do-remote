@@ -59,6 +59,9 @@ const userSchema = mongoose.Schema({
       ref: "Proposal",
     },
   ],
+  ratings: {
+    type: "number",
+  },
 });
 
 export const User = mongoose.model("User", userSchema);

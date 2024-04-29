@@ -2,7 +2,7 @@ const Title = ({ formData, handleChange }) => {
   return (
     <>
       <div className="container flex border p-4 relative mb-10 rounded-2xl md:items- flex-col md:flex-row">
-        <div className="info md:w-1/2 m-4">
+        <div className="info md:w-1/2 md:m-4">
           <h1 className=" text-3xl font-medium">
             Let's start with a strong title.
           </h1>

@@ -10,7 +10,7 @@ const Budget = ({ formData, handleChange }) => {
   return (
     <>
       <div className="container mb-5 border rounded-2xl p-4 min:h-[50vh] flex flex-col md:flex-row">
-        <div className=" m-4 md:w-1/2">
+        <div className=" md:m-4 mb-4 md:w-1/2">
           <h1 className=" text-3xl font-medium ">
             Next, estimate the scope of your job.
           </h1>

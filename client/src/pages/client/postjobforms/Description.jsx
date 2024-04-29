@@ -2,7 +2,7 @@ const Description = ({ formData, handleChange }) => {
   return (
     <>
       <div className="container mb-5 border rounded-2xl md:mt-10 p-4 flex flex-col md:flex-row">
-        <div className="md:w-1/2 m-4">
+        <div className="md:w-1/2 md:m-4">
           <div className="info">
             <h1 className=" text-3xl font-medium">
               Describe your job in detail

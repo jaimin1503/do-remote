@@ -84,8 +84,8 @@ const ProposalCard = ({ proposal }) => {
           </div>
         </div>
         <p className=" whitespace-pre-wrap text-gray-600 my-2 mr-4 text-justify">
-          {proposal?.coverLetter.length > 300
-            ? proposal?.coverLetter.substring(0, 300) + "..."
+          {proposal?.coverLetter.length > 150
+            ? proposal?.coverLetter.substring(0, 150) + "..."
             : proposal?.coverLetter}
         </p>
         <div className="my-2">

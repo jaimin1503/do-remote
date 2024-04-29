@@ -408,3 +408,31 @@ export const getUserByID = async (req, res) => {
     });
   }
 };
+
+export const rateUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { rating } = req.body;
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+    const user = await User.findByIdAndUpdate(
+      id,
+      { ratings: rating },
+      { new: true }
+    );
+    res.status(200).json({
+      success: true,
+      message: "User Rated successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: `Something went wrong while rating user: ${error.message}`,
+    });
+  }
+};
