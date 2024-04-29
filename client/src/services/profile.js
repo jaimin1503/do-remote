@@ -226,3 +226,35 @@ export function updateEducation(formData, pId) {
     }
   };
 }
+
+export function updateLinks(formData, pId) {
+  return async (dispatch) => {
+    const toastId = toast.loading("Loading...");
+    try {
+      await axios
+        .put(
+          `${import.meta.env.VITE_BASE_URL}/profile/editLinks/${pId}`,
+          formData,
+          {
+            withCredentials: true,
+          }
+        )
+        .then((res) => {
+          console.log(res);
+          toast.success("Education Updated Successfully");
+          dispatch(setuser(res.data.data));
+        })
+        .catch((error) => {
+          console.log("error accure in update display", error);
+          toast.error("Could Not Update Education");
+        });
+
+      console.log("UPDATE_EDUCATION_API API RESPONSE............");
+    } catch (error) {
+      console.error("UPDATE_EDUCATION_API API ERROR............", error);
+      toast.error("Could Not Update Education");
+    } finally {
+      toast.dismiss(toastId);
+    }
+  };
+}

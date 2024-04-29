@@ -135,3 +135,24 @@ export const editEducation = async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 };
+
+export const editLinks = async (req, res) => {
+  try {
+    const pId = req.params.id;
+    const { github, stackoverflow, linkedin } = req.body;
+    if (github) {
+      const profile = await Profile.findByIdAndUpdate(pId, {
+        linkedAccounts: { github, stackoverflow, linkedin },
+      });
+      if (!profile) {
+        return res.status(404).json({ message: "Profile Not Found" });
+      }
+      return res
+        .status(200)
+        .json({ message: "Profile updated successfully", data: profile });
+    }
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send({ message: error.message });
+  }
+};

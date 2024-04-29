@@ -10,6 +10,8 @@ import EditEducation from "../forms/EditEducation";
 import EditLangs from "../forms/EditLangs";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
+import EditLinks from "../forms/EditLinks";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const { user } = useSelector((state) => state.user);
@@ -19,9 +21,13 @@ const Profile = () => {
   const [openRateModal, setOpenRateModal] = useState(false);
   const [openLangsModal, setOpenLangsModal] = useState(false);
   const [openEduModal, setOpenEduModal] = useState(false);
+  const [openLinks, setOpenLinks] = useState(false);
 
   const handleOpenEduModal = () => setOpenEduModal(true);
   const handleCloseEduModal = () => setOpenEduModal(false);
+
+  const handleOpenLinks = () => setOpenLinks(true);
+  const handleCloseLinks = () => setOpenLinks(false);
 
   const handleOpenPPModal = () => setOpenPPModal(true);
   const handleClosePPModal = () => setOpenPPModal(false);
@@ -92,6 +98,17 @@ const Profile = () => {
           <EditEducation
             pId={user?.profile?._id}
             handleCloseEduModal={handleCloseEduModal}
+          />
+        </Box>
+      </Modal>
+      <Modal open={openLinks} onClose={handleCloseLinks}>
+        <Box>
+          <EditLinks
+            pId={user?.profile?._id}
+            handleCloseLinks={handleCloseLinks}
+            github={user?.profile?.linkedAccounts?.github}
+            stackoverflow={user?.profile?.linkedAccounts?.stackoverflow}
+            linkedin={user?.profile?.linkedAccounts?.linkedin}
           />
         </Box>
       </Modal>
@@ -178,10 +195,50 @@ const Profile = () => {
               </li>
 
               <li className="py-2">
-                <h1 className=" text-xl pb-2 font-semibold">Linked Accounts</h1>
-                <p className="text-gray-600 cursor-pointer">GitHub</p>
-                <p className="text-gray-600 cursor-pointer">Stack OverFlow</p>
-                <p className="text-gray-600 cursor-pointer">LinkedIn</p>
+                <div className=" flex items-center justify-between">
+                  <h1 className=" text-xl pb-2 font-semibold">
+                    Linked Accounts
+                  </h1>
+                  <button
+                    onClick={handleOpenLinks}
+                    className=" m-4 p-1 bg-gray-200 border-gray-600 rounded-full border-2"
+                  >
+                    <img src={editLogo} alt="edit" />
+                  </button>
+                </div>
+                {user?.profile?.linkedAccounts?.github && (
+                  <div className=" flex">
+                    <p className=" font-medium">GitHub: </p>
+                    <Link
+                      className=" text-blue-600 pl-2 hover:underline"
+                      to={user?.profile?.linkedAccounts?.github}
+                    >
+                      {user?.profile?.linkedAccounts?.github}
+                    </Link>
+                  </div>
+                )}
+                {user?.profile?.linkedAccounts?.stackoverflow && (
+                  <div className=" flex">
+                    <p className=" font-medium">Stack OverFlow: </p>
+                    <Link
+                      className=" text-blue-600 pl-2 hover:underline"
+                      to={user?.profile?.linkedAccounts?.stackoverflow}
+                    >
+                      {user?.profile?.linkedAccounts?.stackoverflow}
+                    </Link>
+                  </div>
+                )}
+                {user?.profile?.linkedAccounts?.linkedin && (
+                  <div className=" flex">
+                    <p className=" font-medium">LinkedIn: </p>
+                    <Link
+                      className=" text-blue-600 pl-2 hover:underline"
+                      to={user?.profile?.linkedAccounts?.linkedin}
+                    >
+                      {user?.profile?.linkedAccounts?.linkedin}
+                    </Link>
+                  </div>
+                )}
               </li>
             </ul>
           </div>
