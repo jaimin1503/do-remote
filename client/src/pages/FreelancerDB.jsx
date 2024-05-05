@@ -8,7 +8,7 @@ const FreelancerDB = () => {
 
   return (
     <div>
-      <div className="container">
+      <div className=" p-4">
         <h1 className=" text-4xl font-medium my-4">
           Hi, {user?.firstName} 👋{" "}
         </h1>

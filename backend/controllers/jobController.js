@@ -4,12 +4,13 @@ import { User } from "../models/user.js";
 export const getAllJobs = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
-    const perPage = 5;
+    const perPage = 10;
 
     const skip = (page - 1) * perPage;
     const jobs = await Job.find({
       status: "open",
     })
+      .sort({ createdAt: -1 }) // Sorting by createdAt field in descending order
       .skip(skip)
       .limit(perPage)
       .populate("client");
@@ -29,7 +30,7 @@ export const getAllJobs = async (req, res) => {
 export const getAllJobsC = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
-    const perPage = 5;
+    const perPage = 10;
 
     const skip = (page - 1) * perPage;
     const jobs = await Job.find({
