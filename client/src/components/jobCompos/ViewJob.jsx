@@ -114,7 +114,7 @@ const ViewJob = ({ job, toggleDrawer }) => {
       <div className="buttons my-4 flex justify-evenly w-full">
         {!isSent ? (
           <Link
-            className=" md:w-full px-4 py-2 flex items-center rounded-full bg-blue-500 hover:bg-blue-600 text-white md:mx-2"
+            className=" md:w-full px-4 py-2 flex justify-center items-center rounded-full bg-blue-500 hover:bg-blue-600 text-white md:mx-2"
             to={`/apply/${job?._id}`}
           >
             Apply Now

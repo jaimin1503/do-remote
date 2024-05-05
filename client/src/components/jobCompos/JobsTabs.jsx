@@ -111,16 +111,18 @@ export default function JobsTabs() {
             <SavedJobs />
           </CustomTabPanel>
 
-          <div className=" w-full p-2 flex justify-center">
-            <Stack spacing={2}>
-              <Pagination
-                color="primary"
-                count={10}
-                page={page}
-                onChange={handlePageChange}
-              />
-            </Stack>
-          </div>
+          {value === 1 && (
+            <div className=" w-full p-2 flex justify-center">
+              <Stack spacing={2}>
+                <Pagination
+                  color="primary"
+                  count={10}
+                  page={page}
+                  onChange={handlePageChange}
+                />
+              </Stack>
+            </div>
+          )}
         </Box>
       )}
     </>

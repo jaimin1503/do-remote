@@ -2,6 +2,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 const ViewProfile = ({ user, toggleDrawer, role }) => {
   const [isSaved, setIsSaved] = useState(false);
@@ -105,16 +106,53 @@ const ViewProfile = ({ user, toggleDrawer, role }) => {
                 ))}
               </li>
               <li className="py-2">
-                <h1 className=" text-xl pb-2 font-semibold">Education</h1>
-                <p className="text-gray-900 font-medium text-xl">NIT Surat</p>
-                <p className="text-gray-600">B.Tech</p>
+                <div className=" flex items-center justify-between">
+                  <h1 className=" text-xl pb-2 font-semibold">Education</h1>
+                </div>
+                <p className="text-gray-900 font-medium text-xl">
+                  {user?.profile?.education?.school}
+                </p>
+                <p className="text-gray-600">
+                  {user?.profile?.education?.degree}
+                </p>
               </li>
 
               <li className="py-2">
-                <h1 className=" text-xl pb-2 font-semibold">Linked Accounts</h1>
-                <p className="text-gray-600 cursor-pointer">GitHub</p>
-                <p className="text-gray-600 cursor-pointer">Stack OverFlow</p>
-                <p className="text-gray-600 cursor-pointer">LinkedIn</p>
+                <div className=" flex items-center justify-between">
+                  <h1 className=" text-xl pb-2 font-semibold">
+                    Linked Accounts
+                  </h1>
+                </div>
+                {user?.profile?.linkedAccounts?.github && (
+                  <div className=" flex">
+                    <Link
+                      className=" text-blue-600 pl-2 hover:underline"
+                      to={user?.profile?.linkedAccounts?.github}
+                    >
+                      <p className=" font-medium">GitHub </p>
+                    </Link>
+                  </div>
+                )}
+                {user?.profile?.linkedAccounts?.stackoverflow && (
+                  <div className=" flex">
+                    <Link
+                      className=" text-blue-600 pl-2 hover:underline"
+                      to={user?.profile?.linkedAccounts?.stackoverflow}
+                    >
+                      <p className=" font-medium">Stack OverFlow </p>
+                    </Link>
+                  </div>
+                )}
+                {user?.profile?.linkedAccounts?.linkedin && (
+                  <div className=" flex">
+                    <Link
+                      className=" text-blue-600 pl-2 hover:underline"
+                      to={user?.profile?.linkedAccounts?.linkedin}
+                    >
+                      <p className=" font-medium">LinkedIn </p>
+                    </Link>
+                  </div>
+                )}
               </li>
             </ul>
           </div>

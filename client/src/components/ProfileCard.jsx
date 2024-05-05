@@ -28,10 +28,12 @@ const ProfileCard = ({ id, photo, username, role }) => {
           <p className="role text-sm text-gray-600">{role}</p>
         </div>
         <div className="options">
-          <div className="settings flex mt-4 cursor-pointer">
-            <img className=" pl-5 pr-3" src={settingsLogo} alt="settings" />
-            <p className=" text-base font-medium">Settings</p>
-          </div>
+          <Link to={`/profile/${id}`}>
+            <div className="settings flex mt-4 cursor-pointer">
+              <img className=" pl-5 pr-3" src={settingsLogo} alt="settings" />
+              <p className=" text-base font-medium">Settings</p>
+            </div>
+          </Link>
           <div
             onClick={handleLogout}
             className="logout flex mt-4 cursor-pointer"

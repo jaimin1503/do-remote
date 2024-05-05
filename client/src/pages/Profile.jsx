@@ -220,7 +220,7 @@ const Profile = () => {
                 {user?.profile?.linkedAccounts?.stackoverflow && (
                   <div className=" flex">
                     <p className=" font-medium">Stack OverFlow: </p>
-                    <Link
+                   <Link
                       className=" text-blue-600 pl-2 hover:underline"
                       to={user?.profile?.linkedAccounts?.stackoverflow}
                     >
