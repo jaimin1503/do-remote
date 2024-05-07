@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { updateEducation } from "../services/profile";
+import { updateEducation } from "../../services/profile";
 
 const EditEducation = ({ pId, handleCloseEduModal }) => {
-  const [FormData, setFormData] = useState({
-    school: "",
-    degree: "",
-  });
+  const [FormData, setFormData] = useState({});
   const dispatch = useDispatch();
 
   const handleChange = (e) => {

@@ -1,9 +1,9 @@
 import Multiselect from "multiselect-react-dropdown";
-import "./formStyles.css";
+import "../formStyles.css";
 import { useEffect, useState } from "react";
-import skillsArray from "./assets/skills.js";
+import skillsArray from "../assets/skills.js";
 import { useDispatch } from "react-redux";
-import { editJob } from "../services/job.js";
+import { editJob } from "../../services/job.js";
 
 function EditRskills({ jId, handleCloseSkills, skillsRequired }) {
   const [options, setOptions] = useState([]);

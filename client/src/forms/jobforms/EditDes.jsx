@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { editJob } from "../services/job";
+import { editJob } from "../../services/job";
 import { toast } from "react-hot-toast";
 
 const EditDes = ({ jId, handleCloseDescription, description, budget }) => {

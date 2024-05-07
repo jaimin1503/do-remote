@@ -144,12 +144,16 @@ export const editLinks = async (req, res) => {
       const profile = await Profile.findByIdAndUpdate(pId, {
         linkedAccounts: { github, stackoverflow, linkedin },
       });
+
       if (!profile) {
         return res.status(404).json({ message: "Profile Not Found" });
       }
+      const updatedUser = await User.findOne({ profile: pId }).populate(
+        "profile"
+      );
       return res
         .status(200)
-        .json({ message: "Profile updated successfully", data: profile });
+        .json({ message: "Profile updated successfully", data: updatedUser });
     }
   } catch (error) {
     console.error(error.message);

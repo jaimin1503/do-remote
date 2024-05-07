@@ -1,8 +1,8 @@
-import "./formStyles.css";
+import "../formStyles.css";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { updateRate } from "../services/profile.js";
+import { updateRate } from "../../services/profile.js";
 
 function Rate({ pId, handleCloseRateModal }) {
   const [rate, setRate] = useState(0);

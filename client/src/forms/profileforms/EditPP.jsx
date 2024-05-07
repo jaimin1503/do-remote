@@ -1,8 +1,8 @@
 import React, { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { updateDisplayPicture } from "../services/profile.js";
-import "./formStyles.css";
+import { updateDisplayPicture } from "../../services/profile.js";
+import "../formStyles.css";
 
 const EditPP = ({ pId, handleClosePPModal }) => {
   const [File, setFile] = useState(null);
@@ -21,7 +21,7 @@ const EditPP = ({ pId, handleClosePPModal }) => {
       setPreviewSource(reader.result);
     };
   };
-  
+
   const handleUpload = () => {
     try {
       console.log("uploading...");

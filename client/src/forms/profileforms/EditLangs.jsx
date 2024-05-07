@@ -1,8 +1,8 @@
-import "./formStyles.css";
+import "../formStyles.css";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { updateLanguages } from "../services/profile.js";
+import { updateLanguages } from "../../services/profile.js";
 
 export default function ({ pId, handleCloseLangsModal }) {
   const [languages, setLanguages] = useState(""); // Initialize as an empty string

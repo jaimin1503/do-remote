@@ -1,17 +1,20 @@
 import NavLogged from "../components/NavLogged";
 import { useSelector } from "react-redux";
 import editLogo from "./assets/editLogo.svg";
-import EditPP from "../forms/EditPP";
+import EditPP from "../forms/profileforms/EditPP";
 import { useState } from "react";
-import EditInfo from "../forms/EditInfo";
-import EditSkills from "../forms/EditSkills";
-import Rate from "../forms/Rate";
-import EditEducation from "../forms/EditEducation";
-import EditLangs from "../forms/EditLangs";
+import EditInfo from "../forms/profileforms/EditInfo";
+import EditSkills from "../forms/profileforms/EditSkills";
+import Rate from "../forms/profileforms/Rate";
+import EditEducation from "../forms/profileforms/EditEducation";
+import EditLangs from "../forms/profileforms/EditLangs";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
-import EditLinks from "../forms/EditLinks";
+import EditLinks from "../forms/profileforms/EditLinks";
 import { Link } from "react-router-dom";
+import githubLogo from "./assets/github.svg";
+import linkedInlogo from "./assets/linkedin.svg";
+import soflogo from "./assets/sof.svg";
 
 const Profile = () => {
   const { user } = useSelector((state) => state.user);
@@ -207,35 +210,41 @@ const Profile = () => {
                   </button>
                 </div>
                 {user?.profile?.linkedAccounts?.github && (
-                  <div className=" flex">
-                    <p className=" font-medium">GitHub: </p>
+                  <div className=" flex pb-1">
                     <Link
-                      className=" text-blue-600 pl-2 hover:underline"
+                      className=" pl-2 hover:underline"
                       to={user?.profile?.linkedAccounts?.github}
                     >
-                      {user?.profile?.linkedAccounts?.github}
+                      <div className=" flex">
+                        <p className=" font-medium pr-2">GitHub </p>
+                        <img src={githubLogo} alt="" />
+                      </div>
                     </Link>
                   </div>
                 )}
                 {user?.profile?.linkedAccounts?.stackoverflow && (
-                  <div className=" flex">
-                    <p className=" font-medium">Stack OverFlow: </p>
-                   <Link
-                      className=" text-blue-600 pl-2 hover:underline"
+                  <div className=" flex pb-1">
+                    <Link
+                      className=" pl-2 hover:underline"
                       to={user?.profile?.linkedAccounts?.stackoverflow}
                     >
-                      {user?.profile?.linkedAccounts?.stackoverflow}
+                      <div className=" flex">
+                        <p className=" font-medium pr-2">Stack OverFlow </p>
+                        <img src={soflogo} alt="" />
+                      </div>
                     </Link>
                   </div>
                 )}
                 {user?.profile?.linkedAccounts?.linkedin && (
-                  <div className=" flex">
-                    <p className=" font-medium">LinkedIn: </p>
+                  <div className=" flex pb-1">
                     <Link
-                      className=" text-blue-600 pl-2 hover:underline"
+                      className="  pl-2 hover:underline"
                       to={user?.profile?.linkedAccounts?.linkedin}
                     >
-                      {user?.profile?.linkedAccounts?.linkedin}
+                      <div className=" flex">
+                        <p className=" font-medium pr-2">LinkedIn </p>
+                        <img src={linkedInlogo} alt="" />
+                      </div>
                     </Link>
                   </div>
                 )}

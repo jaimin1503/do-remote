@@ -1,12 +1,12 @@
 import Multiselect from "multiselect-react-dropdown";
-import "./formStyles.css";
+import "../formStyles.css";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { updateSkills } from "../services/profile.js";
-import skillsArray from "./assets/skills.js";
+import { updateSkills } from "../../services/profile.js";
+import skillsArray from "../assets/skills.js";
 
-function EditSkills({ pId,handleCloseSkillsModal }) {
+function EditSkills({ pId, handleCloseSkillsModal }) {
   const [skills, setSkills] = useState([]);
   const [optiopns, setOptions] = useState([]);
   const dispatch = useDispatch();

@@ -1,11 +1,10 @@
 import { useState } from "react";
-import "./styles.css";
-import SelectCountry from "./SelectCountry";
-import { sendOtp } from "../pages/SendOtp";
+import "../components/styles.css";
+import SelectCountry from "../components/SelectCountry";
+import { sendOtp } from "./SendOtp";
 import { useDispatch } from "react-redux";
 import { setLoading, setsignupdata } from "../reducers/authReducer";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 const SignupForm = ({ role }) => {

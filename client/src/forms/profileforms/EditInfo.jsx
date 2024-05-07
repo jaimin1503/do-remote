@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { updateInfo } from "../services/profile";
+import { updateInfo } from "../../services/profile";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import "./formStyles.css";
+import "../formStyles.css";
 
-const EditInfo = ({ pId,handleCloseInfoModal }) => {
+const EditInfo = ({ pId, handleCloseInfoModal }) => {
   const [formData, setFormData] = useState({});
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
@@ -45,6 +45,7 @@ const EditInfo = ({ pId,handleCloseInfoModal }) => {
                 name="current_position"
                 type="text"
                 value={formData.current_position}
+                placeholder="Add your current role"
                 className="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none "
               />
 
@@ -54,6 +55,7 @@ const EditInfo = ({ pId,handleCloseInfoModal }) => {
                 type="text"
                 rows={5}
                 value={formData.about}
+                placeholder="Write something about you."
                 className="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500"
               />
               <button
@@ -63,7 +65,7 @@ const EditInfo = ({ pId,handleCloseInfoModal }) => {
                 Save
               </button>
               <button
-                onClick={() => setIsOpenEditInfo(false)}
+                onClick={handleCloseInfoModal}
                 className="py-2 px-4 float-right text-blue-500 mt-4"
               >
                 Cancle
