@@ -6,6 +6,7 @@ import "./Styles.css";
 import AssignmentTurnedInOutlinedIcon from "@mui/icons-material/AssignmentTurnedInOutlined";
 import PushPinOutlinedIcon from "@mui/icons-material/PushPinOutlined";
 import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
+import DevIT from "./DevIT";
 
 export default function Home() {
   return (
@@ -39,7 +40,7 @@ export default function Home() {
           />
         </div>
       </div>
-      <div className="container row2 m-4 flex flex-col md:flex-row justify-evenly">
+      <div className="container row2 md:m-4 flex flex-col md:flex-row justify-evenly">
         <div className="image">
           <img
             className=" h-[50vh] w-full md:w-[50vw] rounded-2xl object-cover"
@@ -137,6 +138,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <DevIT />
     </div>
   );
 }
