@@ -6,6 +6,7 @@ import Like from "../assets/Like.jsx";
 import Drawer from "@mui/material/Drawer";
 import ViewJob from "./ViewJob";
 import { toast } from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 const JobCard = ({ job }) => {
   const now = new Date();
@@ -23,7 +24,8 @@ const JobCard = ({ job }) => {
     setDrawerJob(job);
   };
 
-  const handleSave = () => {
+  const handleSave = (e) => {
+    e.stopPropagation();
     axios
       .put(`${import.meta.env.VITE_BASE_URL}/job/savejob/${job?._id}`, null, {
         withCredentials: true,
@@ -56,7 +58,10 @@ const JobCard = ({ job }) => {
 
   return (
     <>
-      <div className="jobcard border-y w-full p-2 hover:bg-gray-100 cursor-pointer">
+      <div
+        onClick={toggleDrawer(true, job)}
+        className="jobcard border-y w-full p-2 hover:bg-gray-100 cursor-pointer"
+      >
         <div className="header flex items-center justify-between my-2">
           <div>
             <p className=" text-sm text-gray-500">
@@ -74,7 +79,7 @@ const JobCard = ({ job }) => {
             </h1>
           </div>
 
-          <button onClick={() => handleSave()}>
+          <button onClick={(e) => handleSave(e)}>
             <Like saved={saved} />
           </button>
         </div>
