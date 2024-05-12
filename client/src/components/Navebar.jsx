@@ -1,7 +1,7 @@
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import { Link } from "react-router-dom";
+import { Link } from "react-scroll";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const Navebar = () => {
@@ -15,15 +15,15 @@ const Navebar = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className=" items-center">
-              <Nav.Link as={Link} to="/dev">
+              <Link className=" mx-2 cursor-pointer" to="development">
                 Development & IT
-              </Nav.Link>
-              <Nav.Link as={Link} to="/design">
+              </Link>
+              <Link className=" mx-2 cursor-pointer" to="design">
                 Design & Creative
-              </Nav.Link>
-              <Nav.Link as={Link} to="/aids">
+              </Link>
+              <Link className=" mx-2 cursor-pointer" to="aids">
                 AI and Data Science
-              </Nav.Link>
+              </Link>
             </Nav>
             <Nav className="ml-auto items-center">
               <Nav.Link className=" float-right" as={Link} to="/">

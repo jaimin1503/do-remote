@@ -7,6 +7,8 @@ import AssignmentTurnedInOutlinedIcon from "@mui/icons-material/AssignmentTurned
 import PushPinOutlinedIcon from "@mui/icons-material/PushPinOutlined";
 import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
 import DevIT from "./DevIT";
+import AIDS from "./AIDS";
+import DesignCreation from "./DesignCreation";
 
 export default function Home() {
   return (
@@ -139,6 +141,8 @@ export default function Home() {
         </div>
       </div>
       <DevIT />
+      <AIDS />
+      <DesignCreation />
     </div>
   );
 }

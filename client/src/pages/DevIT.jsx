@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import webImg from "./assets/web.png";
+import devIng from "./assets/vecteezy_team-of-developers-working-on-code_2178145/Developer_05__Converted__generated.jpg";
 
 export default function DevIT() {
   return (
     <>
-      <div className="container p-4">
+      <div id="development" className="container p-4">
         <h1 className=" text-4xl font-bold mb-4">
           Development and IT related works
         </h1>
@@ -25,6 +26,28 @@ export default function DevIT() {
                 Get started
               </button>
             </Link>
+          </div>
+        </div>
+        <div className="it mt-4 flex flex-col lg:flex-row">
+          <div className="info lg:w-1/2 p-4">
+            <h1 className=" text-2xl font-medium py-3 border-b border-gray-600">
+              Web Development
+            </h1>
+            <h1 className=" text-2xl font-medium py-3 border-b border-gray-600">
+              Mobile App Development
+            </h1>
+            <h1 className=" text-2xl font-medium py-3 border-b border-gray-600">
+              Shopify Development
+            </h1>
+            <h1 className=" text-2xl font-medium py-3 border-b border-gray-600">
+              WordPress Development
+            </h1>
+            <h1 className=" text-2xl font-medium py-3 border-b border-gray-600">
+              E-commerce Solutions
+            </h1>
+          </div>
+          <div className="row2 lg:w-1/2 p-4">
+            <img src={devIng} alt="dev" />
           </div>
         </div>
       </div>
