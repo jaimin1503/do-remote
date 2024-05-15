@@ -9,6 +9,7 @@ import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
 import DevIT from "./DevIT";
 import AIDS from "./AIDS";
 import DesignCreation from "./DesignCreation";
+import Footer from "../components/Footer";
 
 export default function Home() {
   return (
@@ -143,6 +144,7 @@ export default function Home() {
       <DevIT />
       <AIDS />
       <DesignCreation />
+      <Footer />
     </div>
   );
 }

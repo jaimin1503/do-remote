@@ -18,6 +18,8 @@ const AIDS = () => {
             </h1>
           </div>
         </div>
+      </div>
+      <div className=" bg-black text-white">
         <Services />
       </div>
     </>
