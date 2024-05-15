@@ -9,7 +9,10 @@ const AIDS = () => {
         <div className="row1 flex flex-col lg:flex-row mt-4 rounded-3xl">
           <img className=" rounded-3xl" src={aiBg} alt="" />
           <div className=" absolute p-4 text-white">
-            <h1 className=" text-4xl font-bold md:mt-10">
+            <h1
+              className=" text-4xl font-bold md:mt-10"
+              style={{ textShadow: ` 2px 2px 18px rgba(255, 255, 255, 1)` }}
+            >
               WORK SMARTER AND FASTER
             </h1>
           </div>
