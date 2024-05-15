@@ -143,6 +143,10 @@ const Services = () => {
           </div>
 
           <Gradient />
+          <Gradient />
+          <Gradient />
+          <Gradient />
+          <Gradient />
         </div>
       </div>
     </Section>

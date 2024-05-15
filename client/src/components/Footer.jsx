@@ -27,6 +27,7 @@ const Footer = () => {
           <div className="lg:w-[50%] flex flex-wrap flex-row justify-between lg:border-r lg:border-richblack-700 pl-3 lg:pr-5 gap-3">
             <div className="w-[30%] flex flex-col gap-3 lg:w-[30%] mb-7 lg:pl-0">
               {/* <img src={Logo} alt="" className="object-contain" /> */}
+              <h1 className=" text-xl font-bold">DO-REMOTE</h1>
               <h1 className="text-richblack-50 font-semibold text-[16px]">
                 Company
               </h1>
@@ -43,10 +44,18 @@ const Footer = () => {
                 })}
               </div>
               <div className="flex gap-3 text-lg">
-                <FaFacebook />
-                <FaGoogle />
-                <FaTwitter />
-                <FaYoutube />
+                <div className=" cursor-pointer">
+                  <FaFacebook />
+                </div>
+                <div className=" cursor-pointer">
+                  <FaGoogle />
+                </div>
+                <div className=" cursor-pointer">
+                  <FaTwitter />
+                </div>
+                <div className=" cursor-pointer">
+                  <FaYoutube />
+                </div>
               </div>
               <div></div>
             </div>
@@ -79,7 +88,7 @@ const Footer = () => {
               </div>
             </div>
 
-            <div className="w-[48%] lg:w-[30%] mb-7 lg:pl-0">
+            <div className="w-[48%] lg:w-[30%] mb-7 lg:pl-0 hidden lg:block">
               <h1 className="text-richblack-50 font-semibold text-[16px]">
                 Plans
               </h1>
@@ -120,10 +129,13 @@ const Footer = () => {
           </div>
 
           {/* Section 2 */}
-          <div className="lg:w-[50%] flex flex-wrap flex-row justify-between pl-3 lg:pl-5 gap-3">
+          <div className="lg:w-[50%] flex flex-wrap flex-row justify-between pl-3 lg:pl-5 gap-3 ">
             {FooterLink2.map((ele, i) => {
               return (
-                <div key={i} className="w-[48%] lg:w-[30%] mb-7 lg:pl-0">
+                <div
+                  key={i}
+                  className="w-[48%] lg:w-[30%] mb-7 lg:pl-0 hidden lg:block"
+                >
                   <h1 className="text-richblack-50 font-semibold text-[16px]">
                     {ele.title}
                   </h1>
@@ -148,7 +160,7 @@ const Footer = () => {
 
       <div className="flex flex-row items-center justify-between w-11/12 max-w-maxContent text-richblack-400 mx-auto  pb-14 text-sm">
         {/* Section 1 */}
-        <div className="flex justify-between lg:items-start items-center flex-col lg:flex-row gap-3 w-full">
+        <div className="flex justify-between md:block lg:items-start items-center flex-col lg:flex-row gap-3 w-full">
           <div className="flex flex-row">
             {BottomFooter.map((ele, i) => {
               return (
@@ -168,9 +180,7 @@ const Footer = () => {
             })}
           </div>
 
-          <div className="text-center">
-            Made with ❤️ CodeHelp © 2023 Studynotion
-          </div>
+          <div className="text-center">Made with ❤️ JKV © 2024 DoRemote</div>
         </div>
       </div>
     </div>
