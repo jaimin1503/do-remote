@@ -1,3 +1,4 @@
+import Services from "../components/Services";
 import aiImg from "./assets/vecteezy_ai-robot-technology-concept_22242520_82/vecteezy_ai-robot-technology-concept_22242520-1.jpg";
 import aiBg from "./assets/vecteezy_dynamic-flowing-wavy-abstract-light-line-vector-in-blue_24054189_373/vecteezy_dynamic-flowing-wavy-abstract-light-line-vector-in-blue_24054189-1.jpg";
 
@@ -17,6 +18,7 @@ const AIDS = () => {
             </h1>
           </div>
         </div>
+        <Services />
       </div>
     </>
   );

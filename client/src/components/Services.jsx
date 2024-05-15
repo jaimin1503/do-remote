@@ -1,17 +1,36 @@
 import Section from "./Section";
 import Heading from "./Heading";
-import { service1, service2, service3, check } from "../assets";
-import { brainwaveServices, brainwaveServicesIcons } from "../constants";
+import service1 from "../assets/service-1.png";
+import service2 from "../assets/service-2.png";
+import service3 from "../assets/service-3.png";
+import check from "../assets/check.svg";
 import {
   PhotoChatMessage,
   Gradient,
   VideoBar,
   VideoChatMessage,
 } from "./design/Services";
-
 import Generating from "./Generating";
+import recording01 from "./assets/svg/recording-01.svg";
+import recording03 from "./assets/svg/recording-03.svg";
+import disc02 from "./assets/svg/disc-02.svg";
+import chromecast from "./assets/svg/chrome-cast.svg";
+import sliders04 from "./assets/svg/sliders-04.svg";
 
 const Services = () => {
+  const brainwaveServices = [
+    "Photo generating",
+    "Photo enhance",
+    "Seamless Integration",
+  ];
+
+  const brainwaveServicesIcons = [
+    recording03,
+    recording01,
+    disc02,
+    chromecast,
+    sliders04,
+  ];
   return (
     <Section id="how-to-use">
       <div className="container">

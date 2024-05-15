@@ -1,4 +1,4 @@
-import brackets from "../assets/svg/Brackets";
+import brackets from "./assets/Brackets";
 
 const TagLine = ({ className, children }) => {
   return (
