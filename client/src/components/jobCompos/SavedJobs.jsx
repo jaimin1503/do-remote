@@ -37,7 +37,9 @@ const SavedJobs = () => {
       ) : (
         <>
           {savedJobs &&
-            savedJobs.map((job, index) => <JobCard job={job} key={job._id} />)}
+            [...savedJobs]
+              .reverse()
+              .map((job, index) => <JobCard job={job} key={job._id} />)}
         </>
       )}
     </>

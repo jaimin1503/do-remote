@@ -177,7 +177,7 @@ export const login = async (req, res) => {
 
     const user = await User.findOne({
       $or: [{ email: identifier }, { username: identifier }],
-    });
+    }).populate("profile");
 
     if (!user) {
       return res.status(404).json({

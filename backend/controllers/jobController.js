@@ -10,7 +10,7 @@ export const getAllJobs = async (req, res) => {
     const jobs = await Job.find({
       status: "open",
     })
-      .sort({ createdAt: -1 }) // Sorting by createdAt field in descending order
+      .sort({ createdAt: -1 }) // Sorting by createdAt field in descending order (latest first)
       .skip(skip)
       .limit(perPage)
       .populate("client");
@@ -18,7 +18,7 @@ export const getAllJobs = async (req, res) => {
     res.status(200).json({
       page: page,
       perPage: perPage,
-      totalJobs: await Job.countDocuments(),
+      totalJobs: await Job.countDocuments({ status: "open" }), // Count only open jobs
       jobs,
     });
   } catch (error) {

@@ -70,7 +70,7 @@ const NavLogged = () => {
               />
             </Drawer>
             <Nav className=" items-center hidden lg:flex">
-              <Nav.Link as={Link} to="/db">
+              <Nav.Link as={Link} to="/freelancerdb">
                 Find-work
               </Nav.Link>
               <Nav.Link as={Link} to="/proposals">
@@ -133,7 +133,7 @@ const NavLogged = () => {
               />
             </Drawer>
             <Nav className=" items-center hidden lg:flex">
-              <Nav.Link as={Link} to="/db">
+              <Nav.Link as={Link} to="/clientdb">
                 Find Talent
               </Nav.Link>
               <Nav.Link as={Link} to="/savedprofiles">

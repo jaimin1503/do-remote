@@ -7,7 +7,7 @@ const DB = () => {
   const { user } = useSelector((state) => state.user);
   return localStorage.getItem("token") ? (
     <div className=" relative">
-      <NavLogged />
+      {/* <NavLogged /> */}
       {user?.role === "freelancer" ? <FreelancerDB /> : <ClientDB />}
     </div>
   ) : (

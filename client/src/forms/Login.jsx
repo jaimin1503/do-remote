@@ -10,7 +10,7 @@ export default function Login() {
   const [formData, setFormData] = useState({});
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { user } = useSelector((state) => state.user);
+  const [user, setUser] = useState({});
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -30,10 +30,16 @@ export default function Login() {
       );
       if (response.status === 200) {
         localStorage.setItem("token", response.data.token);
-        if (user?.profile?.current_position === "") {
-          navigate(`/profile/${user?.profile?._id}`);
+        setUser(response.data.user);
+        console.log(response.data.user);
+        if (response.data.user.profile.current_position === "") {
+          navigate(`/profile/${response.data.user?.profile?._id}`);
         } else {
-          navigate("/db");
+          navigate(
+            response.data.user.role === "freelancer"
+              ? "/freelancerdb"
+              : "/clientdb"
+          );
         }
         toast.success(`Welcome ${formData.identifier}`, {
           duration: 4000,

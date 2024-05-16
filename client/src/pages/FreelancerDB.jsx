@@ -2,12 +2,14 @@ import React from "react";
 import { useSelector } from "react-redux";
 import SearchCompo from "../components/SearchCompo";
 import JobsTabs from "../components/jobCompos/JobsTabs";
+import NavLogged from "../components/NavLogged";
 
 const FreelancerDB = () => {
   const { user } = useSelector((state) => state.user);
 
   return (
-    <div>
+    <>
+      <NavLogged />
       <div className=" p-4">
         <h1
           style={{ fontFamily: "Philosopher-Bold" }}
@@ -23,7 +25,7 @@ const FreelancerDB = () => {
           <JobsTabs />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 export default FreelancerDB;

@@ -42,7 +42,7 @@ const jobSchema = mongoose.Schema({
       "less than a month",
       "1 to 3 months",
       "3 to 6 months",
-      "more than 6 month",
+      "more than 6 months",
     ],
   },
   location: {

@@ -23,6 +23,7 @@ import Messages from "./pages/Messages";
 import ViewProposal from "./components/proposal/ViewProposal";
 import EditProposal from "./components/proposal/EditProposal";
 import Contracts from "./pages/freelancer/Contracts";
+import FreelancerDB from "./pages/FreelancerDB";
 
 function App() {
   return (
@@ -37,8 +38,9 @@ function App() {
         <Route path="/signup/:role" element={<Signup />} />
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/verify-email" element={<VerifyEmail />} />
-        <Route path="/db" element={<DB />} />
-        <Route path="/client" element={<ClientDB />} />
+        {/* <Route path="/db" element={<DB />} /> */}
+        <Route path="/freelancerdb" element={<FreelancerDB />} />
+        <Route path="/clientdb" element={<ClientDB />} />
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/viewprofile/:id" element={<ViewProfile />} />
         <Route path="/viewproposal/:id" element={<ViewProposal />} />

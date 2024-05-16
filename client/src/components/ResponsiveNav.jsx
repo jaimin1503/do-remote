@@ -30,7 +30,7 @@ const ResponsiveNav = ({ toggleDrawer, id, role }) => {
               <span className=" pr-2">
                 <img src={find} alt="" />
               </span>
-              <a href="/db">Find Talent</a>
+              <a href="/clientdb">Find Talent</a>
             </li>
             <li className=" p-4 border-b flex">
               <span className=" pr-2">
@@ -86,7 +86,7 @@ const ResponsiveNav = ({ toggleDrawer, id, role }) => {
               <span className=" pr-2">
                 <img src={find} alt="" />
               </span>
-              <a href="/db">Find Work</a>
+              <a href="/freelancerdb">Find Work</a>
             </li>
 
             <li className=" p-4 border-b flex">

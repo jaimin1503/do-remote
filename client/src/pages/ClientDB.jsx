@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setJobs } from "../reducers/jobReducer";
 import PostFirstJob from "../components/PostFirstJob";
+import NavLogged from "../components/NavLogged";
 
 function ClientDB() {
   const { user } = useSelector((state) => state.user);
@@ -52,6 +53,7 @@ function ClientDB() {
 
   return (
     <>
+      <NavLogged />
       <div className="m-4 sm:p-4 my-10 ">
         <h1
           style={{ fontFamily: "Philosopher-Bold" }}
