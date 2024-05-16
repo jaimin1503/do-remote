@@ -142,11 +142,7 @@ const Services = () => {
             </div>
           </div>
 
-          <Gradient />
-          <Gradient />
-          <Gradient />
-          <Gradient />
-          <Gradient />
+          {/* <Gradient /> */}
         </div>
       </div>
     </Section>
