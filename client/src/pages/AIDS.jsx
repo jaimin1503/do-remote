@@ -6,7 +6,12 @@ const AIDS = () => {
   return (
     <>
       <div id="aids" className=" p-4 container">
-        <h1 className="text-4xl font-bold">AI and Data science</h1>
+        <h1
+          style={{ fontFamily: "Philosopher-Bold" }}
+          className="text-4xl font-bold"
+        >
+          AI and Data science
+        </h1>
         <div className="row1 flex flex-col lg:flex-row mt-4 rounded-3xl">
           <img className=" rounded-3xl" src={aiBg} alt="" />
           <div className=" absolute p-4 text-white">

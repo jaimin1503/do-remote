@@ -53,7 +53,12 @@ function ClientDB() {
   return (
     <>
       <div className="m-4 sm:p-4 my-10 ">
-        <h1 className=" text-4xl font-medium">Hello, {user?.firstName} 👋</h1>
+        <h1
+          style={{ fontFamily: "Philosopher-Bold" }}
+          className=" text-4xl font-medium"
+        >
+          Hello, {user?.firstName} 👋
+        </h1>
         <div className=" flex items-center justify-between">
           <h1 className=" text-3xl my-4 font-medium">Your Jobs</h1>
           <Link to={`/postjob`}>

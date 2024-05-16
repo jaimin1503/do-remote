@@ -24,7 +24,12 @@ const Contracts = () => {
     <>
       <NavLogged />
       <div className="container">
-        <h1 className=" text-3xl font-medium m-4">Your active jobs</h1>
+        <h1
+          style={{ fontFamily: "Philosopher-Bold" }}
+          className=" text-3xl font-medium m-4"
+        >
+          Your active jobs
+        </h1>
         {loading ? (
           <>
             <JobSktn />

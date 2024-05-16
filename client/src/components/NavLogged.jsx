@@ -79,7 +79,7 @@ const NavLogged = () => {
               <Nav.Link as={Link} to="/contracts">
                 All Contracts
               </Nav.Link>
-              <Nav.Link as={Link} to="/design">
+              <Nav.Link as={Link} to="/messages">
                 Messages
               </Nav.Link>
             </Nav>

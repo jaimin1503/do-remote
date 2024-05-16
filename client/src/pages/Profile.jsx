@@ -139,11 +139,11 @@ const Profile = () => {
               <span> {time}</span>
             </div>
           </div>
-          <div className="editbutton mt-4 md:mt-0 md:ml-auto h-fit">
+          {/* <div className="editbutton mt-4 md:mt-0 md:ml-auto h-fit">
             <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">
               Edit Profile
             </button>
-          </div>
+          </div> */}
         </div>
 
         <div className="row2 border-t flex flex-col-reverse lg:flex-row">

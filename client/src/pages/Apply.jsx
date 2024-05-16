@@ -106,7 +106,12 @@ const Apply = () => {
     <>
       <NavLogged />
       <div className="container my-10">
-        <h1 className=" text-4xl font-medium">Submit a proposal</h1>
+        <h1
+          style={{ fontFamily: "Philosopher-Bold" }}
+          className=" text-4xl font-medium"
+        >
+          Submit a proposal
+        </h1>
         <div className="job-details my-4 rounded-2xl border-2">
           <h1 className=" text-2xl font-medium m-4">Job Details</h1>
           <h1 className=" text-2xl font-medium m-4">{job?.title}</h1>

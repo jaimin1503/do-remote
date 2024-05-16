@@ -19,11 +19,28 @@ const SavedProfiles = () => {
         console.log(err);
       });
   }, []);
+
+  if (SavedProfiles.length === 0) {
+    return (
+      <>
+        <NavLogged />
+        <div className="container h-screen w-screen flex justify-center items-center">
+          <h1 className=" text-4xl font-medium">No saved profiles</h1>
+        </div>
+      </>
+    );
+  }
+
   return (
     <>
       <NavLogged />
       <div className="m-4 my-10 ">
-        <h1 className=" text-3xl my-4 font-medium">Your Saved Profiles</h1>
+        <h1
+          style={{ fontFamily: "Philosopher-Bold" }}
+          className=" text-3xl my-4 font-medium"
+        >
+          Your Saved Profiles
+        </h1>
       </div>
       {profiles.length === 0 ? (
         <>

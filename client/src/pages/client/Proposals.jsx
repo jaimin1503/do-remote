@@ -25,7 +25,12 @@ const Proposals = () => {
     <>
       <NavLogged />
       <div className="container">
-        <h1 className=" text-4xl m-4 font-medium">All Proposals</h1>
+        <h1
+          style={{ fontFamily: "Philosopher-Bold" }}
+          className=" text-4xl m-4 font-medium"
+        >
+          All Proposals
+        </h1>
         <hr />
         {loading ? (
           <JobSktn />

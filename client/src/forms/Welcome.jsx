@@ -19,7 +19,10 @@ export default function Welcome() {
 
       <div className=" flex flex-col justify-center items-center md:border-2 px-10 md:p-10 rounded-xl max-w-xl border-blue-300 mx-auto">
         <div className="message">
-          <h1 className="text-2xl sm:text-3xl mb-3 md:my-5 font-medium">
+          <h1
+            style={{ fontFamily: "Philosopher-Bold" }}
+            className="text-2xl sm:text-4xl mb-3 md:my-5 font-medium"
+          >
             Join as client or Freelancer
           </h1>
         </div>

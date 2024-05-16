@@ -9,7 +9,10 @@ const FreelancerDB = () => {
   return (
     <div>
       <div className=" p-4">
-        <h1 className=" text-4xl font-medium my-4">
+        <h1
+          style={{ fontFamily: "Philosopher-Bold" }}
+          className=" text-4xl font-medium my-4"
+        >
           Hi, {user?.firstName} 👋{" "}
         </h1>
         <div className="search">

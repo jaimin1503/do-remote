@@ -18,13 +18,22 @@ export default function Home() {
       <div className="row1 sm:flex sm:justify-center sm:items-center">
         <div className=" mt-4 flex flex-col h-full items-center sm:items-start m-4">
           <div className=" my-4">
-            <h1 className="text-5xl max-w-xs header-gradient font-bold">
+            <h1
+              style={{ fontFamily: "Philosopher-Bold" }}
+              className="text-5xl max-w-xs header-gradient font-bold"
+            >
               Welcome to Do-Remote
             </h1>
-            <h1 className=" text-3xl sm:text-4xl sub-header-gradient my-2 font-medium mt-4">
+            <h1
+              style={{ fontFamily: "Philosopher-Bold" }}
+              className=" text-3xl sm:text-4xl sub-header-gradient my-2 font-medium mt-4"
+            >
               Explore the sea of Talent,
             </h1>
-            <h1 className=" text-3xl sm:text-4xl sub-header-gradient my-2 font-medium">
+            <h1
+              style={{ fontFamily: "Philosopher-Bold" }}
+              className=" text-3xl sm:text-4xl sub-header-gradient my-2 font-medium"
+            >
               Find the work that suits you.
             </h1>
             <button
@@ -52,7 +61,12 @@ export default function Home() {
           />
         </div>
         <div className=" md:w-1/2 p-4">
-          <h1 className="text-3xl font-bold">Why Do-Remote?</h1>
+          <h1
+            style={{ fontFamily: "Philosopher-Bold" }}
+            className="text-3xl font-bold"
+          >
+            Why Do-Remote?
+          </h1>
 
           <div className="my-4">
             <div className=" flex items-start ">
@@ -100,7 +114,12 @@ export default function Home() {
       </div>
       <div className="row3 m-4 flex flex-col md:flex-row justify-evenly">
         <div className=" md:w-1/2 p-4">
-          <h1 className="text-3xl font-bold">How it works?</h1>
+          <h1
+            style={{ fontFamily: "Philosopher-Bold" }}
+            className="text-3xl font-bold"
+          >
+            How it works?
+          </h1>
 
           <div className="my-4">
             <div className=" flex items-start ">

@@ -27,13 +27,16 @@ const MyJobs = () => {
       });
   }, []);
 
-
-  
   return (
     <>
       <NavLogged />
       <div className="container">
-        <h1 className=" m-4 text-4xl font-medium">Your job postings</h1>
+        <h1
+          style={{ fontFamily: "Philosopher-Bold" }}
+          className=" m-4 text-4xl font-medium"
+        >
+          Your job postings
+        </h1>
         <hr />
         <div className="jobs">
           {loading ? (

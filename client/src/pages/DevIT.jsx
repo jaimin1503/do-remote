@@ -6,7 +6,10 @@ export default function DevIT() {
   return (
     <>
       <div id="development" className="container p-4">
-        <h1 className=" text-4xl font-bold mb-4">
+        <h1
+          style={{ fontFamily: "Philosopher-Bold" }}
+          className=" text-4xl font-bold mb-4"
+        >
           Development and IT related works
         </h1>
         <div className="info flex flex-col lg:flex-row bg-gray-800 rounded-2xl">

@@ -77,7 +77,12 @@ const PostJob = () => {
   return (
     <div className="h-screen relative">
       <NavLogged />
-      <h1 className="text-3xl font-medium m-4">Post a new Job</h1>
+      <h1
+        style={{ fontFamily: "Philosopher-Bold" }}
+        className="text-3xl font-medium m-4"
+      >
+        Post a new Job
+      </h1>
       <p className="ml-10 mb-2">STEP {step}</p>
       <div className="container pb-16">
         {step === 1 && (
