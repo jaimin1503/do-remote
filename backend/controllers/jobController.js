@@ -1,6 +1,23 @@
 import { Job } from "../models/job.js";
 import { User } from "../models/user.js";
 
+export const getJobs = async (req, res) => {
+  try {
+    const jobs = await Job.find({
+      status: "open",
+    })
+      .sort({ createdAt: -1 }) // Sorting by createdAt field in descending order (latest first)
+      .populate("client");
+
+    res.status(200).json({
+      totalJobs: await Job.countDocuments({ status: "open" }), // Count only open jobs
+      jobs,
+    });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send({ message: error.message });
+  }
+};
 export const getAllJobs = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;

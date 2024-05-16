@@ -1,27 +1,42 @@
 import JobCard from "./JobCard";
 import JobSktn from "../../skeletons/JobSktn";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { calculateMatchScore } from "../../services/matchScore";
+import { setAllJobs } from "../../reducers/jobReducer";
+import axios from "axios";
 
 const BestMatches = () => {
   const [bestMatches, setBestMatches] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { jobs } = useSelector((state) => state.job);
+  const { allJobs } = useSelector((state) => state.job);
   const { user } = useSelector((state) => state.user);
-  const userMatch = user?.profile?.current_position.split(" ")[0];
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (jobs && jobs.length > 0) {
-      const filteredJobs = jobs.filter(
-        (job) =>
-          job.category.includes(userMatch) || // Check if user match is in category
-          job.description.includes(userMatch) || // Check if user match is in description
-          job.title.includes(userMatch) // Check if user match is in title
-      );
-      setBestMatches(filteredJobs);
+    axios
+      .get(`${import.meta.env.VITE_BASE_URL}/job/getJobs`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        dispatch(setAllJobs(res.data.jobs));
+      })
+      .catch((error) => console.error(error));
+  }, []);
+
+  useEffect(() => {
+    if (allJobs) {
+      const matches = allJobs.filter((job) => {
+        const score = calculateMatchScore(
+          user?.profile?.skills,
+          job?.skillsRequired
+        );
+        return score > 0; // Adjust the condition according to your matching criteria
+      });
+      setBestMatches(matches);
       setLoading(false);
     }
-  }, [jobs, userMatch]);
+  }, [allJobs, user?.profile?.skills]);
 
   return (
     <>

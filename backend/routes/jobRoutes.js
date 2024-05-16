@@ -12,10 +12,12 @@ import {
   searchJobs,
   getAllJobsC,
   getActiveJobs,
+  getJobs,
 } from "../controllers/jobController.js";
 const router = express.Router();
 
 router.post("/postjob", auth, createJob);
+router.get("/getJobs", auth, getJobs);
 router.get("/getalljobs", auth, getAllJobs);
 router.get("/getalljobsc", auth, getAllJobsC);
 router.get("/getjob/:id", auth, getJob);

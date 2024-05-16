@@ -4,13 +4,11 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 export default function Login() {
   const [formData, setFormData] = useState({});
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const [user, setUser] = useState({});
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -18,7 +16,6 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
     setError("");
     const toastId = toast.loading("Logging in...");
     // Send a POST request to the server
@@ -30,8 +27,6 @@ export default function Login() {
       );
       if (response.status === 200) {
         localStorage.setItem("token", response.data.token);
-        setUser(response.data.user);
-        console.log(response.data.user);
         if (response.data.user.profile.current_position === "") {
           navigate(`/profile/${response.data.user?.profile?._id}`);
         } else {

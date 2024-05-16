@@ -53,7 +53,7 @@ const ProposalCard = ({ proposal }) => {
             <Link to={`/viewproposal/${proposal?._id}`}>
               <button
                 style={{ transition: "0.3s" }}
-                className=" mx-4 py-2 px-5 text-white bg-green-500 hover:bg-green-600 rounded-full"
+                className=" mx-4 py-2 px-5 my-4 text-white bg-green-500 hover:bg-green-600 rounded-full"
               >
                 Hire
               </button>
