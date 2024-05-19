@@ -36,7 +36,7 @@ const EditLetter = ({ handleCloseLetterModal, coverLetter, id }) => {
           name="coverLetter"
         ></textarea>
         <button
-          onClick={handleSubmit}  
+          onClick={handleSubmit}
           className="btn bg-blue-500 hover:bg-blue-600 py-2 px-5 rounded-lg float-right text-white mt-4"
         >
           Save
@@ -45,7 +45,7 @@ const EditLetter = ({ handleCloseLetterModal, coverLetter, id }) => {
           onClick={handleCloseLetterModal}
           className="py-2 px-4 float-right text-blue-500 mt-4"
         >
-          Cancle
+          cancel
         </button>
       </div>
     </>

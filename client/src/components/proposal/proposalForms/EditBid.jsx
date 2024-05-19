@@ -87,7 +87,7 @@ const EditBid = ({ handleCloseBidModal, bidAmount, budget, id }) => {
           onClick={handleCloseBidModal}
           className="py-2 px-4 float-right text-blue-500"
         >
-          Cancle
+          cancel
         </button>
       </div>
     </>

@@ -67,7 +67,7 @@ function EditSkills({ pId, handleCloseSkillsModal }) {
                 onClick={() => setIsOpenSkills(false)}
                 className="py-2 px-4 float-right text-blue-500 "
               >
-                Cancle
+                cancel
               </button>
             </div>
           </form>

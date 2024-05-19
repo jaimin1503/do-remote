@@ -52,7 +52,7 @@ function Rate({ pId, handleCloseRateModal }) {
               onClick={handleCloseRateModal}
               className=" py-2 px-4 mt-4 float-right text-blue-500"
             >
-              Cancle
+              cancel
             </button>
           </form>
         </div>

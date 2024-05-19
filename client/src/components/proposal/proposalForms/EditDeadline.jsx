@@ -65,7 +65,7 @@ const EditDeadline = ({ id, handleCloseDeadlineModal, deliveryTime }) => {
           onClick={handleCloseDeadlineModal}
           className="py-2 px-4 float-right text-blue-500 mt-4"
         >
-          Cancle
+          cancel
         </button>
       </div>
     </>

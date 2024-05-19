@@ -75,7 +75,7 @@ const EditLinks = ({
               onClick={handleCloseLinks}
               className="py-2 px-4 float-right text-blue-500 mt-4"
             >
-              Cancle
+              cancel
             </button>
           </form>
         </div>

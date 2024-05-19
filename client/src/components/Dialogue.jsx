@@ -41,7 +41,7 @@ const Dialogue = ({ open, handleClose, jId }) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancle</Button>
+          <Button onClick={handleClose}>cancel</Button>
           <Button onClick={handleDelete} autoFocus>
             <span className=" text-red-500">Delete</span>
           </Button>
