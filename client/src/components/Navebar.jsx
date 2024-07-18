@@ -25,8 +25,8 @@ const Navebar = () => {
           </Navbar.Brand>
           <div
             onClick={toggleDrawer(true)}
-            className=" cursor-pointer lg:hidden"
-          >
+            className=" cursor-pointer lg:hidden "
+          >w
             <FormatAlignRightIcon />
           </div>
           <Nav className=" items-center hidden lg:flex">
